@@ -1,0 +1,19 @@
+---
+title: "Instructions"
+author: "J. Kyle Wathen"
+date: "3/19/2020"
+output: html_document
+---
+## Biopharm Package Shared Software - Project Creation
+The purpose of this document is to outline the important aspects of the projects that were created.  
+
+You will find a folder for the Shiny app using the BioPharmSoft template which links to a R package for computation and utilizes modules to avoid the entire application residing in the server.r or ui.r files.  This was done to help with testing and validation.  
+
+Each project, Shiny app and computational package,  wehre created as subdirectories of this folder.  Each folder consists of an R Studio project file with the extension .Rproj.  For each project, please open these files. Within each project there is a Instructions.Rmd file to provide specific details about that project. 
+
+Before the Shiny app will run you must first build the R package or remove the reference in the Shiny app in the Golbal.R file. 
+
+Please refer to the [BioPharmSoft Style Guide](https://biopharmsoftgrp.github.io/BioPharmSoftRStyleGuide/) for development best practices.
+
+You may find the following functions in the BASS package helpful.
+

@@ -1,0 +1,8 @@
+---
+title: "Data Analysis Introduction"
+author: "J. Kyle Wathen"
+date: "2/4/2020"
+output: html_document
+---
+
+The data analysis portion is intended to allow the users to load a data set and trial design document then exeucte the analysis.   

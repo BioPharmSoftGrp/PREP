@@ -1,0 +1,27 @@
+Binding: CreateApp
+Title: BaSS Project
+OpenFiles: ProjectInstructions.Rmd
+
+Parameter: strShinyAppName
+Widget: TextInput
+Label: Shiny App Project Name
+Default: ShinyApp
+Position: left
+
+Parameter: strCalculationLibraryName
+Widget: TextInput
+Label: R Package Project Name
+Default: MyCalculationPkg
+Position: left
+
+Parameter: strShinyAppDisplayName
+Widget: TextInput
+Label: App Name to Display in App
+Default: Awesome Shiny App
+Position: left
+
+Parameter: bCreateWithExampleTabs
+Widget: CheckboxInput
+Label: Include example tabs in project?
+Default: On
+Position: left
