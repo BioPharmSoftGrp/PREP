@@ -2,7 +2,6 @@
 
 export(AddFunctionToPkg)
 export(AddNewTabToApp)
-export(CreateBaSSAppGadget)
 export(CreateBaSSRPackage)
 export(CreateBaSSShinyApp)
 export(CreateBaSSdApp)
