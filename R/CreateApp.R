@@ -3,7 +3,7 @@ CreateApp <- function( path, ... )
 {
 
     lArgs <- list(...)
-    CreateBaSSdApp( path,
+    CreateBaSSApp(   path,
                      strProjectName = "",
                      strCalculationLibraryName  =lArgs[[ "strCalculationLibraryName"]],
                      strShinyAppName = lArgs[[ "strShinyAppName"]],

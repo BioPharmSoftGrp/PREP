@@ -2,10 +2,9 @@
 % Please edit documentation in R/CreateBaSSApp.R
 \name{CreateBaSSApp}
 \alias{CreateBaSSApp}
-\alias{CreateBaSSdApp}
 \title{CreateBaSSApp}
 \usage{
-CreateBaSSdApp(
+CreateBaSSApp(
   strProjectDirectory = "",
   strProjectName = "MyNewProject",
   strCalculationLibraryName = "MyCalculationLibrary",

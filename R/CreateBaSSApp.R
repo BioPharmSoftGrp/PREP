@@ -11,7 +11,7 @@
 #' app.   }
 #' @param strShinyAppDisplayName {The name of the applciation to be displayed on the UI that is created.}
 #' @export
-CreateBaSSdApp <-  function( strProjectDirectory        = "",
+CreateBaSSApp <-  function( strProjectDirectory        = "",
                              strProjectName             = "MyNewProject",
                              strCalculationLibraryName  = "MyCalculationLibrary",
                              strShinyAppName            = "MyShinyApp",
