@@ -17,3 +17,9 @@ By default the shiny app is created and linked to an R package.  If the app does
 @) Modules/DataAnalysisRunAnalysisServer.R - This file contains the example of how to call a function in the the R package.  This approach would be the same to call any function in a package. 
 
 To launch the Shiny App, open the ShinyApp.R file, then click the button that says "Run App".
+
+You may find the following functions in the BaSS package helpful when you developing the Shiny app. 
+
+AddNewTabToApp( strTabName, vSubMenuItemNames ) - This funciton will add a new tab to the Shiny App. This function assumes that the working directory
+is the main directory of the Shiny app created by this package.  This function creates a module file for the UI and the Server in the Modules directory
+of the app, it alters the ShinyUI.R file to insert the calls to  modules so the tab is added to the UI. 
