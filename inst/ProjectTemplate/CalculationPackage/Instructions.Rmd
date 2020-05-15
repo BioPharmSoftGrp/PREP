@@ -9,6 +9,12 @@ To build the package click on Build->Clean and Rebuild.   This is also available
 
 The R directory contains the files with functions in the library.   For example, R/CalcPosteriorProbsBinom.R contains the function that is called from the Shiny app.  
 
+You may find the following functions in the BASS package helpful when developing the Calculation package
+
+AddFunctionToPkg( strFunctionName, strPkgDir = "", strFunctionDescription = "" ) - Add a new function named strFunctionName to a package.  This function creates a file names R/strFunctionName.R
+and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package.
+
+
 For a function to be available to the user that installs the package it must have a #' @export in the line above the function name like the following
 
 ```{r,  eval=FALSE}

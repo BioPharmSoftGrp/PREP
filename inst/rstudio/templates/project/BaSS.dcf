@@ -2,16 +2,16 @@ Binding: CreateApp
 Title: BaSS Project
 OpenFiles: ProjectInstructions.Rmd
 
-Parameter: strShinyAppName
-Widget: TextInput
-Label: Shiny App Project Name
-Default: ShinyApp
-Position: left
-
 Parameter: strCalculationLibraryName
 Widget: TextInput
 Label: R Package Project Name
 Default: MyCalculationPkg
+Position: left
+
+Parameter: strShinyAppName
+Widget: TextInput
+Label: Shiny App Project Name
+Default: ShinyApp
 Position: left
 
 Parameter: strShinyAppDisplayName
