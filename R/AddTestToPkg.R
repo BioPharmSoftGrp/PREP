@@ -10,7 +10,10 @@
 #'   This function is intended to be used when a file in the package was already created but
 #'   a test file was not created.  This fuction will create a file named /tests/testthat/test-strTestFileName.R }
 #' @param strFunctionName The name of the function to add.
-#' @examples { \dontrun{AddTestToPkg( "RunSimulation" )  # This would create a test file at /tests/testthat/test-RunSimulation.R }}
+#' @examples
+#' \dontrun{
+#'     AddTestToPkg( "RunSimulation" )  # This would create a test file at /tests/testthat/test-RunSimulation.R
+#' }
 #' @export
 AddTestToPkg <- function(  strTestFileName )
 {
