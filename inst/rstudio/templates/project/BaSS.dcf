@@ -4,15 +4,28 @@ OpenFiles: ProjectInstructions.Rmd
 
 Parameter: strCalculationLibraryName
 Widget: TextInput
-Label: R Package Project Name
+Label: Calculation Package Project Name
 Default: MyCalculationPkg
 Position: left
+
+Parameter: bCreateCalculationPkg
+Widget: CheckboxInput
+Label: Create Package?
+Default: On
+Position: right
 
 Parameter: strShinyAppName
 Widget: TextInput
 Label: Shiny App Project Name
 Default: ShinyApp
 Position: left
+
+Parameter: bCreateShinyApp
+Widget: CheckboxInput
+Label: Create Shiny App?
+Default: On
+Position: right
+
 
 Parameter: strShinyAppDisplayName
 Widget: TextInput
@@ -25,3 +38,5 @@ Widget: CheckboxInput
 Label: Include example tabs in project?
 Default: On
 Position: left
+
+

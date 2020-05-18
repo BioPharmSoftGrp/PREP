@@ -16,7 +16,9 @@ CreateBaSSApp <-  function( strProjectDirectory        = "",
                              strCalculationLibraryName  = "MyCalculationLibrary",
                              strShinyAppName            = "MyShinyApp",
                              strShinyAppDisplayName     = "My Shiny App",
-                             bCreateWithExampleTabs     = TRUE)
+                             bCreateWithExampleTabs     = TRUE,
+                             bCreateShinyApp            = TRUE,
+                             bCreateCalculationPackage  = TRUE )
 {
     strRet <- ""
     if( !Provided( strProjectDirectory ) )
@@ -30,17 +32,24 @@ CreateBaSSApp <-  function( strProjectDirectory        = "",
     strTemplateDirectory        <- GetTemplateDirectory()
     strRet                      <- CopyFiles( strTemplateDirectory, strNewProjectDirectory, FALSE )
 
-    # Create the R package - Complete with testthat example
-    strCalcPkgRet               <- CreateBaSSRPackage( strProjectDirectory          = strNewProjectDirectory,
+    if( bCreateCalculationPackage )
+    {
+        # Create the R package - Complete with testthat example
+        strCalcPkgRet               <- CreateBaSSRPackage( strProjectDirectory      = strNewProjectDirectory,
                                                          strPackageName             = strCalculationLibraryName )
+    }
 
+    if( bCreateShinyApp )
+    {
+        # Create the Shiny App - App will reference the R Package
+        strRShinyRet                <- CreateBaSSShinyApp( strProjectDirectory         = strNewProjectDirectory,
+                                                           strShinyAppName           = strShinyAppName,
+                                                           strShinyAppDisplayName    = strShinyAppDisplayName,
+                                                           strCalculationLibraryName = strCalculationLibraryName,
+                                                           bCreateWithExampleTabs    = bCreateWithExampleTabs)
 
-    # Create the Shiny App - App will reference the R Package
-    strRShinyRet                <- CreateBaSSShinyApp( strProjectDirectory         = strNewProjectDirectory,
-                                                         strShinyAppName           = strShinyAppName,
-                                                         strShinyAppDisplayName    = strShinyAppDisplayName,
-                                                         strCalculationLibraryName = strCalculationLibraryName,
-                                                         bCreateWithExampleTabs    = bCreateWithExampleTabs)
+    }
+
 
     strAppInstructions <- "In the project dierectory, please view the ProjectInstructions.html or ProjectInstructions.Rmd "
     strRet <- paste( c("Creating BaSS App...",strRet,  "Begin by reading the ProjectInstructions.html (or ProjectInstructions.Rmd)",strCalcPkgRet, strRShinyRet), collapse = "\n")

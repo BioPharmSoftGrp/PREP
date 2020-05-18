@@ -12,3 +12,6 @@ You will find a folder for the Shiny app using the BioPharmSoft template which l
 Each project consists of an R Studio project file with the extension .Rproj.  For each project, please open these files. Within each project there is a Instructions.Rmd file to provide specific details about that project. 
 
 Before the Shiny app will run you must first build the R package or remove the reference in the Shiny app in the Global.R file. 
+
+# Reference
+[Project template](https://rstudio.github.io/rstudio-extensions/rstudio_project_templates.html ) - How to create a new project template in R Studio

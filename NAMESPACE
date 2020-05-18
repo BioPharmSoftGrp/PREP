@@ -2,6 +2,7 @@
 
 export(AddFunctionToPkg)
 export(AddNewTabToApp)
+export(AddTestToPkg)
 export(CreateBaSSApp)
 export(CreateBaSSRPackage)
 export(CreateBaSSShinyApp)

@@ -44,7 +44,7 @@ AddFunctionToPkg <- function(  strFunctionName, strPkgDir = "", strFunctionDescr
     {
         nIndex          <- nIndex + 1
         strTestFileName <- paste( strPkgDir, "/tests/testthat/test-", strFunctionName, nIndex, ".R", sep ="" )
-        bFileExists     <- file.exists( strTestFileName )
+        bTestFileExists <- file.exists( strTestFileName )
     }
 
     strTemplateFloder <- GetTemplateDirectory( "Templates" )
