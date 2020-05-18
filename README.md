@@ -1,4 +1,4 @@
-# BaSS
+# Biopharm Package Shared Software (BaSS) - Project Creation
 This project is package in R used to create a Shiny app with a default template and also creates a R package project that the Shiny app links to.
 
 The default Shiny app has a common layout that utilizes modules rather than two long server.r and ui.r files.  This helps to create a common look and feel across apps as well as organize the apps such that they are more suitable for team development and testing. 
