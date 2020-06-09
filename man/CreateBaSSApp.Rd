@@ -12,14 +12,15 @@ CreateBaSSApp(
   strShinyAppDisplayName = "My Shiny App",
   bCreateWithExampleTabs = TRUE,
   bCreateShinyApp = TRUE,
-  bCreateCalculationPackage = TRUE
+  bCreateCalculationPackage = TRUE,
+  bCreateShinyAppAsPackage = TRUE
 )
 }
 \arguments{
 \item{strProjectDirectory}{The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.}
 
-\item{strCalculationLibraryName}{{ The name of the R package that is created to contain the calculations for the applicaiton and is referenced in the Shiny app. A folder is created for the
-libarary and the R Studio project file will be named, strCalculationLibraryName.Rproj}}
+\item{strCalculationLibraryName}{{ The name of the R package that is created to contain the calculations for the application and is referenced in the Shiny app. A folder is created for the
+library and the R Studio project file will be named, strCalculationLibraryName.Rproj}}
 
 \item{strShinyAppName}{{The name of the R Shiny project.  The project file will  be called strShinyAppName.Rproj and will load the strCalculationLibraryName library as part of the Shiny
 app.   }}

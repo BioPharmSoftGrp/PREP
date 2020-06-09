@@ -15,11 +15,12 @@ test_that("Test- CreateBaSSApp", {
     strShinyName        <- "TestShiny"
     strShinyDispName    <- "Test App"
 
-    strRet              <- CreateGileadApp( strProjectDirectory       = strProjDir,
+    strRet              <- CreateBaSSApp( strProjectDirectory       = strProjDir,
                                             strProjectName            = strProjName,
                                             strCalculationLibraryName = strCalcName,
                                             strShinyAppName           = strShinyName,
-                                            strShinyAppDisplayName    = strShinyDispName)
+                                            strShinyAppDisplayName    = strShinyDispName,
+                                            )
 
     strRetExp <- "Creating BaSS Projects...\n..... 2 file(s) were successfully coppied and 0 file(s) were not coppied correctly.\nBegin by reading the ProjectInstructions.html (or ProjectInstructions.Rmd)\nCreating Calculation Package...\n..... 8 file(s) were successfully coppied and 0 file(s) were not coppied correctly.\n.....Use R Studio to open the C:/Kyle/Software/GRApps/tests/testthat/TestProject/TestProj/TestCalc/TestCalc.Rproj project file and begin by reading the Instructions.Rmd file.\nCreating Shiny App...\n..... 13 file(s) were successfully coppied and 0 file(s) were not coppied correctly.\n.....Use R Studio to open the the  C:/Kyle/Software/GRApps/tests/testthat/TestProject/TestProj/TestShiny/TestShiny.Rproj project file and begin by reading the Instructions.Rmd file."
     #expect_true( bSuccess, info = strErr, label="Create Gilead App")

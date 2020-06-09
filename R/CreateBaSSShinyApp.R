@@ -9,6 +9,14 @@
 #' @export
 CreateBaSSShinyApp <- function(strProjectDirectory, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName, bCreateProjectSubdirectory = TRUE, bCreateWithExampleTabs = TRUE )
 {
+    #TODO: Validate input
+    if( !Provided( strShinyAppDisplayName ) )
+        strShinyAppDisplayName <- strShinyAppName
+    if( !Provided( strCalculationLibraryName ) )
+    {
+        strCalculationLibraryName <- ""
+        #TODO WOuld be much better to delete the line that references the calculation package if it does not need one.
+    }
     # Set the template directory to copy from
     strProjectDirectory     <- gsub( "\\\\", "/", strProjectDirectory )
     strTemplateDirectory    <- GetTemplateDirectory()
