@@ -7,8 +7,17 @@
 #' @param bCreateProjectSubdirectory {If bCreateProjectSubdirectory then then a subdirectory for the project is created in strProjectDirectory.  }
 #' @param bCreateWithExampleTabs {By default, the R Shiny app will contain two example tabs (Simulation and Data analyusis), if bCreateWithExampleTabs = FALSE those tabs are removed.}
 #' @export
-CreateBaSSShinyApp <- function(strProjectDirectory, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName, bCreateProjectSubdirectory = TRUE, bCreateWithExampleTabs = TRUE )
+CreateBaSSShinyApp <- function(strProjectDirectory, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName,
+                               bCreateProjectSubdirectory = TRUE, bCreateWithExampleTabs = TRUE )
 {
+    #TODO: Validate input
+    if( !Provided( strShinyAppDisplayName ) )
+        strShinyAppDisplayName <- strShinyAppName
+    if( !Provided( strCalculationLibraryName ) )
+    {
+        strCalculationLibraryName <- ""
+        #TODO WOuld be much better to delete the line that references the calculation package if it does not need one.
+    }
     # Set the template directory to copy from
     strProjectDirectory     <- gsub( "\\\\", "/", strProjectDirectory )
     strTemplateDirectory    <- GetTemplateDirectory()

@@ -5,8 +5,8 @@
 #' @param strProjectDirectory The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.
 #' @param strPojectName {The name of the project folder. If strProjectName  is blank or missing then a then the R package and R shiny app projects are created in the strProjectDirectory.
 #' if strProjectName is provided and is not blank then a folder named  strProjectName is created in the strProjectDirectory directory.}
-#' @param strCalculationLibraryName { The name of the R package that is created to contain the calculations for the applicaiton and is referenced in the Shiny app. A folder is created for the
-#' libarary and the R Studio project file will be named, strCalculationLibraryName.Rproj}
+#' @param strCalculationLibraryName { The name of the R package that is created to contain the calculations for the application and is referenced in the Shiny app. A folder is created for the
+#' library and the R Studio project file will be named, strCalculationLibraryName.Rproj}
 #' @param strShinyAppName {The name of the R Shiny project.  The project file will  be called strShinyAppName.Rproj and will load the strCalculationLibraryName library as part of the Shiny
 #' app.   }
 #' @param strShinyAppDisplayName {The name of the applciation to be displayed on the UI that is created.}
@@ -18,7 +18,8 @@ CreateBaSSApp <-  function( strProjectDirectory        = "",
                              strShinyAppDisplayName     = "My Shiny App",
                              bCreateWithExampleTabs     = TRUE,
                              bCreateShinyApp            = TRUE,
-                             bCreateCalculationPackage  = TRUE )
+                             bCreateCalculationPackage  = TRUE,
+                             bCreateShinyAppAsPackage   = TRUE )
 {
     strRet <- ""
     if( !Provided( strProjectDirectory ) )
@@ -42,11 +43,26 @@ CreateBaSSApp <-  function( strProjectDirectory        = "",
     if( bCreateShinyApp )
     {
         # Create the Shiny App - App will reference the R Package
-        strRShinyRet                <- CreateBaSSShinyApp( strProjectDirectory         = strNewProjectDirectory,
+        if( !bCreateShinyAppAsPackage )
+        {
+            strRShinyRet    <- CreateBaSSShinyApp( strProjectDirectory               = strNewProjectDirectory,
                                                            strShinyAppName           = strShinyAppName,
                                                            strShinyAppDisplayName    = strShinyAppDisplayName,
                                                            strCalculationLibraryName = strCalculationLibraryName,
+                                                           bCreateProjectSubdirectory= TRUE,
                                                            bCreateWithExampleTabs    = bCreateWithExampleTabs)
+        }
+        else
+        {
+            strRShinyRet <- CreateBaSSShinyAppAsPkg( strProjectDirectory      = strNewProjectDirectory,
+                                                    strShinyAppName           = strShinyAppName,
+                                                    strShinyAppDisplayName    = strShinyAppDisplayName,
+                                                    strCalculationLibraryName = strCalculationLibraryName,
+                                                    bCreateProjectSubdirectory= TRUE,
+                                                    bCreateWithExampleTabs    = bCreateWithExampleTabs )
+
+
+        }
 
     }
 

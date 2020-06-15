@@ -2,7 +2,7 @@
 #   This file provides an example of how to create a test.                  ####
 #   For an R package, if you are in the package directory you can execute
 #   the following command usethis::use_test("name") to create a new test
-#   file.  Typcially, if you have a file named FileXX.R in the R directory
+#   file.  Typically, if you have a file named FileXX.R in the R directory
 #   of the package then you would execute usethis::use_test("FileXX") a
 #   new text file will be added to tests/testthat/test-FileXX.R.
 ################################################################################ .
