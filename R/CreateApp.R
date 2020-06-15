@@ -3,14 +3,15 @@ CreateApp <- function( path, ... )
 {
 
     lArgs <- list(...)
-    CreateBaSSApp(   path,
+    CreateBaSSApp(   strProjectDirectory              = path,
                      strProjectName                   = "",
                      strCalculationLibraryName        = lArgs[[ "strCalculationLibraryName"]],
                      strShinyAppName                  = lArgs[[ "strShinyAppName"]],
                      strShinyAppDisplayName           = lArgs[["strShinyAppDisplayName"]],
                      bCreateWithExampleTabs           = lArgs[["bCreateWithExampleTabs"]],
                      bCreateShinyApp                  = lArgs[["bCreateShinyApp"]],
-                     bCreateCalculationPackage        = lArgs[["bCreateCalculationPkg"]])
+                     bCreateCalculationPackage        = lArgs[["bCreateCalculationPkg"]],
+                     bCreateShinyAppAsPackage         = lArgs[["bCreateShinyAppAsPackage"]])
 
 
 }
