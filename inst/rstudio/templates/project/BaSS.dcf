@@ -39,4 +39,8 @@ Label: Include example tabs in project?
 Default: On
 Position: left
 
-
+Parameter: bCreateShinyAppAsPackage
+Widget: CheckboxInput
+Label: Create Shiny App as package?
+Default: On
+Position: left
