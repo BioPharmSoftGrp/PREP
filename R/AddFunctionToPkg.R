@@ -55,15 +55,19 @@ AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", str
     bFileCoppied       <- file.copy( strFunctionTemplateFile, strFileName )
     bTestFileCoppied   <- file.copy( strTestFunctionTemplateFile, strTestFileName )
 
+    strToday           <- format(Sys.Date(), format="%m/%d/%Y")
+
     # Replace the TAGS in the coppied files
     strFileLines       <- readLines( strFileName )
     strFileLines       <- gsub( "_FUNCTION_NAME_", strFunctionName, strFileLines )
     strFileLines       <- gsub( "_FILE_DESCRIPTION_", strFunctionDescription, strFileLines )
+    strFileLines       <- gsub( "_CREATION_DATE_", strToday, strFileLines )
     writeLines( strFileLines, con = strFileName )
 
     strFileLines       <- readLines( strTestFileName )
     strFileLines       <- gsub( "_FUNCTION_NAME_", strFunctionName, strFileLines )
-    strFileLines       <- gsub( "_FILE_NAME_", strFunctionDescription, strFileLines )
+    strFileLines       <- gsub( "_FILE_NAME_", strFunctionName, strFileLines )
+    strFileLines       <- gsub( "_CREATION_DATE_", strToday, strFileLines )
     writeLines( strFileLines, con = strTestFileName )
 
     strRet <- "The following file(s) were created: "
