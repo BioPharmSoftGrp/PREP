@@ -67,6 +67,7 @@ AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", str
     writeLines( strFileLines, con = strTestFileName )
 
     strRet <- "The following file(s) were created: "
+
     if( bFileCoppied )
     {
         strRet <- paste( strRet, strFileName, " - CREATED SUCCESSFULY. ")
