@@ -1,5 +1,9 @@
 #################################################################################################### .
-# _FILE_DESCRIPTION_  ####
+#   Program/Function Name:
+#   Author: Author Name
+#   Description: _FILE_DESCRIPTION_
+#   Change History:
+#   Last Modified Date: _CREATION_DATE_
 #################################################################################################### .
 #' @name _FUNCTION_NAME_
 #' @title _FUNCTION_NAME_
