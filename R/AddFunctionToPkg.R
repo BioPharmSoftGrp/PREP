@@ -8,10 +8,10 @@
 #' @description { Add a new function named strFunctionName to a package.  This function creates a file names R/strFunctionName.R
 #' and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package. }
 #' @param strFunctionName The name of the function to add.
-#' @param strPkgDir The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.
 #' @param strFunctionDescription A description to include at the top of the file with the function.
+#' @param strPkgDir The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.
 #' @export
-AddFunctionToPkg <- function(  strFunctionName, strPkgDir = "", strFunctionDescription = "" )
+AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", strPkgDir = "" )
 {
 
     if( !Provided( strPkgDir) )

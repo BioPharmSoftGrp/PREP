@@ -23,5 +23,5 @@ is the main directory of the Shiny app created by this package.  This function c
 of the app, it alters the ShinyUI.R file to insert the calls to  modules so the tab is added to the UI. 
 
 # For the Calculation Package
-AddFunctionToPkg( strFunctionName, strPkgDir = "", strFunctionDescription = "" ) - Add a new function named strFunctionName to a package.  This function creates a file names R/strFunctionName.R
+AddFunctionToPkg( strFunctionName, strFunctionDescription = "", strPkgDir = "" ) - Add a new function named strFunctionName to a package.  This function creates a file names R/strFunctionName.R
 and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package.

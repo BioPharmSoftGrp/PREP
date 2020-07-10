@@ -4,14 +4,14 @@
 \alias{AddFunctionToPkg}
 \title{AddFunctionToPkg}
 \usage{
-AddFunctionToPkg(strFunctionName, strPkgDir = "", strFunctionDescription = "")
+AddFunctionToPkg(strFunctionName, strFunctionDescription = "", strPkgDir = "")
 }
 \arguments{
 \item{strFunctionName}{The name of the function to add.}
 
-\item{strPkgDir}{The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.}
-
 \item{strFunctionDescription}{A description to include at the top of the file with the function.}
+
+\item{strPkgDir}{The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.}
 }
 \description{
 { Add a new function named strFunctionName to a package.  This function creates a file names R/strFunctionName.R
