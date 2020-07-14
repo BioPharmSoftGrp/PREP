@@ -7,7 +7,7 @@ output: html_document
 
 
 
-To get started with this applicaiton ...
+To get started with this application ...
 
 
 This box was created with a color of "danger", see Modules/HomeUI.R.

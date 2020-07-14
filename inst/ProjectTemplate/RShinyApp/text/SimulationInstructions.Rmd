@@ -5,4 +5,4 @@ date: "2/4/2020"
 output: html_document
 ---
 
-Provoide instrucitons about how to use this part of the program of the program. 
+Provide instructions about how to use this part of the program of the program. 
