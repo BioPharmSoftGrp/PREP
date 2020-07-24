@@ -8,5 +8,5 @@ output: html_document
 
 # Model
 
-For the data analysis, we assume the following posterior distributions $\pi_S$ ~ Beta( dPostParam1S, dPostParam2S ) and  $\pi_E$ ~ Beta( dPostParam1E, dPostParam2E ).  The analaysis consists of computing Pr( $\pi_E - \pi_S$ | data ) > dDelta1 and Pr( $\pi_E - \pi_S$ | data ) > dDelta2.
+For the data analysis, we assume the following posterior distributions $\pi_S$ ~ Beta( dPostParam1S, dPostParam2S ) and  $\pi_E$ ~ Beta( dPostParam1E, dPostParam2E ).  The analysis consists of computing Pr( $\pi_E - \pi_S$ | data ) > dDelta1 and Pr( $\pi_E - \pi_S$ | data ) > dDelta2.
 

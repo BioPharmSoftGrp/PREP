@@ -11,7 +11,7 @@ You will find a folder for the Shiny app using the BioPharmSoft template which l
 
 Each project, Shiny app and computational package,  where created as subdirectories of this folder.  Each folder consists of an R Studio project file with the extension .Rproj.  For each project, please open these files. Within each project there is a Instructions.Rmd file to provide specific details about that project. 
 
-Before the Shiny app will run you must first build the R package or remove the reference in the Shiny app in the Golbal.R file. 
+Before the Shiny app will run you must first build the R package or remove the reference in the Shiny app in the Global.R file. 
 
 Please refer to the [BioPharmSoft Style Guide](https://biopharmsoftgrp.github.io/BioPharmSoftRStyleGuide/) for development best practices.
 
