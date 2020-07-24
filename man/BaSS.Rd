@@ -12,4 +12,9 @@ the Shiny app utiizes the R package.
 \author{
 \strong{Maintainer}: J. Kyle Wathen \email{KyleWathen@gmail.com}
 
+Authors:
+\itemize{
+  \item Nan Chen \email{nchen4@gmail.com} [contributor]
+}
+
 }
