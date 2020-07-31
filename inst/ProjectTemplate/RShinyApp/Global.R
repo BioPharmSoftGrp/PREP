@@ -5,11 +5,9 @@ library( shiny)
 library( shinydashboard)
 library( shinyBS )
 library( ggplot2 )
-
 library(shinydashboardPlus)
-
 library( dashboardthemes)
-
+library( shinybusy )
 
 # Include any other libraries
 library( _CALCULATION_PACKAGE_NAME_ )  # If you have not built the R Calculation package then this likely needs to be commented out for the Shiny app to run

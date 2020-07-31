@@ -2,12 +2,12 @@
 
 DataAnalysisRunAnalysisUI <- function( strID, strTabName )
 {
-    
+
     ns <- NS( strID )
     RunAnalysisButton <- bsButton( ns( "btnRunAnalysis" ), label="Run Analysis", style="success", block=F, size="large")
     fldRow <- fluidRow(
         box( title="Analysis", solidHeader = TRUE,width=12, status = "primary",
-        
+
         tabsetPanel(
             tabPanel("Input",
                      box( width="300px",title=NULL,
@@ -20,24 +20,27 @@ DataAnalysisRunAnalysisUI <- function( strID, strTabName )
                           numericInput( inputId = ns("dDelta1"), label = "dDelta1", min = 0.0, max=1.0, value=0.0),
                           numericInput( inputId = ns("dDelta2"), label = "dDelta2", min = 0.0, max=1.0, value=0.0),
                           RunAnalysisButton
-                        ) 
+                        )
                     ),
-            
+
             tabPanel("Results",
                      plotOutput( ns( "ctrlDataAnalysisPlot" ), height="600px"),
-                     box( "Pr( pe -ps > delta1 ) = ",  textOutput( ns( "txtPrGrtDelta1") ) ) 
+                     box( "Pr( pe -ps > delta1 ) = ",  textOutput( ns( "txtPrGrtDelta1") ) ),
+                     downloadButton( ns( "btnWord" ), "Word Report"),
+                     downloadButton( ns( "btnPPT" ), "PowerPoint Report")
+
             )
         )
         )
-        
+
     )
-    
+
     tabDataAnalysisProgramUI <- tabItem( tabName = strTabName,
                                          fldRow )
-    
-    
+
+
     return( tabDataAnalysisProgramUI )
-    
-    
-    
+
+
+
 }
