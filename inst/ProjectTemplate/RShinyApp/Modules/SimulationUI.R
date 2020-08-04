@@ -92,8 +92,9 @@ SimulationProgramUI <- function( strID )
             ),
 
             tabPanel("Results",
-                     box( width="300px",title="Computation Results",
-                          plotOutput( ns( "ctrlPlotOCs" ), height="600px"),
+                     box( width=8, title="Computation Results",
+                          plotOutput( ns( "ctrlPlotOCs" ))),
+                     box( width=8,
                           downloadButton( ns( "btnWord" ), "Word Report"),
                           downloadButton( ns( "btnPPT" ), "PowerPoint Report") )
             )
