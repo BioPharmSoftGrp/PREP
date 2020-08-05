@@ -121,7 +121,7 @@ SimulationProgramServer <- function(  )
                                                 Values= c(input$nN1, input$nN2)),
                         Version = "0.2"
                     )
-                rmarkdown::render('Modules/WordOutput.Rmd',
+                rmarkdown::render('Templates/WordOutput.Rmd',
                                   output_file = file,
                                   params = lRes)
                 update_modal_progress(0.9) # update progress bar value
@@ -167,7 +167,7 @@ SimulationProgramServer <- function(  )
                                                 Values= c(input$nN1, input$nN2)),
                         Version = "0.2"
                     )
-                rmarkdown::render('Modules/PowerPointOutput.Rmd',
+                rmarkdown::render('Templates/PowerPointOutput.Rmd',
                                   output_file = file,
                                   params = lRes)
                 update_modal_progress(0.9) # update progress bar value

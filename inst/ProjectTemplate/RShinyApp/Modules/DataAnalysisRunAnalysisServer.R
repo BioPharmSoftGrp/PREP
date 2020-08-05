@@ -86,7 +86,7 @@ DataAnalysisRunAnalysisServer <- function( )
                         Version = "0.2",
                         strResult = paste0( "Pr( pe -ps > delta1 ) = ", round(lDataValues$lResult$dPPGrtDelta1, 3) )
                     )
-                rmarkdown::render('Modules/WordOutput.Rmd',
+                rmarkdown::render('Templates/WordOutput.Rmd',
                                   output_file = file,
                                   params = lRes)
                 update_modal_progress(0.9) # update progress bar value
@@ -124,7 +124,7 @@ DataAnalysisRunAnalysisServer <- function( )
                         Version = "0.2",
                         strResult = paste0( "Pr( pe -ps > delta1 ) = ",  round(lDataValues$lResult$dPPGrtDelta1, 3))
                     )
-                rmarkdown::render('Modules/PowerPointOutput.Rmd',
+                rmarkdown::render('Templates/PowerPointOutput.Rmd',
                                   output_file = file,
                                   params = lRes)
                 update_modal_progress(0.9) # update progress bar value
