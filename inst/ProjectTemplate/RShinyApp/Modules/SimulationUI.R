@@ -1,6 +1,6 @@
 # For complex tabs it may be best to use an approach similar to this tab.   Have functions for each subtab of the tab that each reside in a seperate file.
 # Then create a functionUI that would be the tab and all subtabs, in this example SimulationUI.   This approach keeps the main UI from having to call
-# all subtab module UI functions. 
+# all subtab module UI functions.
 # Note: for this simple tab  all UI functions for this tab are in this one file but in practice it may be best to seperate each subtab funciton to different files.
 
 SimulationUI <- function( )
@@ -8,19 +8,19 @@ SimulationUI <- function( )
     tabIntro <-tabItem(
             tabName = "SimulationIntro",
             SimulationIntroUI("SimulationIntro")
-            
-            
+
+
         )
-        
+
       tabSimulation <-tabItem(
             tabName = "SimulationProgram",
             SimulationProgramUI("SimulationProgram")
         )
-     
-    
+
+
     return(list(tabIntro,tabSimulation))
-    
-    
+
+
 }
 
 SimulationSideBarMenu <- function( )
@@ -30,11 +30,11 @@ SimulationSideBarMenu <- function( )
                         text    = "Simulation",
                         tabName = "Simulation",
                         icon    = icon("cogs"),
-                            menuSubItem( 
+                            menuSubItem(
                               text = "Introduciton",
                               tabName = "SimulationIntro"),
-                            
-                            menuSubItem( 
+
+                            menuSubItem(
                               text = "Program",
                               tabName = "SimulationProgram")
                       )
@@ -44,12 +44,12 @@ SimulationSideBarMenu <- function( )
 
 SimulationIntroUI <- function( strID )
 {
-    
+
     ns <- NS( strID )
     fldRow <- fluidRow(
-        
+
         box(
-            
+
             width = 12,
             title = "Introduction",
             status = "primary",
@@ -57,32 +57,32 @@ SimulationIntroUI <- function( strID )
             includeMarkdown( "text/SimulationIntro.Rmd")
         ),
         box(
-            
+
             width = 12,
             title = "Instructions",
             status = "primary",
             solidHeader = TRUE,
             includeMarkdown( "text/SimulationInstructions.Rmd")
-            
-            
+
+
         )
-        
+
     )
     return( fldRow )
-    
-    
-    
+
+
+
 }
 
 SimulationProgramUI <- function( strID )
 {
-    
+
     ns <- NS( strID )
     btn <- bsButton( ns( "btnSimulate" ), label="Run Simulation", style="success", block=F, size="large")
     #print( paste( btn$attribs$id))
     fldRow <- fluidRow(
         box( title="Simulation", solidHeader = TRUE,width=12, status = "primary",
-        
+
         tabsetPanel(
             tabPanel("Setup",
                      box( width="300px",title="Trial Design Options",
@@ -90,20 +90,24 @@ SimulationProgramUI <- function( strID )
                           numericInput( ns( "nN2" ), "Number of Patients on Experimental (E): ", value = 100, max = 1000, step = 5,    min=10)),
                           bsButton( ns( "btnSimulate" ), label="Run Simulation", style="success", block=F, size="large")
             ),
-            
+
             tabPanel("Results",
-                     plotOutput( ns( "ctrlPlotOCs" ), height="600px")
+                     box( width=8, title="Computation Results",
+                          plotOutput( ns( "ctrlPlotOCs" ))),
+                     box( width=8,
+                          downloadButton( ns( "btnWord" ), "Word Report"),
+                          downloadButton( ns( "btnPPT" ), "PowerPoint Report") )
             )
         )
         )
-        
+
     )
-    
-    
-    
+
+
+
     return( fldRow )
-    
-    
-    
+
+
+
 }
 

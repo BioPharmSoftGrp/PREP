@@ -4,6 +4,9 @@ DataAnalysisRunAnalysisServer <- function( )
 {
     strID <- "DataAnalysisProg"
     retModule <- function( input, output, session ){
+
+        lDataValues <- reactiveValues(dfAll = NULL, lResult = NULL)
+
         observeEvent( input$btnRunAnalysis ,{
 
             #ns <- NS( strID )
@@ -27,11 +30,110 @@ DataAnalysisRunAnalysisServer <- function( )
                              }
 
                          })
-            x1<- rnorm( 100 )
+
+            nNum = 10000
+            dfDat1 <- data.frame( Group = rep("Std." , nNum), Data = rbeta(nNum, dParam1S, dParam2S) )
+            dfDat2 <- data.frame( Group = rep("Exp." , nNum), Data = rbeta(nNum, dParam1E, dParam2E) )
+
+            lDataValues$dfAll   <- rbind( dfDat1, dfDat2 )
+            lDataValues$lResult <- lRet
+            print(lRet)
             updateButton(session, inputId = "btnRunAnalysis" , label="Run Analysis", style = "success",  size="large", disabled = FALSE)
-            output$ctrlDataAnalysisPlot <- renderPlot({ plot( density( x1 ), type='l', main=paste("Analysis Results", input$nN1,sep="") ) } )
             output$txtPrGrtDelta1 <- renderText( lRet$dPPGrtDelta1 )
         } )
+
+
+        DrawPlot <- reactive({
+
+            if (!is.null(lDataValues$dfAll))
+            {
+                pRet <- ggplot(lDataValues$dfAll, aes(x = Data, fill = Group)) +
+                    geom_density(alpha = 0.4)
+                return(pRet)
+            }
+        })
+
+        output$ctrlDataAnalysisPlot <- renderPlot({
+            DrawPlot()
+        } )
+
+
+        output$btnWord <- downloadHandler(
+
+            filename = function() {
+                paste0("Word", 'Report.docx')
+            },
+            content = function(file) {
+
+                dParam1S <- input$dPostParam1S
+                dParam2S <- input$dPostParam2S
+                dParam1E <- input$dPostParam1E
+                dParam2E <- input$dPostParam2E
+                dDelta1  <- input$dDelta1
+                dDelta2  <- input$dDelta2
+
+                Sys.sleep(0.1)
+
+                show_modal_progress_line(value = 0.2, text = "Downloading ...") # show the modal window
+                lRes <-
+                    list(
+                        allDat = list(p = DrawPlot()),
+                        ParaValues = data.frame(Parameters = c("Successes in Standard",
+                                                               "Failures in Standard",
+                                                               "Successes in Experimen",
+                                                               "Failures in Experiment"),
+                                                Values= c(dParam1S, dParam2S, dParam1E, dParam2E)),
+                        Version = "0.2",
+                        strResult = paste0( "Pr( pe -ps > delta1 ) = ", round(lDataValues$lResult$dPPGrtDelta1, 3) )
+                    )
+                rmarkdown::render('Templates/WordOutput.Rmd',
+                                  output_file = file,
+                                  params = lRes)
+                update_modal_progress(0.9) # update progress bar value
+                Sys.sleep(2)
+                remove_modal_progress() # remove it when done
+
+                #shinyjs::enable("downloadWordRpt")
+
+            }
+        )
+
+        output$btnPPT <- downloadHandler(
+            filename = function() {
+                paste0("PPT", 'Report.pptx')
+            },
+            content = function(file) {
+
+                dParam1S <- input$dPostParam1S
+                dParam2S <- input$dPostParam2S
+                dParam1E <- input$dPostParam1E
+                dParam2E <- input$dPostParam2E
+                dDelta1  <- input$dDelta1
+                dDelta2  <- input$dDelta2
+
+                show_modal_progress_line(value = 0.2, text = "Downloading ...") # show the modal window
+
+                lRes <-
+                    list(
+                        allDat = list(p = DrawPlot()),
+                        ParaValues = data.frame(Parameters = c("Successes in Standard",
+                                                               "Failures in Standard",
+                                                               "Successes in Experimen",
+                                                               "Failures in Experiment"),
+                                                Values= c(dParam1S, dParam2S, dParam1E, dParam2E)),
+                        Version = "0.2",
+                        strResult = paste0( "Pr( pe -ps > delta1 ) = ",  round(lDataValues$lResult$dPPGrtDelta1, 3))
+                    )
+                rmarkdown::render('Templates/PowerPointOutput.Rmd',
+                                  output_file = file,
+                                  params = lRes)
+                update_modal_progress(0.9) # update progress bar value
+                Sys.sleep(2)
+                remove_modal_progress() # remove it when done
+
+            }
+        )
+
     }
 
     retServer <- moduleServer( strID, module = retModule )
