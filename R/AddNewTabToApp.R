@@ -8,7 +8,7 @@
 #' of the app, it alters the ShinyUI.R file to insert the calls to  modules so the tab is added to the UI. }
 
 #' @export
-AddNewTabToApp <- function( strTabName, vSubMenuItemNames = NULL, strTemplate = "ResultViewer" )
+AddNewTabToApp <- function( strTabName, vSubMenuItemNames = NULL, strTemplate = "NoSubItemTabModule" )
 {
     vResults              <- c()
     strModuleSubdir      <- "Modules/"
@@ -123,6 +123,18 @@ AddSourceCommandToGlobal <- function( strFileName )
 
 CreateTab <- function( strTabName, strTemplate = "ResultViewer", strParentTabName = NULL )
 {
+
+    strSubDir          <- "/ShinyModules"
+    strModulesDir       <- GetTemplateDirectory( paste0 ("Templates", strSubDir ) )
+    vFileNames          <- list.files(strModulesDir, pattern = "\\Server.R$")
+    vModulesName        <- c()
+    vHasReport          <- c()
+    for( i in 1:length( vFileNames ) )
+    {
+        strModuleName <- sub("Server.R", "", vFileNames[i], ignore.case = TRUE )
+        vModulesName  <- c( vModulesName, strModuleName )
+    }
+
     vResults              <- c()
     strModuleSubdir      <- "Modules/"
     strTemplateSubdir    <- "Templates/"
@@ -134,19 +146,10 @@ CreateTab <- function( strTabName, strTemplate = "ResultViewer", strParentTabNam
     vReplace             <- c()
     bReportTemplate      <- FALSE
 
-    if (strTemplate == "ResultViewer")
-    {
-        bReportTemplate <- TRUE
-
-    } else if (strTemplate == "NoSubItemTabModule")
-    {
-        bReportTemplate <- FALSE
-
-    } else
+    if ( !( strTemplate %in% vModulesName ) )
     {
         print( "Current Supported Templates:")
-        print( "ResultViewer")
-        print( "NoSubItemTabModule")
+        print( vModulesName )
         stop( paste0( strTemplate, ": This template is not supported!" ))
     }
 
@@ -164,22 +167,21 @@ CreateTab <- function( strTabName, strTemplate = "ResultViewer", strParentTabNam
 #     lCopyFile1 <- CopyTemplateFile( "NoSubItemTabModuleServer.R", paste( strModuleSubdir, strTabName, "Server.R", sep = "" ) )
 #     lCopyFile2 <- CopyTemplateFile( "NoSubItemTabModuleUI.R", paste( strModuleSubdir, strTabName, "UI.R", sep = "" ) )
 
-    lCopyFile1 <- CopyTemplateFile( paste0( strTemplate, "Server.R" ), paste( strModuleSubdir, strTabName, "Server.R", sep = "" ) )
-    lCopyFile2 <- CopyTemplateFile( paste0( strTemplate, "UI.R" ), paste( strModuleSubdir, strTabName, "UI.R", sep = "" ) )
 
-    if (bReportTemplate)
-    {
-        lCopyFile3 <- CopyTemplateFile( paste0( strTemplate, "PPT.Rmd" ), paste( strTemplateSubdir, strTabName, "PPT.Rmd", sep = "" ) )
-        lCopyFile4 <- CopyTemplateFile( paste0( strTemplate, "Word.Rmd" ), paste( strTemplateSubdir, strTabName, "Word.Rmd", sep = "" ) )
-    }
+    # print( paste0( strSubDir, "/", strTemplate, "Server.R" ))
+    # print(paste0(strModulesDir, "/", strTemplate, "Word.Rmd" ))
+    # stop*("Stop here")
+    #
+    lCopyFile1 <- CopyTemplateFile( paste0( strSubDir, "/", strTemplate, "Server.R" ), paste( strModuleSubdir, strTabName, "Server.R", sep = "" ) )
+    lCopyFile2 <- CopyTemplateFile( paste0( strSubDir, "/", strTemplate, "UI.R" ), paste( strModuleSubdir, strTabName, "UI.R", sep = "" ) )
 
     if( lCopyFile1$bFileCoppied )
     {
         vResults <- c(vResults, paste( "Created File", lCopyFile1$strDestinationFile ) )
         ReplaceTagsInFile( lCopyFile1$strDestinationFile, vTags, vReplace )
         AddSourceCommandToGlobal( lCopyFile1$strDestinationFile )
-
     }
+
     if( lCopyFile2$bFileCoppied )
     {
         # If this is a subtab would also need to replace the menuItem( with subMenuItem
@@ -188,19 +190,16 @@ CreateTab <- function( strTabName, strTemplate = "ResultViewer", strParentTabNam
         AddSourceCommandToGlobal( lCopyFile2$strDestinationFile )
     }
 
-    if (bReportTemplate)
+    if (file.exists(paste0(strModulesDir, "/", strTemplate, "PPT.Rmd" )))
     {
-        if( lCopyFile3$bFileCoppied )
-        {
-            # If this is a subtab would also need to replace the menuItem( with subMenuItem
-            vResults <- c(vResults, paste( "Created File", lCopyFile3$strDestinationFile ) )
-        }
+        lCopyFile3 <- CopyTemplateFile( paste0(strSubDir, "/", strTemplate, "PPT.Rmd" ), paste( strTemplateSubdir, strTabName, "PPT.Rmd", sep = "" ) )
+        vResults <- c(vResults, paste( "Created File", lCopyFile3$strDestinationFile ) )
+    }
 
-        if( lCopyFile4$bFileCoppied )
-        {
-            # If this is a subtab would also need to replace the menuItem( with subMenuItem
-            vResults <- c(vResults, paste( "Created File", lCopyFile4$strDestinationFile ) )
-        }
+    if (file.exists(paste0(strModulesDir, "/", strTemplate, "Word.Rmd" )))
+    {
+        lCopyFile4 <- CopyTemplateFile( paste0(strSubDir, "/", strTemplate, "Word.Rmd" ), paste( strTemplateSubdir, strTabName, "Word.Rmd", sep = "" ) )
+        vResults <- c(vResults, paste( "Created File", lCopyFile4$strDestinationFile ) )
     }
 
     return( vResults )
