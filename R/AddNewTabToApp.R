@@ -124,6 +124,14 @@ AddSourceCommandToGlobal <- function( strFileName )
 CreateTab <- function( strTabName, strTemplate = "ResultViewer", strParentTabName = NULL )
 {
 
+    #################################################################################################### .
+    # The Shiny templates are stored at the folder BaSS/inst/Templates/ShinyModules. These Shiny templates ####
+    # will be applied as templates for Shiny tab modules. If the name of the template is "TemplateName", the ####
+    # template includes the file "TemplateNameServer.R" and "TemplateNameUI.R" for the Servr and UI functions, respectively. ####
+    # If the template include the download output function in Word or Powerpoint format, please use the name ####
+    # "TemplateNameWord.Rmd" and "TemplateNamePPT.Rmd" for the R-Markdown template name, respectively in this folder. ####
+    #################################################################################################### .
+
     strSubDir          <- "/ShinyModules"
     strModulesDir       <- GetTemplateDirectory( paste0 ("Templates", strSubDir ) )
     vFileNames          <- list.files(strModulesDir, pattern = "\\Server.R$")
@@ -134,6 +142,11 @@ CreateTab <- function( strTabName, strTemplate = "ResultViewer", strParentTabNam
         strModuleName <- sub("Server.R", "", vFileNames[i], ignore.case = TRUE )
         vModulesName  <- c( vModulesName, strModuleName )
     }
+
+    #################################################################################################### .
+    # The **Server.R and **UI.R in the BaSS/inst/Templates/ShinyModules will be modified and copied to the
+    # Shinyapp/Modules folder. The **Word.Rmd and **PPT.Rmd will be copied to the Shinyapp/Templates folder ####
+    #################################################################################################### .
 
     vResults              <- c()
     strModuleSubdir      <- "Modules/"
@@ -164,14 +177,6 @@ CreateTab <- function( strTabName, strTemplate = "ResultViewer", strParentTabNam
     vTags    <- c( vTags, "_TAB_NAME_WITH_SPACES_", "_TAB_NAME_" )
     vReplace <- c( vReplace, strTabNameWithSpaces, strTabName )
 
-#     lCopyFile1 <- CopyTemplateFile( "NoSubItemTabModuleServer.R", paste( strModuleSubdir, strTabName, "Server.R", sep = "" ) )
-#     lCopyFile2 <- CopyTemplateFile( "NoSubItemTabModuleUI.R", paste( strModuleSubdir, strTabName, "UI.R", sep = "" ) )
-
-
-    # print( paste0( strSubDir, "/", strTemplate, "Server.R" ))
-    # print(paste0(strModulesDir, "/", strTemplate, "Word.Rmd" ))
-    # stop*("Stop here")
-    #
     lCopyFile1 <- CopyTemplateFile( paste0( strSubDir, "/", strTemplate, "Server.R" ), paste( strModuleSubdir, strTabName, "Server.R", sep = "" ) )
     lCopyFile2 <- CopyTemplateFile( paste0( strSubDir, "/", strTemplate, "UI.R" ), paste( strModuleSubdir, strTabName, "UI.R", sep = "" ) )
 
