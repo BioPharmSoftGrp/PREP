@@ -30,7 +30,6 @@ _TAB_NAME_Server <- function( )
                             )
 
             lDataValues$dfParas <- data.frame( Parameters = vParaLabels, Values = vParaValues)
-            print(lDataValues$dfParas)
 
             lDataValues$dfAll <- mtcars[ mtcars$cyl %in% input$cyl &
                                          mtcars$am %in% input$am &
@@ -43,7 +42,6 @@ _TAB_NAME_Server <- function( )
         DrawPlot <- function()
         {
             SubsetData()
-            print(lDataValues$dfAll)
             dfDat     <- lDataValues$dfAll
             dfDat$cyl <- as.factor(dfDat$cyl)
 
