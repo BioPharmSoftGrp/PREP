@@ -5,7 +5,7 @@
 #################################################################################################### .
 #' @name  AddFunctionToPkg
 #' @title  AddFunctionToPkg
-#' @description { Add a new function named strFunctionName to a package.  This function creates a file names R/strFunctionName.R
+#' @description { Add a new function named strFunctionName to a package.  This function creates a file named R/strFunctionName.R
 #' and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package. }
 #' @param strFunctionName The name of the function to add.
 #' @param strFunctionDescription A description to include at the top of the file with the function.
