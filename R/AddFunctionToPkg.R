@@ -47,7 +47,7 @@ AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", str
         bTestFileExists <- file.exists( strTestFileName )
     }
 
-    strTemplateFloder <- GetTemplateDirectory( "Templates" )
+    strTemplateFolder <- GetTemplateDirectory( "Templates" )
 
     strFunctionTemplateFile     <- paste( strTemplateFloder, "/", "FunctionTemplate.R", sep="")
     strTestFunctionTemplateFile <- paste( strTemplateFloder, "/",  "TestFunctionTemplate.R", sep="")
