@@ -1,6 +1,6 @@
 #################################################################################################### .
 # AddFunctionToPkg                                                                              ####
-#   Description - The function will add a new function file to the R directory whith the
+#   Description - The function will add a new function file to the R directory with the
 #   correct headers and also setup a test file in the test/tests directory
 #################################################################################################### .
 #' @name  AddFunctionToPkg
