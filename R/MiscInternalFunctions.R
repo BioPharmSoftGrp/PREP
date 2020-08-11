@@ -7,7 +7,7 @@
 GetTemplateDirectory <- function( strTemplateFolder = "ProjectTemplate")
 {
     strPackageTemplateDirectory <- "BaSS"
-    strTemplateDirectory        <- system.file( strTemplateFloder, package = strPackageTemplateDirectory)
+    strTemplateDirectory        <- system.file( strTemplateFolder, package = strPackageTemplateDirectory)
 
 
     return( strTemplateDirectory )
