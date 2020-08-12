@@ -16,6 +16,7 @@ CreateBaSSApp <-  function( strProjectDirectory        = "",
                              strCalculationLibraryName  = "MyCalculationLibrary",
                              strShinyAppName            = "MyShinyApp",
                              strShinyAppDisplayName     = "My Shiny App",
+                             strAuthors                 = "J. Kyle Wathen",
                              bCreateWithExampleTabs     = TRUE,
                              bCreateShinyApp            = TRUE,
                              bCreateCalculationPackage  = TRUE,
@@ -37,7 +38,8 @@ CreateBaSSApp <-  function( strProjectDirectory        = "",
     {
         # Create the R package - Complete with testthat example
         strCalcPkgRet               <- CreateBaSSRPackage( strProjectDirectory      = strNewProjectDirectory,
-                                                         strPackageName             = strCalculationLibraryName )
+                                                         strPackageName             = strCalculationLibraryName,
+                                                         strAuthors                 = strAuthors)
     }
 
     if( bCreateShinyApp )
@@ -49,6 +51,7 @@ CreateBaSSApp <-  function( strProjectDirectory        = "",
                                                            strShinyAppName           = strShinyAppName,
                                                            strShinyAppDisplayName    = strShinyAppDisplayName,
                                                            strCalculationLibraryName = strCalculationLibraryName,
+                                                           strAuthors                = strAuthors,
                                                            bCreateProjectSubdirectory= TRUE,
                                                            bCreateWithExampleTabs    = bCreateWithExampleTabs)
         }
@@ -58,6 +61,7 @@ CreateBaSSApp <-  function( strProjectDirectory        = "",
                                                     strShinyAppName           = strShinyAppName,
                                                     strShinyAppDisplayName    = strShinyAppDisplayName,
                                                     strCalculationLibraryName = strCalculationLibraryName,
+                                                    strAuthors                = strAuthors,
                                                     bCreateProjectSubdirectory= TRUE,
                                                     bCreateWithExampleTabs    = bCreateWithExampleTabs )
 

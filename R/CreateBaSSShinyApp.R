@@ -7,7 +7,7 @@
 #' @param bCreateProjectSubdirectory {If bCreateProjectSubdirectory then then a subdirectory for the project is created in strProjectDirectory.  }
 #' @param bCreateWithExampleTabs {By default, the R Shiny app will contain two example tabs (Simulation and Data analyusis), if bCreateWithExampleTabs = FALSE those tabs are removed.}
 #' @export
-CreateBaSSShinyApp <- function(strProjectDirectory, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName,
+CreateBaSSShinyApp <- function(strProjectDirectory, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName, strAuthors,
                                bCreateProjectSubdirectory = TRUE, bCreateWithExampleTabs = TRUE )
 {
     #TODO: Validate input
@@ -35,9 +35,12 @@ CreateBaSSShinyApp <- function(strProjectDirectory, strShinyAppName, strShinyApp
     strRet                  <- CopyFiles( strAppDirectory, strDestDirectory )
     strShinyApp             <- UpdateShinyAppName( strProjectDirectory, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName )
 
-    strRet <- paste( c("Creating Shiny App...", strRet, strShinyApp ), collapse="\n" )
+
+    strUpdateAuthor <- UpdateAuthors(strProjectDirectory, strAuthors)
+    strRet <- paste( c("Creating Shiny App...", strRet, strShinyApp, strUpdateAuthor ), collapse="\n" )
     return(strRet)
 }
+
 UpdateShinyAppName <- function(  strProjectDirectory, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName = NA )
 {
 

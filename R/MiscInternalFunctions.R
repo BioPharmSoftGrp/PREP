@@ -88,3 +88,44 @@ ReplaceTagsInFile <- function( strFileName, vTags, vReplace )
     return( bFileExists )
 
 }
+
+ReplaceTagsMultipleFiles <- function( vFileNames, vTags, vReplace )
+{
+    nNumFiles <- length( vFileNames )
+    if (nNumFiles > 0)
+    {
+        for(i in 1:nNumFiles)
+        {
+            ReplaceTagsInFile( vFileNames[i], vTags, vReplace )
+        }
+    }
+}
+
+UpdateAuthors <- function(strPath, strAuthor)
+{
+
+    strRet <- ""
+    if ( !is.null(strAuthor) )
+    {
+        vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$")
+        for (i in 1:length( vFileType ))
+        {
+            vFileNames <- list.files( strPath, pattern = vFileType[i], recursive = TRUE )
+            if (length(vFileNames) > 0)
+            {
+                vFilePaths <- paste0( strPath, "/", vFileNames )
+                if (i == 3) # html
+                {
+                    ReplaceTagsMultipleFiles ( vFilePaths, "AUTHOR_NAME", strAuthor )
+                } else
+                {
+                    ReplaceTagsMultipleFiles ( vFilePaths, "_AUTHOR_NAME_", strAuthor )
+                }
+
+            }
+        }
+        strRet <- paste0("Update the author names to: ", strAuthor)
+    }
+    return(strRet)
+
+}
