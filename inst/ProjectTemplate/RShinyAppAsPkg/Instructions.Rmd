@@ -1,7 +1,7 @@
 ---
 title: "Instructions"
-author: "J. Kyle Wathen"
-date: "3/19/2020"
+author: "_AUTHOR_NAME_"
+date: "8/10/2020"
 output: html_document
 ---
 ## R Computation Package

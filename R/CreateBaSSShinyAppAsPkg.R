@@ -5,7 +5,7 @@
 #' @title CreateBaSSShinyAppAsPkg
 #' @description { This function creates a Shiny app as an R Package.  }
 #' @export
-CreateBaSSShinyAppAsPkg <- function( strProjectDirectory, strShinyAppName, strShinyAppDisplayName,  strCalculationLibraryName,
+CreateBaSSShinyAppAsPkg <- function( strProjectDirectory, strShinyAppName, strShinyAppDisplayName,  strCalculationLibraryName, strAuthors,
                                      bCreateProjectSubdirectory = TRUE, bCreateWithExampleTabs = TRUE  )
 {
 
@@ -27,12 +27,15 @@ CreateBaSSShinyAppAsPkg <- function( strProjectDirectory, strShinyAppName, strSh
     # Step 1 - Create the Shiny App Package project - This will not have the shiny app yet
     strRet            <- CopyFiles( strTemplateDirectory, strDestDirectory )
     strPackageUpdates <- UpdateCalculationPackageName(strProjectDirectory, strShinyAppName )
+    strUpdateAuthor1 <- UpdateAuthors( strProjectDirectory, strAuthors )
+
 
     # Step 2 - Create the Shiny app in the inst directory of the package created in the previous step.  By creating it in the inst folder
     #          the shiny app is deployed when the package is installed and can be executed with the RunApp function in the package created in the previous step
     strProjectInstDir <- paste( strDestDirectory , "/inst", sep = ""  )
-    strShinyApp       <- CreateBaSSShinyApp ( strProjectInstDir, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName,
+    strShinyApp       <- CreateBaSSShinyApp ( strProjectInstDir, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName, strAuthors,
                                               bCreateProjectSubdirectory = bCreateProjectSubdirectory, bCreateWithExampleTabs = bCreateWithExampleTabs )
+
 
     # Step 3: Replace name in the ShinyUI.R file
     # At this point the R package for the Shiny app was created, the Shiny app was setup in the strShinyAppName/inst/strShinyAppName
@@ -42,7 +45,7 @@ CreateBaSSShinyAppAsPkg <- function( strProjectDirectory, strShinyAppName, strSh
     strFileLines  <- gsub( "_SHINY_PROJECT_NAME_", strShinyAppName, strFileLines )
     writeLines( strFileLines, con = strRunAppFile )
 
-    strRet <- paste( c("Creating Shiny App as a package...", strPackageUpdates, strShinyApp,
+    strRet <- paste( c("Creating Shiny App as a package...", strPackageUpdates, strUpdateAuthor1, strShinyApp,
                        paste( "The Shiny app  in ", strDestDirectory, "/inst directory was renamed to ", strShinyApp, sep = ""  )), collapse="\n" )
     return( strRet )
 

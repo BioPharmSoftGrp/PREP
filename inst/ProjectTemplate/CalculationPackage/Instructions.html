@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="J. Kyle Wathen" />
+<meta name="author" content="AUTHOR_NAME" />
 
 
 <title>Instructions</title>
@@ -363,8 +363,8 @@ summary {
 
 
 <h1 class="title toc-ignore">Instructions</h1>
-<h4 class="author">J. Kyle Wathen</h4>
-<h4 class="date">3/19/2020</h4>
+<h4 class="author"><em>AUTHOR_NAME</em></h4>
+<h4 class="date">8/10/2020</h4>
 
 </div>
 
@@ -373,6 +373,8 @@ summary {
 <h2>R Computation Package</h2>
 <p>To build the package click on Build-&gt;Clean and Rebuild. This is also available Build tab typically to right pane in R Studio.</p>
 <p>The R directory contains the files with functions in the library. For example, R/CalcPosteriorProbsBinom.R contains the function that is called from the Shiny app.</p>
+<p>You may find the following functions in the BASS package helpful when developing the Calculation package</p>
+<p>AddFunctionToPkg( strFunctionName, strFunctionDescription = &quot;“, strPkgDir =”&quot; ) - Add a new function named strFunctionName to a package. This function creates a file names R/strFunctionName.R and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package.</p>
 <p>For a function to be available to the user that installs the package it must have a #’ <span class="citation">@export</span> in the line above the function name like the following</p>
 <pre class="r"><code>#&#39; @export
 ExampleFunction &lt;- function()

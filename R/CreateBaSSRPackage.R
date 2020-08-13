@@ -6,7 +6,7 @@
 #' if strPackageName is provided, is not blank and bCreateProjectSubdirectory == TRUE then a folder named  strPackageName is created in the strProjectDirectory directory.}
 #' @param bCreateProjectSubdirectory {If bCreateProjectSubdirectory then then a subdirectory for the project is created in strProjectDirectory.  }
 #' @export
-CreateBaSSRPackage <- function( strProjectDirectory, strPackageName, bCreateProjectSubdirectory = TRUE )
+CreateBaSSRPackage <- function( strProjectDirectory, strPackageName, strAuthors, bCreateProjectSubdirectory = TRUE )
 {
     # Set the template directory to copy from
     strProjectDirectory         <- gsub( "\\\\", "/", strProjectDirectory )
@@ -20,8 +20,9 @@ CreateBaSSRPackage <- function( strProjectDirectory, strPackageName, bCreateProj
 
     strRet        <- CopyFiles( strCalculationsDirectory, strDestDirectory )
     strCalcPkgRet <- UpdateCalculationPackageName( strProjectDirectory, strPackageName )
+    strUpdateAuthor <- UpdateAuthors(strProjectDirectory, strAuthors)
 
-    strRet <- paste( c("Creating Calculation Package...", strRet, strCalcPkgRet), collapse="\n" )
+    strRet <- paste( c("Creating Calculation Package...", strRet, strCalcPkgRet, strUpdateAuthor), collapse="\n" )
     return(strRet)
 }
 
