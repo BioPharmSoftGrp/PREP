@@ -59,15 +59,15 @@ AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", str
 
     # Replace the TAGS in the coppied files
     strFileLines       <- readLines( strFileName )
-    strFileLines       <- gsub( "_FUNCTION_NAME_", strFunctionName, strFileLines )
-    strFileLines       <- gsub( "_FILE_DESCRIPTION_", strFunctionDescription, strFileLines )
-    strFileLines       <- gsub( "_CREATION_DATE_", strToday, strFileLines )
+    strFileLines       <- WhiskerReplace( "FUNCTION_NAME", strFunctionName, strFileLines )
+    strFileLines       <- WhiskerReplace( "FILE_DESCRIPTION", strFunctionDescription, strFileLines )
+    strFileLines       <- WhiskerReplace( "CREATION_DATE", strToday, strFileLines )
     writeLines( strFileLines, con = strFileName )
 
     strFileLines       <- readLines( strTestFileName )
-    strFileLines       <- gsub( "_FUNCTION_NAME_", strFunctionName, strFileLines )
-    strFileLines       <- gsub( "_FILE_NAME_", strFunctionName, strFileLines )
-    strFileLines       <- gsub( "_CREATION_DATE_", strToday, strFileLines )
+    strFileLines       <- WhiskerReplace( "FUNCTION_NAME", strFunctionName, strFileLines )
+    strFileLines       <- WhiskerReplace( "FILE_NAME", strFunctionName, strFileLines )
+    strFileLines       <- WhiskerReplace( "CREATION_DATE", strToday, strFileLines )
     writeLines( strFileLines, con = strTestFileName )
 
     strRet <- "The following file(s) were created: "

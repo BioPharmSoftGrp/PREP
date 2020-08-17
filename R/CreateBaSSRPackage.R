@@ -6,7 +6,7 @@
 #' if strPackageName is provided, is not blank and bCreateProjectSubdirectory == TRUE then a folder named  strPackageName is created in the strProjectDirectory directory.}
 #' @param bCreateProjectSubdirectory {If bCreateProjectSubdirectory then then a subdirectory for the project is created in strProjectDirectory.  }
 #' @export
-CreateBaSSRPackage <- function( strProjectDirectory, strPackageName, strAuthors, bCreateProjectSubdirectory = TRUE )
+CreateBaSSRPackage <- function( strProjectDirectory, strPackageName, strAuthors = NULL, bCreateProjectSubdirectory = TRUE )
 {
     # Set the template directory to copy from
     strProjectDirectory         <- gsub( "\\\\", "/", strProjectDirectory )
@@ -45,7 +45,10 @@ UpdateCalculationPackageName <- function(  strProjectDirectory, strPackageName )
     # Step 2: Replace name in the description file
     strDescriptionFile <- paste( strPackageDir, "/DESCRIPTION", sep = "" )
     strFileLines       <- readLines( strDescriptionFile )
-    strFileLines       <- gsub( "_CALCULATION_PACKAGE_NAME_", strPackageName, strFileLines )
+    #strFileLines       <- gsub( "_CALCULATION_PACKAGE_NAME_", strPackageName, strFileLines )
+    strFileLines       <- whisker.render(strFileLines, list( CALCULATION_PACKAGE_NAME = strPackageName,
+                                                             AUTHOR_NAME = "{{AUTHOR_NAME}}" ) )
+
     writeLines( strFileLines, con = strDescriptionFile )
     return( strCalculationPkgInst )
 

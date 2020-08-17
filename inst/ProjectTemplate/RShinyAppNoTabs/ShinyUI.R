@@ -39,7 +39,7 @@ header <- dashboardHeader(
     badgeStatus = NULL, icon = icon("question"),
     headerText = div(style = "color:purple; font-size:150%","About"),
     notificationItem(text="Version: Beta v0.1", icon=icon("angle-right")),
-    notificationItem(text="Author: _AUTHOR_NAME_", icon=icon("angle-right")),
+    notificationItem(text="Author: {{AUTHOR_NAME}}", icon=icon("angle-right")),
     notificationItem(text="Contact: _CONTACT_EMAIL_", icon=icon("angle-right")),
     notificationItem(text="Release Date: 2020-XXX-XX", icon=icon("angle-right"))
   )
