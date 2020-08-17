@@ -16,12 +16,12 @@ Likely the most convenient way to utilize this package is through R studio.
 Once the package has been installed, restart R Studio so that the BaSS project will be loaded.   
 
 To create a new Project click on File->New Project and you should get the following:
-![Create Project](CreateProject.png)
+![Create Project](docs/CreateProject.png)
 
 Click on New Directory so that the various project types will show. You should now see Project Type where the BaSS Project is listed.
 
-![BassProjectStep1](BaSSProjectStep1.png)
+![BassProjectStep1](docs/BaSSProjectStep1.png)
 
 Click on BaSS Project to move to the next step.
 
-![BassProjectStep2](BaSSProjectStep2.png)
+![BassProjectStep2](docs/BaSSProjectStep2.png)
