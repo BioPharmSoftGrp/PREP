@@ -27,7 +27,10 @@ CreateBaSSShinyAppAsPkg <- function( strProjectDirectory, strShinyAppName, strSh
     # Step 1 - Create the Shiny App Package project - This will not have the shiny app yet
     strRet            <- CopyFiles( strTemplateDirectory, strDestDirectory )
     strPackageUpdates <- UpdateCalculationPackageName(strProjectDirectory, strShinyAppName )
-    strUpdateAuthor1 <- UpdateAuthors( strProjectDirectory, strAuthors )
+    strUpdateAuthor1 <- UpdateAuthors(
+        paste( strProjectDirectory, "/", strShinyAppName, sep="" ),
+        strAuthors
+    )
 
 
     # Step 2 - Create the Shiny app in the inst directory of the package created in the previous step.  By creating it in the inst folder

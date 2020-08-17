@@ -20,7 +20,10 @@ CreateBaSSRPackage <- function( strProjectDirectory, strPackageName, strAuthors,
 
     strRet        <- CopyFiles( strCalculationsDirectory, strDestDirectory )
     strCalcPkgRet <- UpdateCalculationPackageName( strProjectDirectory, strPackageName )
-    strUpdateAuthor <- UpdateAuthors(strProjectDirectory, strAuthors)
+    strUpdateAuthor <- UpdateAuthors(
+        paste( strProjectDirectory, "/", strShinyAppName, sep="" ),
+        strAuthors
+    )
 
     strRet <- paste( c("Creating Calculation Package...", strRet, strCalcPkgRet, strUpdateAuthor), collapse="\n" )
     return(strRet)

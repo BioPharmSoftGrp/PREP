@@ -36,7 +36,10 @@ CreateBaSSShinyApp <- function(strProjectDirectory, strShinyAppName, strShinyApp
     strShinyApp             <- UpdateShinyAppName( strProjectDirectory, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName )
 
 
-    strUpdateAuthor <- UpdateAuthors(strProjectDirectory, strAuthors)
+    strUpdateAuthor <- UpdateAuthors(
+        paste( strProjectDirectory, "/", strShinyAppName, sep="" ),
+        strAuthors
+    )
     strRet <- paste( c("Creating Shiny App...", strRet, strShinyApp, strUpdateAuthor ), collapse="\n" )
     return(strRet)
 }
