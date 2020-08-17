@@ -2,14 +2,14 @@
 # The UI Module is setup with several example code blocks for reference, delete as needed ####
 ###############################################################################################.
 
-_TAB_NAME_UI <- function(  )
+{{TAB_NAME}}UI <- function(  )
 {
-    strID <- "_TAB_NAME_"
+    strID <- "{{TAB_NAME}}"
     ns <- NS( strID )
     strNames <- setdiff(names(mtcars), "Features")
     #----- Sidebar Tab: ResultViewer -----#
     tTabItem <- tabItem(
-        tabName =  "_TAB_NAME_",
+        tabName =  "{{TAB_NAME}}",
         fluidRow(
 
             box(
@@ -93,12 +93,12 @@ _TAB_NAME_UI <- function(  )
     return(tTabItem)
 
 }
-_TAB_NAME_SideBarMenu <- function( ){
-    #----- Sidebar Tab #1:_TAB_NAME_WITH_SPACES_ -----####
+{{TAB_NAME}}SideBarMenu <- function( ){
+    #----- Sidebar Tab #1:{{TAB_NAME_WITH_SPACES}} -----####
 
     retMenuItem <- menuItem(
-        text    = "_TAB_NAME_WITH_SPACES_",
-        tabName = "_TAB_NAME_",
+        text    = "{{TAB_NAME_WITH_SPACES}}",
+        tabName = "{{TAB_NAME}}",
         icon    = icon("home")
     )
 

@@ -30,7 +30,7 @@ GTabItems <- function( ... )
 # Description: THis header will display the app name and tool tip to the right
 ####################################################################################################.
 header <- dashboardHeader(
-  title = span(img(src="logo.png", height=35), "_PROJECT_NAME_"),
+  title = span(img(src="logo.png", height=35), "{{PROJECT_NAME}}"),
   titleWidth = 300,
 
   ## Drop down menu
@@ -57,7 +57,7 @@ sidebar <- dashboardSidebar(
 
     HomeSideBarMenu( ),
 
-## _ADD_NEW_TAB_SIDE_BAR_ ##
+## {{ADD_NEW_TAB_SIDE_BAR}} 
 
     FeedbackSideBarMenu( ),
 
@@ -72,7 +72,7 @@ body <-  dashboardBody(
   ChangeThemeOutputUI(),   # Theme: This line will inject the theme options into the right place ####
   GTabItems(   HomeUI( ),
 
-## _ADD_NEW_TAB_UI_CALL_ ##
+## {{ADD_NEW_TAB_UI_CALL}}  
 
                FeedbackUI( "Feedback" ),
 

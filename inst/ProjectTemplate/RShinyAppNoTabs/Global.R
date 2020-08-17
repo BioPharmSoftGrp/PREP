@@ -12,7 +12,7 @@ library( dashboardthemes)
 
 
 # Include any other libraries
-library( _CALCULATION_PACKAGE_NAME_ )  # If you have not built the R Calculation package then this likely needs to be commented out for the Shiny app to run
+library( {{CALCULATION_PACKAGE_NAME}} )  # If you have not built the R Calculation package then this likely needs to be commented out for the Shiny app to run
 
 
 source( "BassShinyThemes.R")
@@ -26,7 +26,7 @@ source( "Modules/HomeServer.R")
 
 # Optional Example Tabs
 
-# _SOURCE_ADDITIONAL_TABS_ #
+# {{SOURCE_ADDITIONAL_TABS}} 
 # Include the TAG for use with the AddNewTabToApp Function - if the previous line is removed the AddNewTabToApp will not correctly add the source commands.
 
 

@@ -17,7 +17,7 @@ AddNewTabToApp <- function( strTabName, vSubMenuItemNames = NULL, strTemplate = 
     strTabName           <- gsub( "/", "_", strTabName, fixed = TRUE )
 
     # Note - If tags have the same begining then you must put the longer tag first, like the first two items.
-    vTags    <- c( "_TAB_NAME_WITH_SPACES_", "_TAB_NAME_" )
+    vTags    <- c( "TAB_NAME_WITH_SPACES", "TAB_NAME" )
     vReplace <- c( strTabNameWithSpaces, strTabName )
     # If vSubMenuItemNames is not supplied then the default would be a tab item with no sub items and hence the resulting tab would be a single file UI and server
     # similar to Home
@@ -71,7 +71,7 @@ AddNewTabToApp <- function( strTabName, vSubMenuItemNames = NULL, strTemplate = 
         strSubTabSideBarMenuCalls   <- paste( strTabName, vSubMenuItemNamesWOSpace, c( rep( "SideBarMenu( ),", nQtySubtabs-1), "SideBarMenu( ) "), collapse ="",sep ="")
         strSubtabServerCalls        <- paste( strTabName, vSubMenuItemNamesWOSpace, c( rep( "Server( )\n    ",nQtySubtabs-1), "Server() "), collapse ="", sep="" )
 
-        vTmpTags                    <- c( vTags, "_ADD_CALLS_TO_UI_TABS_", "_ADD_CALLS_TO_SIDE_BAR_MENU_", "_ADD_CALLS_TO_SERVER_TABS_" )
+        vTmpTags                    <- c( vTags, "ADD_CALLS_TO_UI_TABS", "ADD_CALLS_TO_SIDE_BAR_MENU", "ADD_CALLS_TO_SERVER_TABS" )
         vTmpReplace                 <- c( vReplace, strSubtabUICalls, strSubTabSideBarMenuCalls,  strSubtabServerCalls)
 
 
@@ -95,13 +95,13 @@ AddNewTabToApp <- function( strTabName, vSubMenuItemNames = NULL, strTemplate = 
 
     #Insert the calls to the ShinyUI file
     ## _ADD_NEW_TAB_SIDE_BAR_ ##
-    vTags    <- c( "## _ADD_NEW_TAB_SIDE_BAR_ ##", "## _ADD_NEW_TAB_UI_CALL_ ##" )
-    vReplace <- paste(  c( "    ","               "), c( strTabName, strTabName ), c("SideBarMenu( ),", "UI( )," ), sep="" )
-    vReplace <- paste(vReplace, "\n\n", vTags,  sep ="" )
+    vTags    <- c( "ADD_NEW_TAB_SIDE_BAR", "ADD_NEW_TAB_UI_CALL" )
+    vReplace <- paste( "{{", vTags, "}}\n\n", c( "    ","               "), c( strTabName, strTabName ), c("SideBarMenu( ),", "UI( )," ), sep="" )
+    vReplace <- paste(vReplace, "\n\n", sep ="" )
     ReplaceTagsInFile( "ShinyUI.R", vTags, vReplace )
 
-    vServerTag   <- c("# _ADD_NEW_TAB_SERVER_ #")
-    vReplace     <- paste( "    ", strTabName, "Server( )\n\n", vServerTag, sep ="" )
+    vServerTag   <- c( "ADD_NEW_TAB_SERVER" )
+    vReplace     <- paste("{{" , vServerTag, "}}\n\n", "    ", strTabName, "Server( )\n\n", sep ="" )
     ReplaceTagsInFile( "ShinyServer.R", vServerTag, vReplace )
 
 
@@ -114,9 +114,9 @@ AddNewTabToApp <- function( strTabName, vSubMenuItemNames = NULL, strTemplate = 
 AddSourceCommandToGlobal <- function( strFileName )
 {
 
-    strSourceTag   <- "# _SOURCE_ADDITIONAL_TABS_ #"
+    strSourceTag   <- "SOURCE_ADDITIONAL_TABS"
     vSourceTag     <- strSourceTag
-    vReplaceSource <- paste( "source( '", strFileName, "' ) \n", strSourceTag, sep = "" )
+    vReplaceSource <- paste( "{{", strSourceTag, "}} \n", "source( '", strFileName, "' ) \n",  sep = "" )
     ReplaceTagsInFile( "Global.R", vSourceTag, vReplaceSource )
 
 }
@@ -174,16 +174,18 @@ CreateTab <- function( strTabName, strTemplate = "ResultViewer", strParentTabNam
     }
 
     # Note - If tags have the same begining then you must put the longer tag first, like the first two items.
-    vTags    <- c( vTags, "_TAB_NAME_WITH_SPACES_", "_TAB_NAME_" )
-    vReplace <- c( vReplace, strTabNameWithSpaces, strTabName )
+    vTagsW    <- c( "TAB_NAME_WITH_SPACES", "TAB_NAME" )
+    vReplaceW <- c(  strTabNameWithSpaces, strTabName )
 
     lCopyFile1 <- CopyTemplateFile( paste0( strSubDir, "/", strTemplate, "Server.R" ), paste( strModuleSubdir, strTabName, "Server.R", sep = "" ) )
     lCopyFile2 <- CopyTemplateFile( paste0( strSubDir, "/", strTemplate, "UI.R" ), paste( strModuleSubdir, strTabName, "UI.R", sep = "" ) )
 
+
     if( lCopyFile1$bFileCoppied )
     {
         vResults <- c(vResults, paste( "Created File", lCopyFile1$strDestinationFile ) )
-        ReplaceTagsInFile( lCopyFile1$strDestinationFile, vTags, vReplace )
+        ReplaceTagsInFile( lCopyFile1$strDestinationFile, vTagsW, vReplaceW )
+        ReplaceTagsInFileGSub( lCopyFile1$strDestinationFile, vTags, vReplace )
         AddSourceCommandToGlobal( lCopyFile1$strDestinationFile )
     }
 
@@ -191,7 +193,8 @@ CreateTab <- function( strTabName, strTemplate = "ResultViewer", strParentTabNam
     {
         # If this is a subtab would also need to replace the menuItem( with subMenuItem
         vResults <- c(vResults, paste( "Created File", lCopyFile2$strDestinationFile ) )
-        ReplaceTagsInFile( lCopyFile2$strDestinationFile, vTags, vReplace )
+        ReplaceTagsInFile( lCopyFile2$strDestinationFile, vTagsW, vReplaceW )
+        ReplaceTagsInFileGSub( lCopyFile2$strDestinationFile, vTags, vReplace )
         AddSourceCommandToGlobal( lCopyFile2$strDestinationFile )
     }
 

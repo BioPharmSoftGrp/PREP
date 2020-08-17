@@ -1,18 +1,18 @@
-_TAB_NAME_UI <- function()
+{{TAB_NAME}}UI <- function()
 {
-    lRet <-  list( _ADD_CALLS_TO_UI_TABS_   )
+    lRet <-  list( {{ADD_CALLS_TO_UI_TABS}}   )
     return( lRet )
 
 }
 
-_TAB_NAME_SideBarMenu <- function( )
+{{TAB_NAME}}SideBarMenu <- function( )
 {
     retMenuItem <- menuItem(
-        text    = "_TAB_NAME_WITH_SPACES_",
-        tabName = "_TAB_NAME_",
+        text    = "{{TAB_NAME_WITH_SPACES}}",
+        tabName = "{{TAB_NAME}}",
         icon = icon("calculator"),
 
-        _ADD_CALLS_TO_SIDE_BAR_MENU_
+        {{ADD_CALLS_TO_SIDE_BAR_MENU}}
     )
     return( retMenuItem )
 }

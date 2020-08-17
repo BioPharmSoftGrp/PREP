@@ -11,7 +11,7 @@ server <- function(input, output,session) {
     FeedbackServer(  )
     ThemeSwitcherServer( )
 
-# _ADD_NEW_TAB_SERVER_ #
+# {{ADD_NEW_TAB_SERVER}} 
     # Include the TAG for use with the AddNewTabToApp Function - if the previous line is removed the AddNewTabToApp will not correctly add the server command
 
 }
