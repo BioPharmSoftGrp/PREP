@@ -1,0 +1,17 @@
+---
+title: "About"
+author: "J. Kyle Wathen"
+date: "2/4/2020"
+output: html_document
+---
+
+
+This is an R-Shiny application that utilizes a template with the ability to switch themes (colors).  To view theme (color) options, click on the Options tab and select a different theme. 
+
+This Shiny app is based on modules.  Modules allow the app UI and Server elements to be broken into separate files, thereby, making it easier to test and develop in a team environment.  
+
+The intent is to provide a starting point for Shiny apps that are likely to be larger applications.    
+The Simulation Tab is provided as an example for a simpler tab where the UI module is contained in a single file Modules/SimulationUI.R.
+The Data Analysis tab is created as a more complex example is typically how a tab with sub items should be implemented.  For a more complex tab, a UI file should be created that calls the sub-elements.  In this example, the Data Analysis menu item on the left has two sub-items 1) Introduction and 2) Run Analysis.  In the file Modules/DataAnalysisUI.R the side bar menu is created with a call to DataAnalysisSideBarMenu and the UI is created by calling DataAnalysisUI.  Because a modular approach has been taken the DataAnalysisUI simply calls the modules (functions) to create the UI for when the user clicks the Data Analysis->Introduction and Data Analysis -> Run Analysis.  Since the Introduction and Run Analysis are separate modules in separate files it simplifies team development.  
+
+This box in the UI was created with a color of "primary", see Moduless/HomeUI.R

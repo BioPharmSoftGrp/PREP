@@ -1,0 +1,49 @@
+---
+title: "Report"
+
+author: Team
+
+date: "`r format(Sys.time(), '%B %d %Y')`"
+
+output: 
+    powerpoint_presentation:
+        reference_doc: ppt.potx
+
+params:
+  allDat: NA
+  ParaValues: NA
+  Version: NA
+  strResult: ""
+
+---
+
+Application Version: `r params$Version` 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Input Parameter Values:
+
+
+```{r comment='', echo=FALSE}
+ knitr::kable(params$ParaValues, caption = "", floating.environment="sidewaystable")
+```
+
+
+### Results:
+
+```{r fig.width=11, fig.height=5.5, echo=FALSE}
+library(ggplot2)
+
+print(params$allDat[[1]])
+```
+
+
+```{r comment='', echo=FALSE}
+  strOutput <- params$strResult
+```
+
+## `r strOutput` 
+

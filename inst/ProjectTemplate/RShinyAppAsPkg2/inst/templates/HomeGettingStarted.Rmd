@@ -1,0 +1,13 @@
+---
+title: "Getting Started"
+author: "J. Kyle Wathen"
+date: "2/4/2020"
+output: html_document
+---
+
+
+
+To get started with this application ...
+
+
+This box was created with a color of "danger", see Modules/HomeUI.R.

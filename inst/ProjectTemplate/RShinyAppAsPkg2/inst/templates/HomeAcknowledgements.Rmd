@@ -1,0 +1,15 @@
+---
+title: "Acknowledgements"
+author: "J. Kyle Wathen"
+date: "2/4/2020"
+output: html_document
+---
+
+
+J. Kyle Wathen
+
+Bob Smith
+
+More people..
+
+This box was created with a color of "success", see Modules/HomeUI.R.
