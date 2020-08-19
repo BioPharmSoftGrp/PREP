@@ -34,12 +34,11 @@ CreateBaSSShinyApp <- function(strProjectDirectory, strShinyAppName, strShinyApp
 
     strRet                  <- CopyFiles( strAppDirectory, strDestDirectory )
     strShinyApp             <- UpdateShinyAppName( strProjectDirectory, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName )
-
-
     strUpdateAuthor <- UpdateAuthors(
         paste( strProjectDirectory, "/", strShinyAppName, sep="" ),
         strAuthors
     )
+
     strRet <- paste( c("Creating Shiny App...", strRet, strShinyApp, strUpdateAuthor ), collapse="\n" )
     return(strRet)
 }
@@ -62,7 +61,12 @@ UpdateShinyAppName <- function(  strProjectDirectory, strShinyAppName, strShinyA
     # Step 2: Replace name in the ShinyUI.R file
     strDescriptionFile <- paste( strPackageDir, "/ShinyUI.R", sep = "" )
     strFileLines       <- readLines( strDescriptionFile )
-    strFileLines       <- gsub( "_PROJECT_NAME_", strShinyAppDisplayName, strFileLines )
+    #strFileLines       <- gsub( "_PROJECT_NAME_", strShinyAppDisplayName, strFileLines )
+    strFileLines       <- whisker.render(strFileLines, list( PROJECT_NAME = strShinyAppDisplayName,
+                                                             AUTHOR_NAME = "{{AUTHOR_NAME}}",
+                                                             ADD_NEW_TAB_SIDE_BAR = "{{ADD_NEW_TAB_SIDE_BAR}}",
+                                                             ADD_NEW_TAB_UI_CALL = "{{ADD_NEW_TAB_UI_CALL}}"
+                                                             ) )
     writeLines( strFileLines, con = strDescriptionFile )
 
     # Replace the R App name if one was provided, if not remove that line in the global.r file
@@ -70,7 +74,12 @@ UpdateShinyAppName <- function(  strProjectDirectory, strShinyAppName, strShinyA
     {
         strFileName        <- paste( strPackageDir, "/Global.R", sep = "" )
         strFileLines       <- readLines( strFileName )
-        strFileLines       <- gsub( "_CALCULATION_PACKAGE_NAME_", strCalculationLibraryName, strFileLines )
+        strFileLines       <- whisker.render(strFileLines, list( CALCULATION_PACKAGE_NAME = strCalculationLibraryName,
+                                                                 AUTHOR_NAME = "{{AUTHOR_NAME}}",
+                                                                 SOURCE_ADDITIONAL_TABS = "{{SOURCE_ADDITIONAL_TABS}}"
+                                                                 ) )
+
+        #strFileLines       <- gsub( "_CALCULATION_PACKAGE_NAME_", strCalculationLibraryName, strFileLines )
         writeLines( strFileLines, con = strFileName )
 
     }

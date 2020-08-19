@@ -5,7 +5,7 @@
 #' @export
 RunApp = function() {
 
-    appDir <- system.file("_SHINY_PROJECT_NAME_", package = "_SHINY_PROJECT_NAME_")
+    appDir <- system.file("_SHINY{{PROJECT_NAME}}", package = "_SHINY{{PROJECT_NAME}}")
     shiny::runApp(paste( appDir,"/ShinyApp.R",sep=""), display.mode = "normal")
 
 }

@@ -1,15 +1,15 @@
 #################################################################################################### .
 #   Program/Function Name:
 #   Author: Author Name
-#   Description: _FILE_DESCRIPTION_
+#   Description: {{FILE_DESCRIPTION}}
 #   Change History:
-#   Last Modified Date: _CREATION_DATE_
+#   Last Modified Date: {{CREATION_DATE}}
 #################################################################################################### .
-#' @name _FUNCTION_NAME_
-#' @title _FUNCTION_NAME_
-#' @description { Description: _FILE_DESCRIPTION_ }
+#' @name {{FUNCTION_NAME}}
+#' @title {{FUNCTION_NAME}}
+#' @description { Description: {{FILE_DESCRIPTION}} }
 #' @export
-_FUNCTION_NAME_ <- function( [Add arguments] )
+{{FUNCTION_NAME}} <- function( [Add arguments] )
 {
 
     lRet <- list( )  #Example of return object

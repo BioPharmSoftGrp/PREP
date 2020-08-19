@@ -1,10 +1,10 @@
 ################################################################################ .
 # Description:
 ################################################################################ .
-_TAB_NAME_Server <- function( )
+{{TAB_NAME}}Server <- function( )
 {
     #The strID here must match what is in the UI file.
-    strID     <- "_TAB_NAME_"
+    strID     <- "{{TAB_NAME}}"
     retModule <- function( input, output, session ){
 
 

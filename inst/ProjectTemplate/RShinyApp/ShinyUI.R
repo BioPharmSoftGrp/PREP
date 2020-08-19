@@ -30,7 +30,7 @@ TabItems <- function( ... )
 # Description: THis header will display the app name and tool tip to the right
 ####################################################################################################.
 header <- dashboardHeader(
-  title = span(img(src="logo.png", height=35), "_PROJECT_NAME_"),
+  title = span(img(src="logo.png", height=35), "{{PROJECT_NAME}}"),
   titleWidth = 300,
 
   ## Drop down menu
@@ -39,7 +39,7 @@ header <- dashboardHeader(
     badgeStatus = NULL, icon = icon("question"),
     headerText = div(style = "color:purple; font-size:150%","About"),
     notificationItem(text="Version: Beta v0.1", icon=icon("angle-right")),
-    notificationItem(text="Author: _AUTHOR_NAME_", icon=icon("angle-right")),
+    notificationItem(text="Author: {{AUTHOR_NAME}}", icon=icon("angle-right")),
     notificationItem(text="Contact: _CONTACT_EMAIL_", icon=icon("angle-right")),
     notificationItem(text="Release Date: 2020-XXX-XX", icon=icon("angle-right"))
   )
@@ -61,7 +61,7 @@ sidebar <- dashboardSidebar(
 
     DataAnalysisSideBarMenu( ),
 
-## _ADD_NEW_TAB_SIDE_BAR_ ##
+## {{ADD_NEW_TAB_SIDE_BAR}} 
 
     FeedbackSideBarMenu( ),
 
@@ -80,7 +80,7 @@ body <-  dashboardBody(
 
                DataAnalysisUI( ),
 
-## _ADD_NEW_TAB_UI_CALL_ ##
+## {{ADD_NEW_TAB_UI_CALL}}  
 
                FeedbackUI( "Feedback" ),
 

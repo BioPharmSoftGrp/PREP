@@ -1,10 +1,10 @@
 ################################################################################ .
 # Description:
 ################################################################################ .
-_TAB_NAME_Server <- function( )
+{{TAB_NAME}}Server <- function( )
 {
     #The strID here must match what is in the UI file.
-    strID     <- "_TAB_NAME_"
+    strID     <- "{{TAB_NAME}}"
     retModule <- function( input, output, session ){
 
         lDataValues <- reactiveValues(dfAll = NULL, dfParas = NULL)
@@ -81,7 +81,7 @@ _TAB_NAME_Server <- function( )
                         SelectedData = lDataValues$dfAll
                     )
 
-                rmarkdown::render('Templates/_TAB_NAME_Word.Rmd',
+                rmarkdown::render('Templates/{{TAB_NAME}}Word.Rmd',
                                   output_file = file,
                                   params = lRes)
                 update_modal_progress(0.9) # update progress bar value
@@ -122,7 +122,7 @@ _TAB_NAME_Server <- function( )
                         SelectedData = lDataValues$dfAll
                     )
 
-                rmarkdown::render('Templates/_TAB_NAME_PPT.Rmd',
+                rmarkdown::render('Templates/{{TAB_NAME}}PPT.Rmd',
                                   output_file = file,
                                   params = lRes)
                 update_modal_progress(0.9) # update progress bar value

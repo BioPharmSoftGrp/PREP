@@ -1,15 +1,15 @@
 #################################################################################################### .
 #   Program/Function Name:
 #   Author: Author Name
-#   Description: Test file for _FILE_NAME_
+#   Description: Test file for {{FILE_NAME}}
 #   Change History:
-#   Last Modified Date: _CREATION_DATE_
+#   Last Modified Date: {{CREATION_DATE}}
 #################################################################################################### .
 
 
-context( "_FUNCTION_NAME_")
+context( "{{FUNCTION_NAME}}")
 
-test_that("Test- _FUNCTION_NAME_", {
+test_that("Test- {{FUNCTION_NAME}}", {
     # Example test that will fail
     # nRet         <- 1
     # nExpectedRet <- 10

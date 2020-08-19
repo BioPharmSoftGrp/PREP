@@ -58,17 +58,27 @@ AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", str
     strToday           <- format(Sys.Date(), format="%m/%d/%Y")
 
     # Replace the TAGS in the coppied files
-    strFileLines       <- readLines( strFileName )
-    strFileLines       <- gsub( "_FUNCTION_NAME_", strFunctionName, strFileLines )
-    strFileLines       <- gsub( "_FILE_DESCRIPTION_", strFunctionDescription, strFileLines )
-    strFileLines       <- gsub( "_CREATION_DATE_", strToday, strFileLines )
-    writeLines( strFileLines, con = strFileName )
 
-    strFileLines       <- readLines( strTestFileName )
-    strFileLines       <- gsub( "_FUNCTION_NAME_", strFunctionName, strFileLines )
-    strFileLines       <- gsub( "_FILE_NAME_", strFunctionName, strFileLines )
-    strFileLines       <- gsub( "_CREATION_DATE_", strToday, strFileLines )
-    writeLines( strFileLines, con = strTestFileName )
+    vTags    <- c("FUNCTION_NAME", "FILE_DESCRIPTION", "CREATION_DATE")
+    vReplace <- c(strFunctionName, strFunctionDescription, strToday)
+    ReplaceTagsInFile( strFileName, vTags, vReplace )
+
+    # strFileLines       <- readLines( strFileName )
+    # strFileLines       <- WhiskerReplace( "FUNCTION_NAME", strFunctionName, strFileLines )
+    # strFileLines       <- WhiskerReplace( "FILE_DESCRIPTION", strFunctionDescription, strFileLines )
+    # strFileLines       <- WhiskerReplace( "CREATION_DATE", strToday, strFileLines )
+    # writeLines( strFileLines, con = strFileName )
+
+    vTags    <- c("FUNCTION_NAME", "FILE_NAME", "CREATION_DATE")
+    vReplace <- c(strFunctionName, strFunctionName, strToday)
+    ReplaceTagsInFile( strTestFileName, vTags, vReplace )
+
+
+    # strFileLines       <- readLines( strTestFileName )
+    # strFileLines       <- WhiskerReplace( "FUNCTION_NAME", strFunctionName, strFileLines )
+    # strFileLines       <- WhiskerReplace( "FILE_NAME", strFunctionName, strFileLines )
+    # strFileLines       <- WhiskerReplace( "CREATION_DATE", strToday, strFileLines )
+    # writeLines( strFileLines, con = strTestFileName )
 
     strRet <- "The following file(s) were created: "
 
