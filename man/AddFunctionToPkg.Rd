@@ -14,6 +14,6 @@ AddFunctionToPkg(strFunctionName, strFunctionDescription = "", strPkgDir = "")
 \item{strPkgDir}{The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.}
 }
 \description{
-{ Add a new function named strFunctionName to a package.  This function creates a file names R/strFunctionName.R
+{ Add a new function named strFunctionName to a package.  This function creates a file named R/strFunctionName.R
 and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package. }
 }

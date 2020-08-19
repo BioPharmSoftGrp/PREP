@@ -7,6 +7,7 @@
 CreateBaSSRPackage(
   strProjectDirectory,
   strPackageName,
+  strAuthors = NULL,
   bCreateProjectSubdirectory = TRUE
 )
 }

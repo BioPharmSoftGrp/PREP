@@ -6,6 +6,7 @@
 #' If strPackageName is provided, is not blank and bCreateProjectSubdirectory == TRUE then a folder named  strShinyAppName is created in the strProjectDirectory directory.}
 #' @param bCreateProjectSubdirectory {If bCreateProjectSubdirectory then then a subdirectory for the project is created in strProjectDirectory.  }
 #' @param bCreateWithExampleTabs {By default, the R Shiny app will contain two example tabs (Simulation and Data analyusis), if bCreateWithExampleTabs = FALSE those tabs are removed.}
+#' @param bAppInRFolder {Create }
 #' @export
 CreateBaSSShinyApp <- function(strProjectDirectory, strShinyAppName, strShinyAppDisplayName, strCalculationLibraryName, strAuthors,
                                bCreateProjectSubdirectory = TRUE, bCreateWithExampleTabs = TRUE )

@@ -10,6 +10,7 @@ CreateBaSSApp(
   strCalculationLibraryName = "MyCalculationLibrary",
   strShinyAppName = "MyShinyApp",
   strShinyAppDisplayName = "My Shiny App",
+  strAuthors = "AUTHOR NAME",
   bCreateWithExampleTabs = TRUE,
   bCreateShinyApp = TRUE,
   bCreateCalculationPackage = TRUE,

@@ -9,6 +9,7 @@ CreateBaSSShinyAppAsPkg(
   strShinyAppName,
   strShinyAppDisplayName,
   strCalculationLibraryName,
+  strAuthors,
   bCreateProjectSubdirectory = TRUE,
   bCreateWithExampleTabs = TRUE
 )

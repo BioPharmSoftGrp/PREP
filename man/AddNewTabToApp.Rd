@@ -4,7 +4,11 @@
 \alias{AddNewTabToApp}
 \title{AddNewTabToApp}
 \usage{
-AddNewTabToApp(strTabName, vSubMenuItemNames = NULL)
+AddNewTabToApp(
+  strTabName,
+  vSubMenuItemNames = NULL,
+  strTemplate = "NoSubItemTabModule"
+)
 }
 \description{
 { This funciton will add a new tab to the Shiny App. This function assumes that the working directory
