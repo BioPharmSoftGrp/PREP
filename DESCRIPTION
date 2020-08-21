@@ -5,7 +5,9 @@ Version: 0.6.0
 Author: J. Kyle Wathen
 Maintainer: The package maintainer <KyleWathen@gmail.com>
 Authors@R: c( person("J. Kyle", "Wathen", email = "KyleWathen@gmail.com", role = c("aut", "cre")), 
-              person( "Nan", "Chen", email = "nchen4@gmail.com", role= c( "aut", "ctb") ) )
+              person( "Nan", "Chen", email = "nchen4@gmail.com", role= c( "aut", "ctb") ),
+              person( "Jeremy", "Wildfire", email = "jwildfire@gmail.com", role= c( "aut", "ctb") ),
+             )
 Description: This project is package in R used to create a Shiny app with a default template and also creates a R package project that the Shiny app links to.
 License: GPL-3
 Encoding: UTF-8
