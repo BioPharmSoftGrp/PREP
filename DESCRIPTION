@@ -13,6 +13,7 @@ LazyData: true
 RoxygenNote: 7.1.1
 Depends: R (>= 3.6.0),
          whisker,
+         stringr,
          shiny
 Suggests: 
     testthat (>= 2.1.0)
