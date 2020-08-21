@@ -63,7 +63,7 @@ UpdateShinyAppName <- function(  strProjectDirectory, strShinyAppName, strShinyA
     strDescriptionFile <- paste( strPackageDir, "/ShinyUI.R", sep = "" )
     strFileLines       <- readLines( strDescriptionFile )
     #strFileLines       <- gsub( "_PROJECT_NAME_", strShinyAppDisplayName, strFileLines )
-    stringr::str_extract_all(strFileLines, "\\{\\{[^{}]*\\}\\}")
+
     strFileLines       <- WhiskerKeepUnrender(strFileLines, list( PROJECT_NAME = strShinyAppDisplayName,
                                                              AUTHOR_NAME = "{{AUTHOR_NAME}}",
                                                              ADD_NEW_TAB_SIDE_BAR = "{{ADD_NEW_TAB_SIDE_BAR}}",
