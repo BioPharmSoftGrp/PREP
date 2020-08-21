@@ -155,7 +155,7 @@ ReplaceTagsInFile <- function( strFileName, vTags, vReplace )
             lData[[vTags[ iTag ]]] <- vReplace[ iTag ]
         }
 
-        strRet  <- WiskerKeepUnrender(strInput, lData)
+        strRet  <- WhiskerKeepUnrender(strInput, lData)
         writeLines( strRet, con = strFileName )
 
     }
