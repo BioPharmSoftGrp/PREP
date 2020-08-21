@@ -62,7 +62,7 @@ UpdateShinyAppName <- function(  strProjectDirectory, strShinyAppName, strShinyA
     # Step 2: Replace name in the ShinyUI.R file
     strDescriptionFile <- paste( strPackageDir, "/ShinyUI.R", sep = "" )
     strFileLines       <- readLines( strDescriptionFile )
-    #strFileLines       <- gsub( "_PROJECT_NAME_", strShinyAppDisplayName, strFileLines )
+    # strFileLines       <- gsub( "_PROJECT_NAME_", strShinyAppDisplayName, strFileLines )
 
     strFileLines       <- WhiskerKeepUnrender(strFileLines, list( PROJECT_NAME = strShinyAppDisplayName,
                                                              AUTHOR_NAME = "{{AUTHOR_NAME}}",
