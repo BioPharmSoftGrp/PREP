@@ -1,16 +1,16 @@
 #' app_ui
-#' 
+#'
 #' Application UI
 #'
 #' @return shinydashboard::dashboardPage containing the app
-#' 
+#'
 #' @import shiny
 #' @import shinydashboard
-#' 
+#'
 #' @export
- 
+
 app_ui <- function(){
-  
+  addResourcePath("www", 'inst/www')
   TabItems <- function( ... ){
     args <- list(...)
     vArgs <- c()
@@ -24,14 +24,14 @@ app_ui <- function(){
       }
     }
     retTabItems <- do.call("tabItems", vArgs)
-    
+
     return(retTabItems)
   }
-  
+
   header <- dashboardHeader(
-    title = span(img(src="logo.png", height=35), "{{PROJECT_NAME}}"),
+    title = span(img(src="www/logo.png", height=35), "{{PROJECT_NAME}}"),
     titleWidth = 300,
-    
+
     ## Drop down menu
     dropdownMenu(
       type = "notifications",
@@ -43,7 +43,7 @@ app_ui <- function(){
       notificationItem(text="Release Date: 2020-XXX-XX", icon=icon("angle-right"))
     )
   )
-  
+
   sidebar <- shinydashboard::dashboardSidebar(
     shinydashboard::sidebarMenu(
       id = "sidebar_tabs",
@@ -55,7 +55,7 @@ app_ui <- function(){
       OptionsSideBarMenu()
     )
   )
-  
+
   body <-  dashboardBody(
     ChangeThemeOutputUI(),   # Theme: This line will inject the theme options into the right place ####
     TabItems(
