@@ -47,7 +47,7 @@ CreateBaSSShinyAppAsPkg <- function( strProjectDirectory, strShinyAppName, strSh
     strRunAppFile <- paste( strDestDirectory, "/R/RunApp.R",  sep = "" )
     strFileLines  <- readLines( strRunAppFile )
     #strFileLines  <- gsub( "_SHINY_PROJECT_NAME_", strShinyAppName, strFileLines )
-    strFileLines  <- whisker.render(strFileLines, list( SHINY_PROJECT_NAME = strShinyAppName,
+    strFileLines  <- WhiskerKeepUnrender(strFileLines, list( SHINY_PROJECT_NAME = strShinyAppName,
                                                         AUTHOR_NAME = strAuthors ) )
     writeLines( strFileLines, con = strRunAppFile )
 
@@ -77,7 +77,7 @@ UpdateShinyAppAsAPackageInfo <- function(  strProjectDirectory, strShinyAppName,
     strDescriptionFile <- paste( strPackageDir, "/ShinyUI.R", sep = "" )
     strFileLines       <- readLines( strDescriptionFile )
     #strFileLines       <- gsub( "_PROJECT_NAME_", strShinyAppDisplayName, strFileLines )
-    strFileLines       <- whisker.render(strFileLines, list( PROJECT_NAME = strShinyAppDisplayName,
+    strFileLines       <- WhiskerKeepUnrender (strFileLines, list( PROJECT_NAME = strShinyAppDisplayName,
                                                              AUTHOR_NAME = "{{AUTHOR_NAME}}" ) )
     writeLines( strFileLines, con = strDescriptionFile )
 
@@ -88,7 +88,7 @@ UpdateShinyAppAsAPackageInfo <- function(  strProjectDirectory, strShinyAppName,
         strFileLines       <- readLines( strFileName )
         # strFileLines       <- gsub( "_CALCULATION_PACKAGE_NAME_", strCalculationLibraryName, strFileLines )
 
-        strFileLines       <- whisker.render(strFileLines, list( CALCULATION_PACKAGE_NAME = strCalculationLibraryName,
+        strFileLines       <- WhiskerKeepUnrender(strFileLines, list( CALCULATION_PACKAGE_NAME = strCalculationLibraryName,
                                                                  AUTHOR_NAME = "{{AUTHOR_NAME}}" ) )
 
         writeLines( strFileLines, con = strFileName )

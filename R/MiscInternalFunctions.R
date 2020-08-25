@@ -70,38 +70,64 @@ Provided <- function( argument )
 }
 
 
+AddUnrenderToList <- function(sTemplate, lList)
+{
+    lRes     <- stringr::str_extract_all(sTemplate, "\\{\\{[^{}]*\\}\\}")
+    vTags    <- lRes[[1]]
+    lRetList <- lList
+
+    if (length(vTags) > 0)
+    {
+        for( iTag in 1:length(vTags))
+        {
+            vNames <- names(lRetList)
+            strFullTag <- vTags[iTag]
+            if (nchar(strFullTag) <= 4)
+            {
+                next
+            }
+            sTag   <- substring( strFullTag, 3, nchar(vTags[iTag]) - 2)
+            if (length(vNames) == 0)
+            {
+                lRetList[[sTag]] <- vTags[iTag]
+            } else if (!sTag %in% vNames)
+            {
+                lRetList[[sTag]] <- vTags[iTag]
+            }
+        }
+
+    }
+
+    return(lRetList)
+
+}
+
+WhiskerKeepUnrender <- function(sTemplate, lList)
+{
+    lExList  <- AddUnrenderToList(sTemplate, lList)
+    sRes     <- whisker.render(sTemplate, lExList)
+    return (sRes)
+}
+
 WhiskerReplace <- function(strTag, strReplace, strTemplate)
 {
     lData           <- list()
     lData[[strTag]] <- strReplace
 
-    strRet  <- whisker.render(strTemplate, lData)
+    strRet  <- WhiskerKeepUnrender(strTemplate, lData)
     return(strRet)
-
-    # Handle a text with multiple lines
-    # strRet <- strTemplate
-    # if ( length(strTemplate) > 0 )
-    # {
-    #     lData           <- list()
-    #     lData[[strTag]] <- strReplace
-    #     for ( i in 1:length(strTemplate))
-    #     {
-    #         strRet[i]  <- whisker.render(strTemplate[i], lData)
-    #     }
-    # }
-    # return( strRet )
 }
 
 
 ReplaceTagsInFileGSub <- function( strFileName, vTags, vReplace )
 {
-    bFileExists     <- file.exists( strFileName )
-    nQtyTags        <- length( vTags )
+    bFileExists <- file.exists( strFileName )
+    nQtyTags    <- length( vTags )
     if (nQtyTags > 0)
     {
         if( bFileExists )
         {
-            strInput    <- readLines( strFileName )
+            strInput <- readLines( strFileName )
 
             for( iTag in 1:nQtyTags )
             {
@@ -129,7 +155,7 @@ ReplaceTagsInFile <- function( strFileName, vTags, vReplace )
             lData[[vTags[ iTag ]]] <- vReplace[ iTag ]
         }
 
-        strRet  <- whisker.render(strInput, lData)
+        strRet  <- WhiskerKeepUnrender(strInput, lData)
         writeLines( strRet, con = strFileName )
 
     }
@@ -164,24 +190,7 @@ ReplaceTags <- function()
     vFileType <- c("\\.R$")
 
     strPath   <- "../inst"
-    # vTags     <- c("_CALCULATION_PACKAGE_NAME_")
-    # vReplace  <- c("{{CALCULATION_PACKAGE_NAME}}")
 
-    # vTags     <- c("_PROJECT_NAME_")
-    # vReplace  <- c("{{PROJECT_NAME}}")
-
-    # vTags     <- c("_SHINY_PROJECT_NAME_")
-    # vReplace  <- c("{{SHINY_PROJECT_NAME}}")
-
-    # vTags     <- c( "_TAB_NAME_WITH_SPACES_", "_TAB_NAME_" )
-    # vReplace  <- c( "{{TAB_NAME_WITH_SPACES}}", "{{TAB_NAME}}" )
-    #
-
-    # vTags     <- c("_ADD_CALLS_TO_UI_TABS_", "_ADD_CALLS_TO_SIDE_BAR_MENU_", "_ADD_CALLS_TO_SERVER_TABS_" )
-    # vReplace  <- c("{{ADD_CALLS_TO_UI_TABS}}", "{{ADD_CALLS_TO_SIDE_BAR_MENU}}", "{{ADD_CALLS_TO_SERVER_TABS}}" )
-
-    vTags     <- c( "## _ADD_NEW_TAB_SIDE_BAR_ ##", "## _ADD_NEW_TAB_UI_CALL_ ##" , "# _ADD_NEW_TAB_SERVER_ #",
-                    "# _SOURCE_ADDITIONAL_TABS_ #")
     vReplace  <- c( "## {{ADD_NEW_TAB_SIDE_BAR}} ", "## {{ADD_NEW_TAB_UI_CALL}}  " , "# {{ADD_NEW_TAB_SERVER}} ",
                     "# {{SOURCE_ADDITIONAL_TABS}} ")
     vFileNames <- list.files( strPath, pattern = vFileType[1], recursive = TRUE )
@@ -209,13 +218,6 @@ ReplaceTags <- function()
         }
 
     }
-
-    #ReplaceTagsMultipleFiles (vFilePaths, "_AUTHOR_NAME_", "{{AUTHOR_NAME}}")
-    #ReplaceTagsMultipleFiles (vFilePaths, "_CALCULATION_PACKAGE_NAME_", "{{CALCULATION_PACKAGE_NAME}}")
-    #ReplaceTagsMultipleFiles (vFilePaths, "_FUNCTION_NAME_", "{{FUNCTION_NAME}}")
-    #ReplaceTagsMultipleFiles (vFilePaths, "_FILE_NAME_", "{{FILE_NAME}}")
-    #ReplaceTagsMultipleFiles (vFilePaths, "_CREATION_DATE_", "{{CREATION_DATE}}")
-    #ReplaceTagsMultipleFiles (vFilePaths, "_FILE_DESCRIPTION_", "{{FILE_DESCRIPTION}}")
 
 }
 

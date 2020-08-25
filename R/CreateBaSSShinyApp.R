@@ -62,8 +62,9 @@ UpdateShinyAppName <- function(  strProjectDirectory, strShinyAppName, strShinyA
     # Step 2: Replace name in the ShinyUI.R file
     strDescriptionFile <- paste( strPackageDir, "/ShinyUI.R", sep = "" )
     strFileLines       <- readLines( strDescriptionFile )
-    #strFileLines       <- gsub( "_PROJECT_NAME_", strShinyAppDisplayName, strFileLines )
-    strFileLines       <- whisker.render(strFileLines, list( PROJECT_NAME = strShinyAppDisplayName,
+    # strFileLines       <- gsub( "_PROJECT_NAME_", strShinyAppDisplayName, strFileLines )
+
+    strFileLines       <- WhiskerKeepUnrender(strFileLines, list( PROJECT_NAME = strShinyAppDisplayName,
                                                              AUTHOR_NAME = "{{AUTHOR_NAME}}",
                                                              ADD_NEW_TAB_SIDE_BAR = "{{ADD_NEW_TAB_SIDE_BAR}}",
                                                              ADD_NEW_TAB_UI_CALL = "{{ADD_NEW_TAB_UI_CALL}}"
@@ -75,7 +76,7 @@ UpdateShinyAppName <- function(  strProjectDirectory, strShinyAppName, strShinyA
     {
         strFileName        <- paste( strPackageDir, "/Global.R", sep = "" )
         strFileLines       <- readLines( strFileName )
-        strFileLines       <- whisker.render(strFileLines, list( CALCULATION_PACKAGE_NAME = strCalculationLibraryName,
+        strFileLines       <- WhiskerKeepUnrender(strFileLines, list( CALCULATION_PACKAGE_NAME = strCalculationLibraryName,
                                                                  AUTHOR_NAME = "{{AUTHOR_NAME}}",
                                                                  SOURCE_ADDITIONAL_TABS = "{{SOURCE_ADDITIONAL_TABS}}"
                                                                  ) )

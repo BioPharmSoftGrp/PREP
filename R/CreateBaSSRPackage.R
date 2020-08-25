@@ -49,7 +49,7 @@ UpdateCalculationPackageName <- function(  strProjectDirectory, strPackageName )
     strDescriptionFile <- paste( strPackageDir, "/DESCRIPTION", sep = "" )
     strFileLines       <- readLines( strDescriptionFile )
     #strFileLines       <- gsub( "_CALCULATION_PACKAGE_NAME_", strPackageName, strFileLines )
-    strFileLines       <- whisker.render(strFileLines, list( CALCULATION_PACKAGE_NAME = strPackageName,
+    strFileLines       <- WhiskerKeepUnrender(strFileLines, list( CALCULATION_PACKAGE_NAME = strPackageName,
                                                              AUTHOR_NAME = "{{AUTHOR_NAME}}" ) )
 
     writeLines( strFileLines, con = strDescriptionFile )
