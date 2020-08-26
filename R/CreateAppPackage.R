@@ -2,6 +2,14 @@
 #' @title CreateAppPackage
 #' @description { This function creates a Shiny app as an R Package.  }
 #'
+#' @description {Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.  }
+#' @param strDirectory The directory where the project folder is created.  If this parameter is left blank then the current working directory will be used.
+#' @param strName {The folder where the app saved.}
+#' @param strDisplayName {Display name for the app. strName is used by default}
+#' @param strCalculationLibraryName {Name of the calculation library (if any)}
+#' @param strAuthors {Author Names. Blank by default}
+#' @param bDocumentPackage {run devtools:document() on the new package once it is created? TRUE by default}
+#'
 #' @importFrom devtools build document
 #' @export
 #'
@@ -11,7 +19,7 @@ CreateAppPackage <- function(
     strName="newApp",
     strDisplayName="",
     strAuthors="",
-    strModules=c("Home","Feedback","Options"),
+    # strModules=c("Home","Feedback","Options"), ## Coming soon!
     bDocumentPackage=TRUE
 ){
     #### 0 - Parameter checks
@@ -41,6 +49,11 @@ CreateAppPackage <- function(
     strThemesDest<-paste0(strInstDest,"/themes")
     dir.create(strThemesDest)
     CopyFiles(strThemesSrc, strThemesDest)
+
+    # App Files - Server and UI
+    strAppSrc<-paste0(strSharedDirectory,"/app")
+    strAppDest<-paste0(strDestDirectory,"/R")
+    CopyFiles(strAppSrc,strAppDest)
 
     # Shiny Modules
     #TODO - only copy required modules

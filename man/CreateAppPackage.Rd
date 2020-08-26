@@ -10,7 +10,7 @@ CreateAppPackage(
   strDisplayName = "",
   strAuthors = "",
   strModules = c("Home", "Feedback", "Options"),
-  bBuildPackage = TRUE
+  bDocumentPackage = TRUE
 )
 }
 \description{

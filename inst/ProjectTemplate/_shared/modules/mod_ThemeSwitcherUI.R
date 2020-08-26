@@ -1,8 +1,5 @@
 #' Theme switcher module UI
 #'
-#' @param dropDownLabel 
-#' @param defaultTheme 
-#'
 #' @return UI for theme selector
 
 ThemeSwithcherUI <- function(dropDownLabel = "Change Theme", defaultTheme = "grey_light"){

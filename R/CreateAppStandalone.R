@@ -1,136 +1,100 @@
 #' @name  CreateAppStandalone
 #' @title  CreateAppStandalone
 #' @description {Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.  }
-#' @param strProjectDirectory The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.
-#' @param strShinyAppName {The name of the folder where the R Shiny app is created. If strShinyAppName  is blank or missing then the project is created in the strProjectDirectory.
-#' If strPackageName is provided, is not blank and bCreateProjectSubdirectory == TRUE then a folder named  strShinyAppName is created in the strProjectDirectory directory.}
-#' @param bCreateProjectSubdirectory {If bCreateProjectSubdirectory then then a subdirectory for the project is created in strProjectDirectory.  }
-#' @param bCreateWithExampleTabs {By default, the R Shiny app will contain two example tabs (Simulation and Data analyusis), if bCreateWithExampleTabs = FALSE those tabs are removed.}
-#' @param bAppInRFolder {Create }
+#' @param strDirectory The directory where the project folder is created.  If this parameter is left blank then the current working directory will be used.
+#' @param strName {The folder where the app saved.}
+#' @param strDisplayName {Display name for the app. strName is used by default}
+#' @param strCalculationLibraryName {Name of the calculation library (if any)}
+#' @param strAuthors {Author Names. Blank by default}
+
+
 #' @export
 
 CreateAppStandalone <-
-    function(strProjectDirectory,
-             strShinyAppName,
-             strShinyAppDisplayName,
-             strCalculationLibraryName,
-             strAuthors,
-             bCreateProjectSubdirectory = TRUE,
-             bCreateWithExampleTabs = TRUE)
-    {
-        #TODO: Validate input
-        if (!Provided(strShinyAppDisplayName))
-            strShinyAppDisplayName <- strShinyAppName
-        if (!Provided(strCalculationLibraryName))
-        {
-            strCalculationLibraryName <- ""
-            #TODO WOuld be much better to delete the line that references the calculation package if it does not need one.
-        }
-        # Set the template directory to copy from
-        strProjectDirectory     <-
-            gsub("\\\\", "/", strProjectDirectory)
-        strTemplateDirectory    <- GetTemplateDirectory()
+    function(strProjectDirectory=getwd(),
+             strName="newApp",
+             strDisplayName="",
+             strCalculationLibraryName="",
+             strAuthors=""
+    ){
+        #### 0 - Parameter checks
+        if (!Provided(strDisplayName)) strDisplayName <- strName
 
-        if (bCreateWithExampleTabs)
-            strAppDirectory         <-
-            paste(strTemplateDirectory, "/RShinyApp", sep = "")
-        else
-            strAppDirectory         <-
-            paste(strTemplateDirectory, "/RShinyAppNoTabs", sep = "")
+        #### 1 - File Management
+        #### 1a - Clone package directory
+        strProjectDirectory <- gsub("\\\\", "/", strProjectDirectory)
+        strTemplateDirectory <- paste(GetTemplateDirectory(), "/AppStandalone",sep="")
+        strDestDirectory  <- CreateProjectDirectory(strProjectDirectory, strName, TRUE)
+        CopyFiles(strTemplateDirectory, strDestDirectory)
+
+        #### 1b - copy shared assets to new project
+        strSharedDirectory <- paste0( GetTemplateDirectory(), "/_shared")
+
+        strInstDest<-paste0(strDestDirectory,"/","inst") #NOTE: not traditional to use /inst directory in standalone app, but greatly simplifies workflow with /inst/_shared here ...
+        dir.create(strInstDest)
 
 
-        # strDestDirectory        <- paste( strProjectDirectory, "/", strShinyAppName, sep="" )
-        strDestDirectory         <-
-            CreateProjectDirectory(strProjectDirectory,
-                                   strShinyAppName,
-                                   bCreateProjectSubdirectory)
+        # Templates
+        strTemplatesSrc<-paste0(strSharedDirectory,"/templates")
+        strTemplatesDest<-paste0(strInstDest,"/templates")
+        dir.create(strTemplatesDest)
+        CopyFiles(strTemplatesSrc, strTemplatesDest)
 
+        # Themes
+        strThemesSrc<-paste0(strSharedDirectory,"/themes")
+        strThemesDest<-paste0(strInstDest,"/themes")
+        dir.create(strThemesDest)
+        CopyFiles(strThemesSrc, strThemesDest)
 
-        strRet                  <-
-            CopyFiles(strAppDirectory, strDestDirectory)
-        strShinyApp             <-
-            UpdateShinyAppName(
-                strProjectDirectory,
-                strShinyAppName,
-                strShinyAppDisplayName,
-                strCalculationLibraryName
+        # Shiny Modules
+        #TODO - only copy required modules
+        strModulesSrc<-paste0(strSharedDirectory,"/modules")
+        strModulesDest<-paste0(strDestDirectory,"/modules")
+        dir.create(strModulesDest,'modules')
+        CopyFiles(strModulesSrc,strModulesDest)
+
+        # App Files - Server and UI
+        strAppSrc<-paste0(strSharedDirectory,"/app")
+        CopyFiles(strAppSrc,strDestDirectory)
+
+        # Logo
+        # TODO - allow user to select an image (using BaSS hex as placeholder for now)
+        strLogoSrc<-paste0(strProjectDirectory,"/hex-BaSS.png")
+        strLogoDest<-paste0(strDestDirectory,"/www/logo.png")
+        file.copy(strLogoSrc,strLogoDest)
+
+        #### 1c - rename the .rproj file
+        strRProjName  <- paste(strDestDirectory, "/AppStandalone.Rproj", sep="")
+        strNewRProjName <- paste(strDestDirectory,"/",strName,".Rproj",sep ="")
+        file.rename( strRProjName, strNewRProjName )
+
+        #### 2 - Update Metadata with Whisker templating
+        calculationLibrary <- ifelse(strCalculationLibraryName=="","",paste0("library(",strCalculationLibraryName,")"))
+        tags <- list(
+            AUTHOR_NAME=strAuthors,
+            PACKAGE_NAME=strName,
+            PROJECT_NAME=strDisplayName,
+            CALCULATION_LIBRARY=calculationLibrary
+        )
+
+        vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$", "Global.R") #apply template to these file types
+        vFileNames <- c()
+        for(i in 1:length(vFileType)){
+            newFiles <- list.files(
+                strDestDirectory,
+                pattern = vFileType[i],
+                recursive = TRUE,
+                full.names = TRUE
             )
-        strUpdateAuthor <- UpdateAuthors(paste(strProjectDirectory, "/", strShinyAppName, sep =
-                                                   ""),
-                                         strAuthors)
-
-        strRet <-
-            paste(c(
-                "Creating Shiny App...",
-                strRet,
-                strShinyApp,
-                strUpdateAuthor
-            ),
-            collapse = "\n")
-        return(strRet)
-    }
-
-UpdateShinyAppName <-
-    function(strProjectDirectory,
-             strShinyAppName,
-             strShinyAppDisplayName,
-             strCalculationLibraryName = NA)
-    {
-        # Step 1: Rename project file ####
-        strPackageDir <-
-            paste(strProjectDirectory, "/", strShinyAppName, sep = "")
-        strRProjName  <-
-            paste(strPackageDir, "/RShinyApp.Rproj", sep = "")
-        if (file.exists(strRProjName))
-        {
-            strNewRProjName <-
-                paste(strPackageDir, "/", strShinyAppName, ".Rproj", sep = "")
-
-            file.rename(strRProjName, strNewRProjName)
-            strRProjName  <- strNewRProjName
+            vFileNames<-c(vFileNames,newFiles)
         }
-        strRShinyInst <-
-            paste(
-                ".....Use R Studio to open the the ",
-                strRProjName,
-                "project file and begin by reading the Instructions.Rmd file."
-            )
-
-        # Step 2: Replace name in the ShinyUI.R file
-        strDescriptionFile <-
-            paste(strPackageDir, "/ShinyUI.R", sep = "")
-        strFileLines       <- readLines(strDescriptionFile)
-        #strFileLines       <- gsub( "_PROJECT_NAME_", strShinyAppDisplayName, strFileLines )
-        strFileLines       <-
-            whisker.render(
-                strFileLines,
-                list(
-                    PROJECT_NAME = strShinyAppDisplayName,
-                    AUTHOR_NAME = "{{AUTHOR_NAME}}",
-                    ADD_NEW_TAB_SIDE_BAR = "{{ADD_NEW_TAB_SIDE_BAR}}",
-                    ADD_NEW_TAB_UI_CALL = "{{ADD_NEW_TAB_UI_CALL}}"
-                )
-            )
-        writeLines(strFileLines, con = strDescriptionFile)
-
-        # Replace the R App name if one was provided, if not remove that line in the global.r file
-        if (!is.na(strCalculationLibraryName))
-        {
-            strFileName        <- paste(strPackageDir, "/Global.R", sep = "")
-            strFileLines       <- readLines(strFileName)
-            strFileLines       <-
-                whisker.render(
-                    strFileLines,
-                    list(
-                        CALCULATION_PACKAGE_NAME = strCalculationLibraryName,
-                        AUTHOR_NAME = "{{AUTHOR_NAME}}",
-                        SOURCE_ADDITIONAL_TABS = "{{SOURCE_ADDITIONAL_TABS}}"
-                    )
-                )
-
-            #strFileLines       <- gsub( "_CALCULATION_PACKAGE_NAME_", strCalculationLibraryName, strFileLines )
-            writeLines(strFileLines, con = strFileName)
-
+        if (length(vFileNames) > 0){
+            for(i in 1:length(vFileNames)){
+                strInput <- readLines( vFileNames[i] )
+                strRet  <- whisker.render(strInput, tags)
+                writeLines( strRet, con = vFileNames[i] )
+            }
         }
-        return(strRShinyInst)
+
+        return( "Built the app!!" )
     }

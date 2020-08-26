@@ -10,7 +10,6 @@
 #' @export
 
 app_ui <- function(){
-  addResourcePath("www", 'inst/www')
   TabItems <- function( ... ){
     args <- list(...)
     vArgs <- c()
