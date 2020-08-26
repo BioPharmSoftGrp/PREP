@@ -8,6 +8,13 @@
 
 <title>CreateBaSSShinyApp — CreateBaSSShinyApp • BaSS</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -41,6 +48,7 @@
 
 <meta property="og:title" content="CreateBaSSShinyApp — CreateBaSSShinyApp" />
 <meta property="og:description" content="Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -72,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -140,6 +148,7 @@
   <span class='no'>strShinyAppName</span>,
   <span class='no'>strShinyAppDisplayName</span>,
   <span class='no'>strCalculationLibraryName</span>,
+  <span class='no'>strAuthors</span>,
   <span class='kw'>bCreateProjectSubdirectory</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>bCreateWithExampleTabs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
@@ -164,6 +173,10 @@ If strPackageName is provided, is not blank and bCreateProjectSubdirectory == TR
       <th>bCreateWithExampleTabs</th>
       <td><p>By default, the R Shiny app will contain two example tabs (Simulation and Data analyusis), if bCreateWithExampleTabs = FALSE those tabs are removed.</p></td>
     </tr>
+    <tr>
+      <th>bAppInRFolder</th>
+      <td><p>Create</p></td>
+    </tr>
     </table>
 
 
@@ -178,11 +191,11 @@ If strPackageName is provided, is not blank and bCreateProjectSubdirectory == TR
 
       <footer>
       <div class="copyright">
-  <p>Developed by The package maintainer.</p>
+  <p>Developed by J. Kyle Wathen, Nan Chen, Jeremy Wildfire.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

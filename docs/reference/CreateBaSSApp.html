@@ -8,6 +8,13 @@
 
 <title>CreateBaSSApp — CreateBaSSApp • BaSS</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -42,6 +49,7 @@
 <meta property="og:title" content="CreateBaSSApp — CreateBaSSApp" />
 <meta property="og:description" content="Create an application that consists of a Shiny app and a R library package complete with an example testthat unit test.   The Shiny app will reference
 the R library so you should build the R library first before trying to run the Shiny app." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -73,7 +81,7 @@ the R library so you should build the R library first before trying to run the S
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -143,9 +151,11 @@ the R library so you should build the R library first before trying to run the S
   <span class='kw'>strCalculationLibraryName</span> <span class='kw'>=</span> <span class='st'>"MyCalculationLibrary"</span>,
   <span class='kw'>strShinyAppName</span> <span class='kw'>=</span> <span class='st'>"MyShinyApp"</span>,
   <span class='kw'>strShinyAppDisplayName</span> <span class='kw'>=</span> <span class='st'>"My Shiny App"</span>,
+  <span class='kw'>strAuthors</span> <span class='kw'>=</span> <span class='st'>"AUTHOR NAME"</span>,
   <span class='kw'>bCreateWithExampleTabs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>bCreateShinyApp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>bCreateCalculationPackage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>bCreateCalculationPackage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>bCreateShinyAppAsPackage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,8 +167,8 @@ the R library so you should build the R library first before trying to run the S
     </tr>
     <tr>
       <th>strCalculationLibraryName</th>
-      <td><p>The name of the R package that is created to contain the calculations for the applicaiton and is referenced in the Shiny app. A folder is created for the
-libarary and the R Studio project file will be named, strCalculationLibraryName.Rproj</p></td>
+      <td><p>The name of the R package that is created to contain the calculations for the application and is referenced in the Shiny app. A folder is created for the
+library and the R Studio project file will be named, strCalculationLibraryName.Rproj</p></td>
     </tr>
     <tr>
       <th>strShinyAppName</th>
@@ -188,11 +198,11 @@ if strProjectName is provided and is not blank then a folder named  strProjectNa
 
       <footer>
       <div class="copyright">
-  <p>Developed by The package maintainer.</p>
+  <p>Developed by J. Kyle Wathen, Nan Chen, Jeremy Wildfire.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
