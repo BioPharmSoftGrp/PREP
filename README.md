@@ -20,7 +20,7 @@ To create a new Project click on File->New Project and you should get the follow
 
 Click on New Directory so that the various project types will show. You should now see Project Type where the BaSS Project is listed.
 
-![BassProjectStep1](docs/BaSSProjectStep1.png)
+![BassProjectStep1](BaSSProjectStep1.png)
 
 Click on BaSS Project to move to the next step.
 
