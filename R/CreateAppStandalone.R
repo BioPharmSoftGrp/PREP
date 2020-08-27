@@ -59,7 +59,7 @@ CreateAppStandalone <-
 
         # Logo
         # TODO - allow user to select an image (using BaSS hex as placeholder for now)
-        strLogoSrc<-paste0(strProjectDirectory,"/hex-BaSS.png")
+        strLogoSrc<-paste0(strProjectDirectory,"/docs/logo.png")
         strLogoDest<-paste0(strDestDirectory,"/www/logo.png")
         file.copy(strLogoSrc,strLogoDest)
 
