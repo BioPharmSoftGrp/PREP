@@ -91,7 +91,7 @@ CreateAppStandalone <-
         if (length(vFileNames) > 0){
             for(i in 1:length(vFileNames)){
                 strInput <- readLines( vFileNames[i] )
-                strRet  <- whisker.render(strInput, tags)
+                strRet  <- WhiskerKeepUnrender(strInput, tags)
                 writeLines( strRet, con = vFileNames[i] )
             }
         }
