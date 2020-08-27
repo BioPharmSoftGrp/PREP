@@ -8,6 +8,13 @@
 
 <title>AddFunctionToPkg — AddFunctionToPkg • BaSS</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -40,8 +47,9 @@
 
 
 <meta property="og:title" content="AddFunctionToPkg — AddFunctionToPkg" />
-<meta property="og:description" content="Add a new function named strFunctionName to a package.  This function creates a file names R/strFunctionName.R
+<meta property="og:description" content="Add a new function named strFunctionName to a package.  This function creates a file named R/strFunctionName.R
 and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -73,7 +81,7 @@ and adds a test function in the file tests/testthat/test-strFunctionName.R to be
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -106,6 +114,9 @@ and adds a test function in the file tests/testthat/test-strFunctionName.R to be
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
+<li>
+  <a></a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -133,11 +144,11 @@ and adds a test function in the file tests/testthat/test-strFunctionName.R to be
     </div>
 
     <div class="ref-description">
-    <p>Add a new function named strFunctionName to a package.  This function creates a file names R/strFunctionName.R
+    <p>Add a new function named strFunctionName to a package.  This function creates a file named R/strFunctionName.R
 and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>AddFunctionToPkg</span>(<span class='no'>strFunctionName</span>, <span class='kw'>strPkgDir</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>strFunctionDescription</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+    <pre class="usage"><span class='fu'>AddFunctionToPkg</span>(<span class='no'>strFunctionName</span>, <span class='kw'>strFunctionDescription</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>strPkgDir</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,12 +158,12 @@ and adds a test function in the file tests/testthat/test-strFunctionName.R to be
       <td><p>The name of the function to add.</p></td>
     </tr>
     <tr>
-      <th>strPkgDir</th>
-      <td><p>The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.</p></td>
-    </tr>
-    <tr>
       <th>strFunctionDescription</th>
       <td><p>A description to include at the top of the file with the function.</p></td>
+    </tr>
+    <tr>
+      <th>strPkgDir</th>
+      <td><p>The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.</p></td>
     </tr>
     </table>
 
@@ -168,11 +179,11 @@ and adds a test function in the file tests/testthat/test-strFunctionName.R to be
 
       <footer>
       <div class="copyright">
-  <p>Developed by The package maintainer.</p>
+  <p>Developed by J. Kyle Wathen, Nan Chen, Jeremy Wildfire.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
