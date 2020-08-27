@@ -33,20 +33,14 @@ Label: App Name to Display in App
 Default: Awesome Shiny App
 Position: left
 
-Parameter: strAuthors
-Widget: TextInput
-Label: Authors Name
-Default: Author Name
-Position: left
-
-Parameter: bCreateWithExampleTabs
-Widget: CheckboxInput
-Label: Include example tabs in project?
-Default: On
-Position: left
-
 Parameter: bCreateShinyAppAsPackage
 Widget: CheckboxInput
 Label: Create Shiny App as package?
 Default: On
 Position: left
+
+Parameter: bCreateWithExampleTabs
+Widget: CheckboxInput
+Label: Include example tabs in project?
+Default: Off
+Position: right

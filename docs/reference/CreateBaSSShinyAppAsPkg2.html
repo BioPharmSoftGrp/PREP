@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AddNewTabToApp — AddNewTabToApp • BaSS</title>
+<title>CreateBaSSShinyAppAsPkg2 — CreateBaSSShinyAppAsPkg2 • BaSS</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,8 @@
 
 
 
-<meta property="og:title" content="AddNewTabToApp — AddNewTabToApp" />
-<meta property="og:description" content="This funciton will add a new tab to the Shiny App. This function assumes that the working directory
-is the main directory of the Shiny app created by this package.  This function creates a module file for the UI and the Server in the Modules directory
-of the app, it alters the ShinyUI.R file to insert the calls to  modules so the tab is added to the UI." />
+<meta property="og:title" content="CreateBaSSShinyAppAsPkg2 — CreateBaSSShinyAppAsPkg2" />
+<meta property="og:description" content="This function creates a Shiny app as an R Package." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -139,21 +137,22 @@ of the app, it alters the ShinyUI.R file to insert the calls to  modules so the 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>AddNewTabToApp</h1>
+    <h1>CreateBaSSShinyAppAsPkg2</h1>
     
-    <div class="hidden name"><code>AddNewTabToApp.Rd</code></div>
+    <div class="hidden name"><code>CreateBaSSShinyAppAsPkg2.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This funciton will add a new tab to the Shiny App. This function assumes that the working directory
-is the main directory of the Shiny app created by this package.  This function creates a module file for the UI and the Server in the Modules directory
-of the app, it alters the ShinyUI.R file to insert the calls to  modules so the tab is added to the UI.</p>
+    <p>This function creates a Shiny app as an R Package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>AddNewTabToApp</span>(
-  <span class='no'>strTabName</span>,
-  <span class='kw'>vSubMenuItemNames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>strTemplate</span> <span class='kw'>=</span> <span class='st'>"NoSubItemTabModule"</span>
+    <pre class="usage"><span class='fu'>CreateBaSSShinyAppAsPkg2</span>(
+  <span class='kw'>strProjectDirectory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
+  <span class='kw'>strShinyAppName</span> <span class='kw'>=</span> <span class='st'>"newApp"</span>,
+  <span class='kw'>strShinyAppDisplayName</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>strAuthors</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>bCreateProjectSubdirectory</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>modules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"home"</span>)
 )</pre>
 
 
