@@ -15,7 +15,7 @@
 #'
 
 CreateAppPackage <- function(
-    strProjectDirectory=getwd(),
+    strDirectory=getwd(),
     strName="newApp",
     strDisplayName="",
     strAuthors="",
@@ -27,7 +27,7 @@ CreateAppPackage <- function(
 
     #### 1 - File Management
     #### 1a - Clone package directory
-    strProjectDirectory <- gsub( "\\\\", "/", strProjectDirectory )
+    strProjectDirectory <- gsub( "\\\\", "/", strDirectory )
     strTemplateDirectory <- paste( GetTemplateDirectory(), "/AppPkg", sep="" )
     strDestDirectory <- CreateProjectDirectory(strProjectDirectory, strName, TRUE)
     print(strDestDirectory)

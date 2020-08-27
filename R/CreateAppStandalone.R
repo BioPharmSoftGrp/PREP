@@ -1,6 +1,7 @@
-#' @name  CreateAppStandalone
-#' @title  CreateAppStandalone
-#' @description {Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.  }
+#' @name CreateAppStandalone
+#' @title CreateAppStandalone
+#' @description { This function creates a standalone Shiny app.  }
+#'
 #' @param strDirectory The directory where the project folder is created.  If this parameter is left blank then the current working directory will be used.
 #' @param strName {The folder where the app saved.}
 #' @param strDisplayName {Display name for the app. strName is used by default}
@@ -11,7 +12,7 @@
 #' @export
 
 CreateAppStandalone <-
-    function(strProjectDirectory=getwd(),
+    function(strDirectory=getwd(),
              strName="newApp",
              strDisplayName="",
              strCalculationLibraryName="",
@@ -22,7 +23,7 @@ CreateAppStandalone <-
 
         #### 1 - File Management
         #### 1a - Clone package directory
-        strProjectDirectory <- gsub("\\\\", "/", strProjectDirectory)
+        strProjectDirectory <- gsub("\\\\", "/", strDirectory)
         strTemplateDirectory <- paste(GetTemplateDirectory(), "/AppStandalone",sep="")
         strDestDirectory  <- CreateProjectDirectory(strProjectDirectory, strName, TRUE)
         CopyFiles(strTemplateDirectory, strDestDirectory)
