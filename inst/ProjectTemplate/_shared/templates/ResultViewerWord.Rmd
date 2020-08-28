@@ -1,0 +1,45 @@
+---
+title: "Report"
+author: Team
+date: "`r format(Sys.time(), '%B %d %Y')`"
+
+output: 
+    word_document:
+        reference_docx: wordstyle.docx
+
+params:
+  allDat: NA
+  ParaValues: NA
+  Version: NA
+  SelectedData: NA
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Application Version: `r params$Version` 
+
+
+## Input Parameter Values:
+
+```{r comment='', echo=FALSE}
+ knitr::kable(params$ParaValues, caption = "", floating.environment="sidewaystable")
+```
+
+
+## Results:
+
+```{r fig.width=11, fig.height=5.5, echo=FALSE}
+library(ggplot2)
+
+print(params$allDat[[1]])
+```
+
+
+## Selected Data:
+
+```{r comment='', echo=FALSE}
+ knitr::kable(params$SelectedData, caption = "", floating.environment="sidewaystable")
+```
