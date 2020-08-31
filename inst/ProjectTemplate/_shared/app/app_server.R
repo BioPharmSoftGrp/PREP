@@ -8,10 +8,7 @@
 
 
 app_server <- function(input, output,session) {
-    SimulationProgramServer()
-    DataAnalysisRunAnalysisServer()
-    FeedbackServer()
+    # whisker tag to add new module servers
+    #{{ADD_MODULE_SERVER}}
     ThemeSwitcherServer()
-    # _ADD_NEW_TAB_SERVER_ #
-    # Include the TAG for use with the AddNewTabToApp Function - if the previous line is removed the AddNewTabToApp will not correctly add the server command
 }
