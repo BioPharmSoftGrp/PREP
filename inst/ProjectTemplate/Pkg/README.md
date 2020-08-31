@@ -1,9 +1,4 @@
----
-title: "Instructions"
-author: "{{AUTHOR_NAME}}"
-date: "8/10/2020"
-output: html_document
----
+
 ## R Computation Package
 To build the package click on Build->Clean and Rebuild.   This is also available Build tab typically to right pane in R Studio. 
 

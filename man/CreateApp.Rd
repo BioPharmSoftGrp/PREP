@@ -5,29 +5,23 @@
 \title{CreateApp}
 \usage{
 CreateApp(
-  strProjectDirectory,
-  strShinyAppName = "NewApp",
-  strShinyAppDisplayName = NULL,
-  strAuthors = NULL,
-  strModules = c("home", "feedback", "options"),
-  strModulesPath = "",
+  strDirectory = getwd(),
+  strName = "NewApp",
+  strDisplayName = "",
+  strAuthors = "",
   bPackage = TRUE
 )
 }
 \arguments{
-\item{strProjectDirectory}{{The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.}}
-
-\item{strAuthors}{{List of authors}}
-
-\item{strModules}{{List of Modules to include.  Modules should be named xxx.R, mod_xxx.R or mod_xxx_ui.r and mod_xxx_server.r. Files should be saved in /{strModulePath} or in /inst/modules. A future release may support adding modules loaded in current session}}
-
-\item{bPackage}{{Specifies whether the app should be wrapped in a pacakge. Default True}}
+\item{strDirectory}{{The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.}}
 
 \item{strName}{{The name of the folder where the R Shiny app is created.}}
 
 \item{strDisplayName}{{The display name of the app. }}
 
-\item{bModulesAsTabs}{{add modules as tabs}}
+\item{strAuthors}{{List of authors}}
+
+\item{bPackage}{{Specifies whether the app should be wrapped in a pacakge. Default True}}
 }
 \description{
 {Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.  }

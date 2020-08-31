@@ -10,16 +10,17 @@
 #' @param strFunctionName The name of the function to add.
 #' @param strFunctionDescription A description to include at the top of the file with the function.
 #' @param strPkgDir The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.
+#' @param strFunctionTemplatePath Path to a function template. /inst/Templates/FunctionTemplate.R used as default.
+#' @param stTestTemplatePath Path to a test template. /inst/Templates/TestTemplate.R.
 #' @export
-AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", strPkgDir = "" )
+AddFunctionToPkg <- function(
+    strFunctionName="MyNewFunction",
+    strFunctionDescription = "Add Description",
+    strPkgDir = getwd(),
+    strFunctionTemplate=NULL,
+    strTestTemplate=NULL
+    )
 {
-
-    if( !Provided( strPkgDir) )
-        strPkgDir <- getwd()
-
-    if( !Provided( strFunctionDescription ) )
-        strFunctionDescription <- "Add Description"
-
     strFileName <- paste( strPkgDir, "/R/", strFunctionName, ".R", sep ="" )
 
     # Create the file name
@@ -32,7 +33,6 @@ AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", str
         strFileName <- paste( strPkgDir, "/R/", strFunctionName, nIndex, ".R", sep ="" )
         bFileExists <- file.exists( strFileName )
     }
-
 
     #Verify that the test function file does not exist
     strTestFileName <- paste( strPkgDir, "/tests/testthat/test-", strFunctionName,  ".R", sep ="" )
@@ -49,8 +49,18 @@ AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", str
 
     strTemplateFolder <- GetTemplateDirectory( "Templates" )
 
-    strFunctionTemplateFile     <- paste( strTemplateFolder, "/", "FunctionTemplate.R", sep="")
-    strTestFunctionTemplateFile <- paste( strTemplateFolder, "/",  "TestFunctionTemplate.R", sep="")
+
+    strFunctionTemplateFile     <- ifelse(
+        is.null(strFunctionTemplate),
+        paste( strTemplateFolder, "/", "FunctionTemplate.R", sep=""),
+        strFunctionTemplate
+    )
+    strTestFunctionTemplateFile <- ifelse(
+        is.null(strTestTemplate),
+        paste( strTemplateFolder, "/",  "TestFunctionTemplate.R", sep=""),
+        strTestTemplate
+    )
+
 
     bFileCoppied       <- file.copy( strFunctionTemplateFile, strFileName )
     bTestFileCoppied   <- file.copy( strTestFunctionTemplateFile, strTestFileName )

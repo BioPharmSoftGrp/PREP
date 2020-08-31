@@ -5,14 +5,28 @@
 \title{CreateAppPackage}
 \usage{
 CreateAppPackage(
-  strProjectDirectory = getwd(),
+  strDirectory = getwd(),
   strName = "newApp",
   strDisplayName = "",
   strAuthors = "",
-  strModules = c("Home", "Feedback", "Options"),
   bDocumentPackage = TRUE
 )
 }
+\arguments{
+\item{strDirectory}{The directory where the project folder is created.  If this parameter is left blank then the current working directory will be used.}
+
+\item{strName}{{The folder where the app saved.}}
+
+\item{strDisplayName}{{Display name for the app. strName is used by default}}
+
+\item{strAuthors}{{Author Names. Blank by default}}
+
+\item{bDocumentPackage}{{run devtools:document() on the new package once it is created? TRUE by default}}
+
+\item{strCalculationLibraryName}{{Name of the calculation library (if any)}}
+}
 \description{
 { This function creates a Shiny app as an R Package.  }
+
+{Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.  }
 }

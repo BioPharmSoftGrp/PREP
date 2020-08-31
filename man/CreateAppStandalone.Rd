@@ -5,7 +5,7 @@
 \title{CreateAppStandalone}
 \usage{
 CreateAppStandalone(
-  strProjectDirectory = getwd(),
+  strDirectory = getwd(),
   strName = "newApp",
   strDisplayName = "",
   strCalculationLibraryName = "",
@@ -13,13 +13,16 @@ CreateAppStandalone(
 )
 }
 \arguments{
-\item{strProjectDirectory}{The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.}
+\item{strDirectory}{The directory where the project folder is created.  If this parameter is left blank then the current working directory will be used.}
 
-\item{strShinyAppName}{{The name of the folder where the R Shiny app is created. If strShinyAppName  is blank or missing then the project is created in the strProjectDirectory.
-If strPackageName is provided, is not blank and bCreateProjectSubdirectory == TRUE then a folder named  strShinyAppName is created in the strProjectDirectory directory.}}
+\item{strName}{{The folder where the app saved.}}
 
-\item{bCreateProjectSubdirectory}{{If bCreateProjectSubdirectory then then a subdirectory for the project is created in strProjectDirectory.  }}
+\item{strDisplayName}{{Display name for the app. strName is used by default}}
+
+\item{strCalculationLibraryName}{{Name of the calculation library (if any)}}
+
+\item{strAuthors}{{Author Names. Blank by default}}
 }
 \description{
-{Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.  }
+{ This function creates a standalone Shiny app.  }
 }

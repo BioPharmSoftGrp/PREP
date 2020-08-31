@@ -5,20 +5,19 @@
 \title{CreatePackage}
 \usage{
 CreatePackage(
-  strProjectDirectory,
-  strPackageName,
-  strAuthors = NULL,
-  bCreateProjectSubdirectory = TRUE
+  strDirectory = getwd(),
+  strName = "newPackage",
+  strAuthors = "",
+  bSampleFiles = TRUE
 )
 }
 \arguments{
-\item{strProjectDirectory}{The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.}
+\item{strDirectory}{{The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.}}
 
-\item{strPackageName}{{The name of the package folder. If strPackageName  is blank or missing then the project is created in the strProjectDirectory.
-if strPackageName is provided, is not blank and bCreateProjectSubdirectory == TRUE then a folder named  strPackageName is created in the strProjectDirectory directory.}}
+\item{strName}{{The name of the package folder.}}
 
-\item{bCreateProjectSubdirectory}{{If bCreateProjectSubdirectory then then a subdirectory for the project is created in strProjectDirectory.  }}
+\item{bSampleFiles}{{copy sample files? Default: TRUE}}
 }
 \description{
-{Create an R package complete with an example testthat unit test.   }
+{Create an R package via usethis::create_package. Optionally include a sample functiona and a testthat unit test.   }
 }
