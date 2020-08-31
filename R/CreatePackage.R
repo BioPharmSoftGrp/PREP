@@ -12,24 +12,15 @@ CreatePackage <- function(
     strAuthors = "",
     bSampleFiles=TRUE)
 {
-    packagePath<-paste0(strDirectory,"/",strName)
+    strPackagePath<-paste0(strDirectory,"/",strName)
     opts <- list()
     if(strAuthors != "") opts[`Authors@R`]=strAuthors
-    usethis::create_package(path=packagePath, fields=opts, check_name=FALSE, open=FALSE)
-    usethis::with_project(path=packagePath,usethis::use_testthat())
-
-    strSharedDirectory <- paste0(GetTemplateDirectory(), "/_shared/package")
-    ReadmeSrc<-paste0(strSharedDirectory,"/README.md")
-    ReadmeDest<-paste0(packagePath,"/README.md")
-    file.copy(ReadmeSrc,ReadmeDest)
+    usethis::create_package(path=strPackagePath, fields=opts, check_name=FALSE, open=FALSE)
+    usethis::with_project(path=strPackagePath,usethis::use_testthat())
 
     if(bSampleFiles){
-        RSrc<-paste0(strSharedDirectory,"/CalcPosteriorProbsBinom.R")
-        RDest<-paste0(packagePath,"/R")
-        file.copy(RSrc,RDest)
-
-        TestSrc<-paste0(strSharedDirectory,"/test-CalcPosteriorProbsBinom.R")
-        TestDest<-paste0(packagePath,"/tests/testthat")
-        file.copy(TestSrc, TestDest)
+        strSrcDir<-paste0(GetTemplateDirectory(),"/Pkg")
+        strDestDir<- paste0(strPackagePath)
+        CopyFiles(strSrcDir, strDestDir)
     }
 }
