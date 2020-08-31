@@ -9,6 +9,7 @@ CreateApp(
   strName = "NewApp",
   strDisplayName = "",
   strAuthors = "",
+  strModules = c("home", "simulation", "feedback"),
   bPackage = TRUE
 )
 }
@@ -20,6 +21,8 @@ CreateApp(
 \item{strDisplayName}{{The display name of the app. }}
 
 \item{strAuthors}{{List of authors}}
+
+\item{strModules}{{List of Packages}}
 
 \item{bPackage}{{Specifies whether the app should be wrapped in a pacakge. Default True}}
 }

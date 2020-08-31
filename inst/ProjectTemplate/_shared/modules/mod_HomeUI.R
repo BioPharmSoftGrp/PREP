@@ -9,8 +9,7 @@
 HomeUI <- function(  ){
     strID <- "Welcome"
     ns <- NS( strID )
-    tWelcomeTabItem <- tabItem(
-        tabName =  "Home",
+    tWelcomeTabItem <- 
         fluidRow(
 
             box(
@@ -52,8 +51,6 @@ HomeUI <- function(  ){
             )
 
         )
-
-    )
     return(tWelcomeTabItem)
 }
 

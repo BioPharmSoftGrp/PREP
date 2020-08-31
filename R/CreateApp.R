@@ -6,6 +6,7 @@
 #' @param strName {The name of the folder where the R Shiny app is created.}
 #' @param strDisplayName {The display name of the app. }
 #' @param strAuthors {List of authors}
+#' @param strModules {List of Packages}
 #' @param bPackage {Specifies whether the app should be wrapped in a pacakge. Default True}
 
 #' @export
@@ -15,6 +16,7 @@ CreateApp <-
              strName="NewApp",
              strDisplayName="",
              strAuthors="",
+             strModules=c("home","simulation","feedback"),
              bPackage=TRUE
     ){
         params<-as.list(environment())
