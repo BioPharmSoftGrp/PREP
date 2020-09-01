@@ -1,5 +1,5 @@
-#' @name addModule
-#' @title addModule
+#' @name AddModule
+#' @title AddModule
 #' @description { This function adds a module to a shiny app created by BaSS.  }
 #'
 #' @param strModuleID ID of the shiny module to be added to the application. The source code for the module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R".
@@ -12,7 +12,7 @@
 #' @export
 #'
 
-addModule <- function(
+AddModule <- function(
     strModuleID,
     strPackageDirectory=getwd(),
     strModuleDirectory="",
