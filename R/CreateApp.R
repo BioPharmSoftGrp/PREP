@@ -16,7 +16,7 @@ CreateApp <-
              strName="NewApp",
              strDisplayName="",
              strAuthors="",
-             vModuleIDs=c("Home","Simulation","Feedback","Options"),
+             vModuleIDs=c("Home","Simulation","Feedback"),
              bPackage=TRUE
     ){
         params<-as.list(environment())

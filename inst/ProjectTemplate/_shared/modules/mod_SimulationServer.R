@@ -3,9 +3,12 @@
 #'
 #' @return moduleServer for simulation module - currently an empty shell
 
-DataAnalysisIntroServer <- function(){
-    strID <- "DataAnalysisIntro"
-    retModule <- function( input, output, session ){}
+SimulationServer <- function(){
+    strID <- "Simulation"
+    retModule <- function( input, output, session){
+        SimulationIntroServer()
+        SimulationProgramServer()
+    }
     retServer <- moduleServer( strID, module = retModule )
     return( retServer )
 }

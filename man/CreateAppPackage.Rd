@@ -9,7 +9,7 @@ CreateAppPackage(
   strName = "newApp",
   strDisplayName = "",
   strAuthors = "",
-  vModuleIDs = c("Home", "Feedback", "Options"),
+  vModuleIDs = c("Home", "Simulation", "Feedback"),
   bDocumentPackage = TRUE
 )
 }
@@ -30,6 +30,4 @@ CreateAppPackage(
 }
 \description{
 { This function creates a Shiny app as an R Package.  }
-
-{Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.  }
 }

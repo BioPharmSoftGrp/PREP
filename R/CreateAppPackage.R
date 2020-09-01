@@ -2,7 +2,6 @@
 #' @title CreateAppPackage
 #' @description { This function creates a Shiny app as an R Package.  }
 #'
-#' @description {Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.  }
 #' @param strDirectory The directory where the project folder is created.  If this parameter is left blank then the current working directory will be used.
 #' @param strName {The folder where the app saved.}
 #' @param strDisplayName {Display name for the app. strName is used by default}
@@ -20,7 +19,7 @@ CreateAppPackage <- function(
     strName="newApp",
     strDisplayName="",
     strAuthors="",
-    vModuleIDs=c("Home","Simulation","Feedback","Options"),
+    vModuleIDs=c("Home","Simulation","Feedback"),
     bDocumentPackage=TRUE
 ){
     #### 0 - Parameter checks
@@ -75,9 +74,8 @@ CreateAppPackage <- function(
     file.rename( strRProjName, strNewRProjName )
 
     #### 2 - Add Modules to Package
-    for(mod in vModuleIDs){
-        addModule(strModuleID = mod, strPackageDirectory = strDestDirectory, strType="package")
-    }
+    AddModules(vModuleIDs = vModuleIDs, strPackageDirectory = strDestDirectory, strType="package")
+
 
     #### 3 - Update Metadata with Whisker templating
     tags <- list(

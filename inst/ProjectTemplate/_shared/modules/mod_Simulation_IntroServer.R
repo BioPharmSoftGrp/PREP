@@ -2,7 +2,7 @@
 #'
 #' @return moduleServer for intro submodule - currently an empty shell
 
-DataAnalysisIntroServer <- function(){
+SimulationIntroServer <- function(){
     strID <- "SimulationIntro"
     retModule <- function( input, output, session ){}
     retServer <- moduleServer( strID, module = retModule )

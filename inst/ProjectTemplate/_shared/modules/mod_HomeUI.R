@@ -2,14 +2,16 @@
 #'
 #' @return home page UI
 #'
-#' 
-#' @import shinydashboard 
+#'
+#' @import shinydashboard
 #' @import shinydashboardPlus
 
 HomeUI <- function(  ){
     strID <- "Welcome"
     ns <- NS( strID )
-    tWelcomeTabItem <- 
+    tWelcomeTabItem <-
+        tabItem(
+            tabName="Home",
         fluidRow(
 
             box(
@@ -49,7 +51,7 @@ HomeUI <- function(  ){
                 )
 
             )
-
+        )
         )
     return(tWelcomeTabItem)
 }
