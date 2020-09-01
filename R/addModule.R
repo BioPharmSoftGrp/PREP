@@ -8,7 +8,6 @@
 #' @param bTabItem Wrap the UI in a shinyDashboard::TabItem? default = TRUE
 #'
 #' @importFrom devtools build document
-#' @importFrom stringr string_to_title
 #'
 #' @export
 #'
@@ -27,14 +26,14 @@ addModule <- function(
         is.character(strModuleID)
     )
 
-    #source location of modules to copy in to new pacakge
+    #source location of modules to copy in to new package
     strSrcDirectory <- ifelse(
         strModuleDirectory=="",
         paste0( GetTemplateDirectory(), "/_shared/modules"),
         strModuleDirectory
     )
 
-    #destination locatation for modules in new pacakge
+    #destination location for modules in new package
     strDestDirectory <- ifelse(strType=="package",
         paste0(strPackageDirectory,"/R"),
         paste0(strPackageDirectory,"/inst/modules")
@@ -49,7 +48,7 @@ addModule <- function(
     )
    file.copy(from=vModulePaths, to=strDestDirectory)
 
-    # 2. If using a standalone pacakge `source()` the modules in global.R
+    # 2. If using a standalone package `source()` the modules in global.R
    if(tolower(strType) =="standalone"){
        vModuleFiles <- list.files(
            strSrcDirectory,

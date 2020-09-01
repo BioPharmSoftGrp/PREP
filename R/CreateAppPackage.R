@@ -20,7 +20,7 @@ CreateAppPackage <- function(
     strName="newApp",
     strDisplayName="",
     strAuthors="",
-    vModuleIDs=c("Home","Feedback","Options"),
+    vModuleIDs=c("Home","Simulation","Feedback","Options"),
     bDocumentPackage=TRUE
 ){
     #### 0 - Parameter checks
