@@ -2,7 +2,6 @@
 
 export(AddFunctionToPkg)
 export(AddModules)
-export(AddNewTabToApp)
 export(AddTestToPkg)
 export(CreateApp)
 export(CreateAppPackage)

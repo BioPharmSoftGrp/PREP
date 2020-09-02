@@ -9,7 +9,7 @@ CreateAppStandalone(
   strName = "newApp",
   strDisplayName = "",
   strAuthors = "",
-  vModulesIDs = c("Home", "Simulation", "Feedback", "Options")
+  vModuleIDs = c("Home", "Simulation", "Feedback", "Options")
 )
 }
 \arguments{
