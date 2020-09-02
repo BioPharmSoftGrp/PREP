@@ -4,7 +4,7 @@
 #'
 #' @return tabItem() for feedback UI
 
-FeedbackUI <- function(strID="feedback"){
+FeedbackUI <- function(strID="Feedback"){
 
     ns <- NS( strID )
     fldRow <- fluidRow(

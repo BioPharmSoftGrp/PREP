@@ -49,7 +49,6 @@ app_ui <- function(){
       id = "sidebar_tabs",
       # whisker tag to add sidebar UI
       # {{ADD_MODULE_SIDEBAR}}
-      #OptionsSideBarMenu()
     )
   )
 
@@ -58,7 +57,6 @@ app_ui <- function(){
     TabItems(
       # whisker tag to add module UI
       # {{ADD_MODULE_UI}}
-      #OptionsUI()
     )
   )
   return(dashboardPage(header=header, sidebar=sidebar, body=body))

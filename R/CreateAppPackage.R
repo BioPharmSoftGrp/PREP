@@ -19,7 +19,7 @@ CreateAppPackage <- function(
     strName="newApp",
     strDisplayName="",
     strAuthors="",
-    vModuleIDs=c("Home","Simulation","Feedback"),
+    vModuleIDs=c("Home","Simulation","Feedback","Options"),
     bDocumentPackage=TRUE
 ){
     #### 0 - Parameter checks
@@ -30,7 +30,6 @@ CreateAppPackage <- function(
     strProjectDirectory <- gsub( "\\\\", "/", strDirectory )
     strTemplateDirectory <- paste( GetTemplateDirectory(), "/AppPkg", sep="" )
     strDestDirectory <- CreateProjectDirectory(strProjectDirectory, strName, TRUE)
-    print(strDestDirectory)
     CopyFiles(strTemplateDirectory, strDestDirectory)
 
     #### 1b - copy shared assets to new project
@@ -81,7 +80,9 @@ CreateAppPackage <- function(
     tags <- list(
         AUTHOR_NAME=strAuthors,
         PACKAGE_NAME=strName,
-        PROJECT_NAME=strDisplayName
+        PROJECT_NAME=strDisplayName,
+        ADD_MODULE_SIDEBAR="{{ADD_MODULE_SIDEBAR}}",
+        ADD_MODULE_UI="{{ADD_MODULE_UI}}"
     )
 
     vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$","app_ui.R") #apply template to these file types
