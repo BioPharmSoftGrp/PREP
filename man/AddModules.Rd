@@ -8,8 +8,7 @@ AddModules(
   vModuleIDs,
   strPackageDirectory = getwd(),
   strModuleDirectory = "",
-  strType = "package",
-  bTabItem = TRUE
+  strType = "package"
 )
 }
 \arguments{
@@ -19,7 +18,7 @@ AddModules(
 
 \item{strModuleDirectory}{Location of the Module to be added ot the app. Defaults to inst/_shared/modules.}
 
-\item{bTabItem}{Wrap the UI in a shinyDashboard::TabItem? default = TRUE}
+\item{strType}{type of application - valid options are "package" and "standalone"}
 }
 \description{
 { This function adds a module to a shiny app created by BaSS.  }

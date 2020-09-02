@@ -5,7 +5,8 @@
 #' @param vModuleIDs IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R".
 #' @param strPackageDirectory The directory where the BaSS shiny app located.
 #' @param strModuleDirectory Location of the Module to be added ot the app. Defaults to inst/_shared/modules.
-#'
+#' @param strType type of application - valid options are "package" and "standalone"
+
 #' @importFrom devtools build document
 #'
 #' @export
@@ -54,7 +55,7 @@ AddModules <- function(
             strSrcDirectory,
             pattern = paste0("mod_",strModuleID), #TODO: Update to ignore case conflicts?
             recursive = TRUE,
-            full.names = TRUE
+            full.names = FALSE
         )
         vModuleFiles <- c(vModuleFiles,vCurrentFiles)
     }
@@ -62,32 +63,32 @@ AddModules <- function(
 
     # 2. If using a standalone package `source()` the modules in global.R
    if(tolower(strType) =="standalone"){
-       strGlobalPath <-  paste0(strDestDirectory,"/R/global.R")
-       vSources <- paste0('source(',vModuleFiles,")/n")
+       strGlobalPath <-  paste0(strPackageDirectory,"/global.R")
+       vSources <- paste0('source("inst/modules/',vModuleFiles,'")',collapse="\n")
        strInput <- readLines(strGlobalPath)
-       strRet  <- paste(strInput,vSources)
+       strRet  <- paste(strInput,"\n",vSources)
        writeLines( strRet, con = strGlobalPath )
    }
+
+    # Note/TODO : User must currently load all needed libraries in standalone apps. We could consider adding library calls for @imports in a future release.
 
     # 3. Update app_ui to call the module UI
     # UI Module Call
 
-
-   strUI<-paste0(vModuleIDs,'UI()',collapse=", \n")
-
+    strUI<-paste0(vModuleIDs,'UI()',collapse=", \n")
 
     strUITemplate <- paste("{{ADD_MODULE_UI}} \n", strUI) #Keep the ADD_MODULE_UI Tag for future modules.
     strUITemplate<-substr(strUITemplate,1,nchar(strUITemplate)) #remove trailing comma
 
-    # Sidebar Module Car
+    # Sidebar Module
     strSidebar<-paste0(vModuleIDs, 'SideBarMenu()',collapse =", \n")
-    print(strSidebar)
     strSidebarTemplate<-paste("{{ADD_MODULE_SIDEBAR}} \n",strSidebar)
     strSidebarTemplate<-substr(strSidebarTemplate,1,nchar(strSidebarTemplate)) #remove trailing comma
 
     # Update app_ui.R
+    strAppDir<-ifelse(strType=="package", strDestDirectory, strPackageDirectory)
     UIParameters<-list(ADD_MODULE_UI=strUITemplate, ADD_MODULE_SIDEBAR=strSidebarTemplate)
-    strUIpath <- paste0(strDestDirectory,"/app_ui.R")
+    strUIpath <- paste0(strAppDir,"/app_ui.R")
     strUIInput <- readLines(strUIpath)
     strUIRet  <-whisker.render(strUIInput, data=UIParameters)
     writeLines( strUIRet, con = strUIpath)
@@ -96,7 +97,7 @@ AddModules <- function(
     strServer<-paste0(vModuleIDs,'Server()',collapse="\n")
     strServerTemplate <- paste("{{ADD_MODULE_SERVER}} \n",strServer) #Keep the ADD_MODULE_UI Tag for future modules.
     ServerParameters<-list(ADD_MODULE_SERVER=strServerTemplate)
-    strServerPath <- paste0(strDestDirectory,"/app_server.R")
+    strServerPath <- paste0(strAppDir,"/app_server.R")
     strServerInput <- readLines(strServerPath)
     strServerRet  <-whisker.render(strServerInput, data=ServerParameters)
     writeLines( strServerRet, con = strServerPath)

@@ -5,7 +5,6 @@
 #' @param strDirectory The directory where the project folder is created.  If this parameter is left blank then the current working directory will be used.
 #' @param strName {The folder where the app saved.}
 #' @param strDisplayName {Display name for the app. strName is used by default}
-#' @param strCalculationLibraryName {Name of the calculation library (if any)}
 #' @param strAuthors {Author Names. Blank by default}
 #' @param vModuleIDs {list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_{moduleID*}" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See BaSS::add_module() for more detail.}
 #' @param bDocumentPackage {run devtools:document() on the new package once it is created? TRUE by default}

@@ -9,7 +9,7 @@ CreateApp(
   strName = "NewApp",
   strDisplayName = "",
   strAuthors = "",
-  vModuleIDs = c("Home", "Simulation", "Feedback"),
+  vModuleIDs = c("Home", "Simulation", "Feedback", "Options"),
   bPackage = TRUE
 )
 }
