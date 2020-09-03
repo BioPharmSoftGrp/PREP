@@ -5,13 +5,12 @@
 #' @return shinydashboard::dashboardPage containing the app
 #'
 #' @import shiny
-#' @modules modules to be called 
 #' @import shinydashboard
 #'
 #' @export
 
-app_ui <- function(modules){
-  
+app_ui <- function(){
+
   TabItems <- function( ... ){
     args <- list(...)
     vArgs <- c()
@@ -50,16 +49,14 @@ app_ui <- function(modules){
       id = "sidebar_tabs",
       # whisker tag to add sidebar UI
       # {{ADD_MODULE_SIDEBAR}}
-      OptionsSideBarMenu()
     )
   )
 
   body <-  dashboardBody(
-    ChangeThemeOutputUI(),   # Theme: This line will inject the theme options into the right place ####
+    #ChangeThemeOutputUI(),   # Theme: This line will inject the theme options into the right place ####
     TabItems(
       # whisker tag to add module UI
-      # {{ADD_MODULE_SIDEBAR}}
-      OptionsUI()
+      # {{ADD_MODULE_UI}}
     )
   )
   return(dashboardPage(header=header, sidebar=sidebar, body=body))

@@ -2,54 +2,41 @@
 #'
 #' @return home page UI
 #'
-#' 
-#' @import shinydashboard 
+#'
+#' @import shinydashboard
 #' @import shinydashboardPlus
 
 HomeUI <- function(  ){
     strID <- "Welcome"
     ns <- NS( strID )
-    tWelcomeTabItem <- 
-        fluidRow(
-
-            box(
-
-                width = 12,
-                title = "Welcome!",
-                status = "primary",
-                solidHeader = TRUE,
-
-                accordion(
-
-                    # Homepage: About This Application
-                    accordionItem(
-                        includeMarkdown("inst/templates/HomeAbout.Rmd"),
-                        id = 101,
-                        title = "About This Application",
-                        color = "primary",
-                        collapsed = FALSE
-                    ),
-
-                    # Homepage: Acknowledgements
-                    accordionItem(
-                        includeMarkdown("inst/templates/HomeAcknowledgements.Rmd"),
-                        id = 102,
-                        title = "Acknowledgements",
-                        color = "success"
-                    ),
-
-                    # Homepage: Getting Started
-                    accordionItem(
-                        includeMarkdown("inst/templates/HomeGettingStarted.Rmd"),
-                        id = 103,
-                        title = "Getting Started",
-                        color = "danger"
-                    )
-
+    tWelcomeTabItem <-
+        tabItem(
+            tabName="Home",
+            fluidRow(
+                box(
+                    width = 12,
+                    title = "About",
+                    status = "primary",
+                    solidHeader = TRUE,
+                    includeMarkdown("inst/templates/HomeAbout.Rmd"),
+                    id = 101
+                ),
+                box(
+                    width=12,
+                    title="Acknowledgments",
+                    status="success",
+                    solidHeader= TRUE,
+                    includeMarkdown("inst/templates/HomeAcknowledgements.Rmd")
+                ),
+                box(
+                    includeMarkdown("inst/templates/HomeGettingStarted.Rmd"),
+                    id = 103,
+                    title = "Getting Started",
+                    status = "danger",
+                    width=12,
+                    solidHeader= TRUE,
                 )
-
             )
-
         )
     return(tWelcomeTabItem)
 }

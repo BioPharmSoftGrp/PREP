@@ -1,8 +1,10 @@
 #' Theme switcher module UI
 #'
+#' @import dashboardthemes
+#'
 #' @return UI for theme selector
 
-ThemeSwithcherUI <- function(dropDownLabel = "Change Theme", defaultTheme = "grey_light"){
+OptionsThemeSwithcherUI <- function(strID, defaultTheme = "grey_light"){
 
     # Look in the Themes directory and every file there should contain a theme.
     # This code block will add the new themes.
@@ -29,11 +31,11 @@ ThemeSwithcherUI <- function(dropDownLabel = "Change Theme", defaultTheme = "gre
                             "Purple gradient"   = "purple_gradient"    )
 
     #Build the UI components
-    ns <- NS("ThemeSwitcher")
+    ns <- NS(strID)
     ddlTheme <- tagList(
         selectizeInput(
             inputId = ns("dbxChangeTheme"),
-            label = dropDownLabel,
+            label = "Change Theme",
             choices = changeThemeChoices,
             selected = defaultTheme
         )
@@ -52,8 +54,8 @@ ThemeSwithcherUI <- function(dropDownLabel = "Change Theme", defaultTheme = "gre
 #'
 #' @return theme tags
 
-ChangeThemeOutputUI <- function(){
-    ns <- NS("ThemeSwitcher")
+ChangeThemeOutputUI <- function(strID){
+    ns <- NS(strID)
     themeOutput <- tagList(
         uiOutput(ns("uiChangeTheme"))
     )

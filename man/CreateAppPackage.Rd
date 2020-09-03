@@ -9,7 +9,7 @@ CreateAppPackage(
   strName = "newApp",
   strDisplayName = "",
   strAuthors = "",
-  vModuleIDs = c("Home", "Feedback", "Options"),
+  vModuleIDs = c("Home", "Simulation", "Feedback", "Options"),
   bDocumentPackage = TRUE
 )
 }
@@ -25,11 +25,7 @@ CreateAppPackage(
 \item{vModuleIDs}{{list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_{moduleID*}" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See BaSS::add_module() for more detail.}}
 
 \item{bDocumentPackage}{{run devtools:document() on the new package once it is created? TRUE by default}}
-
-\item{strCalculationLibraryName}{{Name of the calculation library (if any)}}
 }
 \description{
 { This function creates a Shiny app as an R Package.  }
-
-{Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.  }
 }

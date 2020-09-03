@@ -2,11 +2,9 @@
 #' @title CreateAppPackage
 #' @description { This function creates a Shiny app as an R Package.  }
 #'
-#' @description {Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.  }
 #' @param strDirectory The directory where the project folder is created.  If this parameter is left blank then the current working directory will be used.
 #' @param strName {The folder where the app saved.}
 #' @param strDisplayName {Display name for the app. strName is used by default}
-#' @param strCalculationLibraryName {Name of the calculation library (if any)}
 #' @param strAuthors {Author Names. Blank by default}
 #' @param vModuleIDs {list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_{moduleID*}" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See BaSS::add_module() for more detail.}
 #' @param bDocumentPackage {run devtools:document() on the new package once it is created? TRUE by default}
@@ -20,7 +18,7 @@ CreateAppPackage <- function(
     strName="newApp",
     strDisplayName="",
     strAuthors="",
-    vModuleIDs=c("Home","Feedback","Options"),
+    vModuleIDs=c("Home","Simulation","Feedback","Options"),
     bDocumentPackage=TRUE
 ){
     #### 0 - Parameter checks
@@ -31,7 +29,6 @@ CreateAppPackage <- function(
     strProjectDirectory <- gsub( "\\\\", "/", strDirectory )
     strTemplateDirectory <- paste( GetTemplateDirectory(), "/AppPkg", sep="" )
     strDestDirectory <- CreateProjectDirectory(strProjectDirectory, strName, TRUE)
-    print(strDestDirectory)
     CopyFiles(strTemplateDirectory, strDestDirectory)
 
     #### 1b - copy shared assets to new project
@@ -75,15 +72,16 @@ CreateAppPackage <- function(
     file.rename( strRProjName, strNewRProjName )
 
     #### 2 - Add Modules to Package
-    for(mod in vModuleIDs){
-        addModule(strModuleID = mod, strPackageDirectory = strDestDirectory, strType="package")
-    }
+    AddModules(vModuleIDs = vModuleIDs, strPackageDirectory = strDestDirectory, strType="package")
+
 
     #### 3 - Update Metadata with Whisker templating
     tags <- list(
         AUTHOR_NAME=strAuthors,
         PACKAGE_NAME=strName,
-        PROJECT_NAME=strDisplayName
+        PROJECT_NAME=strDisplayName,
+        ADD_MODULE_SIDEBAR="{{ADD_MODULE_SIDEBAR}}",
+        ADD_MODULE_UI="{{ADD_MODULE_UI}}"
     )
 
     vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$","app_ui.R") #apply template to these file types

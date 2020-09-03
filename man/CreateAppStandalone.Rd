@@ -8,8 +8,8 @@ CreateAppStandalone(
   strDirectory = getwd(),
   strName = "newApp",
   strDisplayName = "",
-  strCalculationLibraryName = "",
-  strAuthors = ""
+  strAuthors = "",
+  vModuleIDs = c("Home", "Simulation", "Feedback", "Options")
 )
 }
 \arguments{
@@ -19,9 +19,9 @@ CreateAppStandalone(
 
 \item{strDisplayName}{{Display name for the app. strName is used by default}}
 
-\item{strCalculationLibraryName}{{Name of the calculation library (if any)}}
-
 \item{strAuthors}{{Author Names. Blank by default}}
+
+\item{vModuleIDs}{{list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_{moduleID*}" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See BaSS::add_module() for more detail.}}
 }
 \description{
 { This function creates a standalone Shiny app.  }

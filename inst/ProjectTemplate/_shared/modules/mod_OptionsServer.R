@@ -4,7 +4,9 @@
 
 OptionsServer <- function(){
     strID <- "Options"
-    retModule <- function( input, output, session ){}
+    retModule <- function( input, output, session ){
+        OptionsThemeSwitcherServer()
+    }
     retServer <- moduleServer( strID, module = retModule )
     return( retServer )
 }

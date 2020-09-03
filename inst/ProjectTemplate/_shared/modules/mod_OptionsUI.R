@@ -2,14 +2,14 @@
 #' Options Module UI
 #'
 #' @return tabItem() with Option module UI
- 
-OptionsUI <- function(  ){
+
+OptionsUI <- function(){
     strID <- "Options"
     ns    <- NS( strID )
-
-    # Each new option should be created imilar to ThemeSwitcherUI which returns a box with width 4.
+    ChangeThemeOutputUI(ns("ThemeOutput"))
+    # Each new option should be created Similar to ThemeSwitcherUI which returns a box with width 4.
     # This will allow 3 options of width = 4 per row.
-    fldRow <- fluidRow(ThemeSwithcherUI( defaultTheme = "Bold Red"))
+    fldRow <- fluidRow(OptionsThemeSwithcherUI( ns("ThemeSwitcher"), defaultTheme = "Bold Red"))
 
     tabOptions<- tabItem(
         tabName = strID,
