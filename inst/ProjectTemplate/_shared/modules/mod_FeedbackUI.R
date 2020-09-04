@@ -2,6 +2,8 @@
 #'
 #' @param strID
 #'
+#' @import shinyBS
+#' 
 #' @return tabItem() for feedback UI
 
 FeedbackUI <- function(strID="Feedback"){

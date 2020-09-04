@@ -1,6 +1,6 @@
 ---
 title: "Instructions"
-author: "jw"
+author: "{{AUTHOR_NAME}}"
 date: "8/10/2020"
 output: html_document
 ---

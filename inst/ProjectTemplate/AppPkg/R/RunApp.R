@@ -6,7 +6,7 @@
 #'
 #' @export
 
-run_app <- function() {
+RunApp <- function() {
     app <- shinyApp(
         ui =  {
             # Set up aliases for /inst folder
