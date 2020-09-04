@@ -10,23 +10,23 @@
 #' @export
 
 app_ui <- function(){
-
-  TabItems <- function( ... ){
-    args <- list(...)
-    vArgs <- c()
-    for (i in 1:length(args)) {
-      #print( class(args[[i]] ))
-      if (class(args[[i]]) == "shiny.tag"){
-        vArgs <- c(vArgs, args[i])
-      }
-      else if (class(args[[i]]) == "list"){
-        vArgs <- c(vArgs, c(args[[i]]))
-      }
-    }
-    retTabItems <- do.call("tabItems", vArgs)
-
-    return(retTabItems)
-  }
+#
+#   TabItems <- function( ... ){
+#     args <- list(...)
+#     vArgs <- c()
+#     for (i in 1:length(args)) {
+#       #print( class(args[[i]] ))
+#       if (class(args[[i]]) == "shiny.tag"){
+#         vArgs <- c(vArgs, args[i])
+#       }
+#       else if (class(args[[i]]) == "list"){
+#         vArgs <- c(vArgs, c(args[[i]]))
+#       }
+#     }
+#     retTabItems <- do.call("tabItems", vArgs)
+#
+#     return(retTabItems)
+#   }
 
   header <- dashboardHeader(
     title = span(img(src="www/logo.png", height=35), "{{PROJECT_NAME}}"),
@@ -54,7 +54,7 @@ app_ui <- function(){
 
   body <-  dashboardBody(
     #ChangeThemeOutputUI(),   # Theme: This line will inject the theme options into the right place ####
-    TabItems(
+    tabItems(
       # whisker tag to add module UI
       # {{ADD_MODULE_UI}}
     )

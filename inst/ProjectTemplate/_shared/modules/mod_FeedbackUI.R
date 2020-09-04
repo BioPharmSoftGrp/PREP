@@ -44,9 +44,7 @@ FeedbackUI <- function(strID="Feedback"){
 
     )
 
-    tabFeedback <- tabItem(tabName = strID, fldRow)
-
-    return( tabFeedback )
+    return( fldRow )
 }
 
 #' Feedback sidebar item

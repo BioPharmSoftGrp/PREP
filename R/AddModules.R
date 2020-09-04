@@ -16,7 +16,9 @@ AddModules <- function(
     vModuleIDs,
     strPackageDirectory=getwd(),
     strModuleDirectory="",
-    strType="package"
+    strType="package",
+    bUseTab=TRUE,
+    strCustomUITemplate=NULL
 ){
 
     # 0. Parse Parameter Defaults
@@ -75,19 +77,31 @@ AddModules <- function(
     # 3. Update app_ui to call the module UI
     # UI Module Call
 
-    strUI<-paste0(vModuleIDs,'UI()',collapse=", \n")
+    if(is.null(strCustomUITemplate)){
+       strUITemplate <- ifelse(
+        bUseTab,
+        "tabItem(tabName='{{MODULE_ID}}', {{MODULE_ID}}UI())",
+        "{{MODULE_ID}}UI()"
+       )
+    }else{
+        strUITemplate <- strCustomUITemplate
+    }
 
-    strUITemplate <- paste("{{ADD_MODULE_UI}} \n", strUI) #Keep the ADD_MODULE_UI Tag for future modules.
-    strUITemplate<-substr(strUITemplate,1,nchar(strUITemplate)) #remove trailing comma
+    strUI <- "{{ADD_MODULE_UI}}" #Keep the ADD_MODULE_UI Tag for future modules.
+    for(strModuleID in vModuleIDs){
+        strModuleCall <- whisker.render(strUITemplate, list(MODULE_ID=strModuleID))
+        strUI <- paste0(strUI, "\n", strModuleCall,",")
+    }
+    strUI<-substr(strUI,1,nchar(strUI)-1) #remove trailing comma
 
     # Sidebar Module
     strSidebar<-paste0(vModuleIDs, 'SideBarMenu()',collapse =", \n")
-    strSidebarTemplate<-paste("{{ADD_MODULE_SIDEBAR}} \n",strSidebar)
-    strSidebarTemplate<-substr(strSidebarTemplate,1,nchar(strSidebarTemplate)) #remove trailing comma
+    strSidebar<-paste("{{ADD_MODULE_SIDEBAR}} \n",strSidebar)
+    strSidebar<-substr(strSidebar,1,nchar(strSidebar)) #remove trailing comma
 
     # Update app_ui.R
     strAppDir<-ifelse(strType=="package", strDestDirectory, strPackageDirectory)
-    UIParameters<-list(ADD_MODULE_UI=strUITemplate, ADD_MODULE_SIDEBAR=strSidebarTemplate)
+    UIParameters<-list(ADD_MODULE_UI=strUI, ADD_MODULE_SIDEBAR=strSidebar)
     strUIpath <- paste0(strAppDir,"/app_ui.R")
     strUIInput <- readLines(strUIpath)
     strUIRet  <-whisker.render(strUIInput, data=UIParameters)

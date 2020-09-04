@@ -10,8 +10,7 @@
 SimulationUI <- function( ){
     strID<-"Simulation"
     ns <- NS( strID )
-    tab<-tabItem(
-        tabName="Simulation",
+    fldRow<-
         fluidRow(
             box(
                 width = 12,
@@ -47,8 +46,8 @@ SimulationUI <- function( ){
                 downloadButton( ns( "btnPPT" ), "PowerPoint Report")
             )
         )
-    )
-    return(tab)
+    
+    return(fldRow)
 }
 
 

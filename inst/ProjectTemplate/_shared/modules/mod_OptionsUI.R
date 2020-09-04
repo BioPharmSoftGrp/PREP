@@ -11,12 +11,7 @@ OptionsUI <- function(){
     # This will allow 3 options of width = 4 per row.
     fldRow <- fluidRow(OptionsThemeSwithcherUI( ns("ThemeSwitcher"), defaultTheme = "Bold Red"))
 
-    tabOptions<- tabItem(
-        tabName = strID,
-        fldRow
-    )
-
-    return( tabOptions )
+    return( fldRow )
 }
 
 #' Option Sidebar Item

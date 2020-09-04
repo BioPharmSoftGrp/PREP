@@ -9,9 +9,8 @@
 HomeUI <- function(  ){
     strID <- "Welcome"
     ns <- NS( strID )
-    tWelcomeTabItem <-
-        tabItem(
-            tabName="Home",
+    tWelcomerow <-
+
             fluidRow(
                 box(
                     width = 12,
@@ -37,8 +36,8 @@ HomeUI <- function(  ){
                     solidHeader= TRUE,
                 )
             )
-        )
-    return(tWelcomeTabItem)
+        
+    return(tWelcomerow)
 }
 
 #' Side bar menu item for home page
