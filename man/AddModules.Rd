@@ -5,20 +5,35 @@
 \title{AddModules}
 \usage{
 AddModules(
-  vModuleIDs,
+  vModuleIDs = c(),
+  strModuleID = NULL,
   strPackageDirectory = getwd(),
   strModuleDirectory = "",
-  strType = "package"
+  strType = "package",
+  bDashboard = TRUE,
+  strUIWrapperTemplate = NULL,
+  strNewModuleUITemplate = NULL,
+  strNewModuleServerTemplate = NULL
 )
 }
 \arguments{
 \item{vModuleIDs}{IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R".}
+
+\item{strModuleID}{alias for vModuleIDs. Items are merged if both are provided.}
 
 \item{strPackageDirectory}{The directory where the BaSS shiny app located.}
 
 \item{strModuleDirectory}{Location of the Module to be added ot the app. Defaults to inst/_shared/modules.}
 
 \item{strType}{type of application - valid options are "package" and "standalone"}
+
+\item{bDashboard}{should modules be added to a shinyDashboard? If True,  module UI is wrapped in a shinyDashboard::tabItem and a shinyDashboard::menuItem is added. Default: True}
+
+\item{strUIWrapperTemplate}{Wrapper for calling module UI}
+
+\item{strUITemplate}{UI whisker Template to use when creating new Modules}
+
+\item{strServerTemplate}{Server whisker Template to use when creating new Modules}
 }
 \description{
 { This function adds a module to a shiny app created by BaSS.  }

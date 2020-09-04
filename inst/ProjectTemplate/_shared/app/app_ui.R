@@ -48,7 +48,7 @@ app_ui <- function(){
     shinydashboard::sidebarMenu(
       id = "sidebar_tabs",
       # whisker tag to add sidebar UI
-      # {{ADD_MODULE_SIDEBAR}}
+      # {{ADD_FIRST_MODULE_SIDEBAR}}
     )
   )
 
@@ -56,7 +56,7 @@ app_ui <- function(){
     #ChangeThemeOutputUI(),   # Theme: This line will inject the theme options into the right place ####
     tabItems(
       # whisker tag to add module UI
-      # {{ADD_MODULE_UI}}
+      # {{ADD_FIRST_MODULE_UI}}
     )
   )
   return(dashboardPage(header=header, sidebar=sidebar, body=body))

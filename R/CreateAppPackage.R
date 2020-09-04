@@ -80,8 +80,9 @@ CreateAppPackage <- function(
         AUTHOR_NAME=strAuthors,
         PACKAGE_NAME=strName,
         PROJECT_NAME=strDisplayName,
-        ADD_MODULE_SIDEBAR="{{ADD_MODULE_SIDEBAR}}",
-        ADD_MODULE_UI="{{ADD_MODULE_UI}}"
+        ADD_NEW_MODULE_SIDEBAR="{{ADD_NEW_MODULE_SIDEBAR}}",
+        ADD_NEW_MODULE_UI="{{ADD_NEW_MODULE_UI}}"
+
     )
 
     vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$","app_ui.R") #apply template to these file types
