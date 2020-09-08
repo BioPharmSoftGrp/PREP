@@ -45,8 +45,6 @@ SimulationServer <- function(){
         output$btnWord <- downloadHandler(
             filename = function() { paste0("Word", 'Report.docx') },
             content = function(file) {
-                Sys.sleep(0.1)
-                show_modal_progress_line(value = 0.2, text = "Downloading ...") # show the modal window
                 lRes <- list(
                     allDat = list(p = DrawPlot()),
                     ParaValues = data.frame(
@@ -56,16 +54,12 @@ SimulationServer <- function(){
                     Version = "0.2"
                 )
                 rmarkdown::render('inst/templates/WordOutput.Rmd', output_file = file, params = lRes)
-                update_modal_progress(0.9) # update progress bar value
-                Sys.sleep(2)
-                remove_modal_progress() # remove it when done
             }
         )
         
         output$btnPPT <- downloadHandler(
             filename = function() {paste0("PPT", 'Report.pptx')},
             content = function(file) {
-                show_modal_progress_line(value = 0.2, text = "Downloading ...")
                 lRes <-list(
                     allDat = list(p = DrawPlot()),
                     ParaValues = data.frame(
@@ -74,10 +68,7 @@ SimulationServer <- function(){
                     ),
                     Version = "0.2"
                 )
-                rmarkdown::render('inst/templates/PowerPointOutput.Rmd',output_file = file,params = lRes)
-                update_modal_progress(0.9) # update progress bar value
-                Sys.sleep(2)
-                remove_modal_progress() # remove it when done
+                rmarkdown::render('inst/templates/PowerPointOutput.Rmd',output_file = file,params = lRes)            
             }
         )
     }
