@@ -61,7 +61,8 @@ CreateAppPackage <- function(
 
     # Logo
     # TODO - allow user to select an image (using BaSS hex as placeholder for now)
-    strLogoSrc<-paste0(strProjectDirectory,"/docs/logo.png")
+    strLogoSrc<-paste0(strSharedDirectory,"/img/logo.png")
+    print(strLogoSrc)
     dir.create(paste0(strInstDest,"/www"))
     strLogoDest<-paste0(strInstDest,"/www/logo.png")
     file.copy(strLogoSrc,strLogoDest)

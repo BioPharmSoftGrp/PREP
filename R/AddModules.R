@@ -138,7 +138,9 @@ AddModules <- function(
         ADD_FIRST_MODULE_UI=strUI_new,
         ADD_FIRST_MODULE_SIDEBAR=strSidebar_new,
         ADD_NEW_MODULE_UI=strUI,
-        ADD_NEW_MODULE_SIDEBAR=strSidebar
+        ADD_NEW_MODULE_SIDEBAR=strSidebar,
+        PROJECT_NAME="{{PROJECT_NAME}}",
+        AUTHOR_NAME="{{AUTHOR_NAME}}"
     )
     strUIpath <- paste0(strAppDir,"/app_ui.R")
     strUIInput <- readLines(strUIpath)

@@ -10,7 +10,7 @@
 #' @export
 
 app_ui <- function(){
-#
+
 #   TabItems <- function( ... ){
 #     args <- list(...)
 #     vArgs <- c()
@@ -29,7 +29,7 @@ app_ui <- function(){
 #   }
 
   header <- dashboardHeader(
-    title = span(img(src="www/logo.png", height=35), "{{PROJECT_NAME}}"),
+    title = span("{{PROJECT_NAME}}", img(src="www/logo.png", height=35)),
     titleWidth = 300,
 
     ## Drop down menu
