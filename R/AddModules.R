@@ -96,10 +96,7 @@ AddModules <- function(
    if(tolower(strType) =="standalone"){
        strGlobalPath <-  paste0(strPackageDirectory,"/global.R")
        vSources <- paste0('source("inst/modules/',vModuleFiles,'")',collapse="\n")
-       print(vSources)
        strInput <- paste(readLines(strGlobalPath),collapse="\n")
-
-
        strRet  <- paste(strInput,"\n",vSources)
        writeLines( strRet, con = strGlobalPath )
    }
