@@ -68,6 +68,15 @@ AddModules <- function(
             full.names = TRUE
         )
 
+        #Also get file names for update to global.R below.
+        vCurrentFiles <- list.files(
+            strSrcDirectory,
+            pattern = paste0("mod_",strModuleID), #TODO: Update to ignore case conflicts?
+            recursive = TRUE,
+            full.names = FALSE
+        )
+        vModuleFiles <- c(vModuleFiles,vCurrentFiles)
+
         if(length(vCurrentPaths)>0){
             file.copy(from=vCurrentPaths, to=strDestDirectory)
         }else{
@@ -78,23 +87,19 @@ AddModules <- function(
                 strUITemplate = strNewModuleUITemplate,
                 strServerTemplate = strNewModuleServerTemplate
             )
+            vModuleFiles <- c(vModuleFiles,paste0("mod_",strModuleID,"UI.R"),paste0("mod_",strModuleID,"Server.R"))
         }
 
-        #Also get file names for update to global.R below.
-        vCurrentFiles <- list.files(
-            strSrcDirectory,
-            pattern = paste0("mod_",strModuleID), #TODO: Update to ignore case conflicts?
-            recursive = TRUE,
-            full.names = FALSE
-        )
-        vModuleFiles <- c(vModuleFiles,vCurrentFiles)
     }
 
     # 2. If using a standalone package `source()` the modules in global.R
    if(tolower(strType) =="standalone"){
        strGlobalPath <-  paste0(strPackageDirectory,"/global.R")
        vSources <- paste0('source("inst/modules/',vModuleFiles,'")',collapse="\n")
-       strInput <- readLines(strGlobalPath)
+       print(vSources)
+       strInput <- paste(readLines(strGlobalPath),collapse="\n")
+
+
        strRet  <- paste(strInput,"\n",vSources)
        writeLines( strRet, con = strGlobalPath )
    }
