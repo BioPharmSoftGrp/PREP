@@ -61,7 +61,7 @@ CreateAppPackage <- function(
 
     # Logo
     # TODO - allow user to select an image (using BaSS hex as placeholder for now)
-    strLogoSrc<-paste0(strProjectDirectory,"/docs/logo.png")
+    strLogoSrc<-paste0(strSharedDirectory,"/img/logo.png")
     dir.create(paste0(strInstDest,"/www"))
     strLogoDest<-paste0(strInstDest,"/www/logo.png")
     file.copy(strLogoSrc,strLogoDest)
@@ -80,8 +80,9 @@ CreateAppPackage <- function(
         AUTHOR_NAME=strAuthors,
         PACKAGE_NAME=strName,
         PROJECT_NAME=strDisplayName,
-        ADD_MODULE_SIDEBAR="{{ADD_MODULE_SIDEBAR}}",
-        ADD_MODULE_UI="{{ADD_MODULE_UI}}"
+        ADD_NEW_MODULE_SIDEBAR="{{ADD_NEW_MODULE_SIDEBAR}}",
+        ADD_NEW_MODULE_UI="{{ADD_NEW_MODULE_UI}}"
+
     )
 
     vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$","app_ui.R") #apply template to these file types
