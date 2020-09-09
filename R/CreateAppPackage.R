@@ -53,12 +53,6 @@ CreateAppPackage <- function(
     strAppDest<-paste0(strDestDirectory,"/R")
     CopyFiles(strAppSrc,strAppDest)
 
-    # Shiny Modules
-    #TODO - only copy required modules
-    # strModulesSrc<-paste0(strSharedDirectory,"/modules")
-    # strModulesDest<-paste0(strDestDirectory,"/R")
-    # CopyFiles(strModulesSrc,strModulesDest)
-
     # Logo
     # TODO - allow user to select an image (using BaSS hex as placeholder for now)
     strLogoSrc<-paste0(strSharedDirectory,"/img/logo.png")

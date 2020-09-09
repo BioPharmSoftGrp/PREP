@@ -77,7 +77,9 @@ CreateAppStandalone <-
         tags <- list(
             AUTHOR_NAME=strAuthors,
             PACKAGE_NAME=strName,
-            PROJECT_NAME=strDisplayName
+            PROJECT_NAME=strDisplayName,
+            ADD_NEW_MODULE_SIDEBAR="{{ADD_NEW_MODULE_SIDEBAR}}",
+            ADD_NEW_MODULE_UI="{{ADD_NEW_MODULE_UI}}"
         )
 
         vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$", "Global.R") #apply template to these file types
