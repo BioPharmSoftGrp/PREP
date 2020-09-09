@@ -1,10 +1,15 @@
-################################################################################ .
-# Description:
-################################################################################ .
-{{TAB_NAME}}Server <- function( )
+#' {{MODULE_ID}} shiny Server
+#'
+#' @return {{MODULE_ID}} Server
+#'
+#'
+#' @import shinyBS
+#' @import shinydashboardPlus
+#' 
+{{MODULE_ID}}Server <- function( )
 {
     #The strID here must match what is in the UI file.
-    strID     <- "{{TAB_NAME}}"
+    strID     <- "{{MODULE_ID}}"
     retModule <- function( input, output, session ){
 
 

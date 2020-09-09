@@ -1,54 +1,32 @@
-###############################################################################################.
-# The UI Module is setup with several example code blocks for reference, delete as needed ####
-###############################################################################################.
+#' {{MODULE_ID}} shiny UI
+#'
+#' @return {{MODULE_ID}} UI
+#'
+#'
+#' @import shinyBS
+#' @import shinydashboardPlus
+#' 
 
-{{TAB_NAME}}UI <- function(  )
+{{MODULE_ID}}UI <- function(  )
 {
     strID <- "{{MODULE_ID}}"
     ns <- NS( strID )
     #----- Sidebar Tab: {{MODULE_ID}} -----#
-    tTabItem <- tabItem(
-        trow =  "{{MODULE_ID}}",
+    ui_div <- 
+    div(
         fluidRow(
-
             box(
-
                 width = 12,
                 title = "ENTER TITLE",
                 status = "primary",
                 solidHeader = TRUE,
 
-                ###############################################################################################.
-                # Example Code 1 - Option 1  Included for a reference, delete as needed ####
-                ###############################################################################################.
-
-                accordion(
-
-
-                    # Accordion items allow one item at a time to be exampnded
-                    # This example loads a markdown file from text/HomeAbout.Rmd
-                    accordionItem(
-                        includeMarkdown("text/HomeAbout.Rmd"),
-                        id = ns( "101" ),
-                        title = "About This Application",
-                        color = "primary"
-                    ),
-
-                    # Homepage: Acknowledgements
-                    accordionItem(
-                        includeMarkdown("text/HomeAcknowledgements.Rmd"),
-                        id = ns( "102" ),
-                        title = "Acknowledgements",
-                        color = "success"
-                    )
+                span("[Summary text goes here]")
 
                 )  # End Example Code Option 1
+            ),
 
-
-
-            )
-
-        ),
+   
 
         ###############################################################################################.
         # Example Code 2 - This example includes a 2 tabs with a progress bar updating (see the server side) ####
@@ -109,19 +87,7 @@
                 htmlOutput(outputId = ns( "progress") ), "Progress", icon = icon("users"), color = "purple"
             )
         )
-
-
-    return(trow)
-
-}
-{{TAB_NAME}}SideBarMenu <- function( ){
-    #----- Sidebar Tab #1:{{TAB_NAME_WITH_SPACES}} -----####
-
-    retMenuItem <- menuItem(
-        text    = "{{TAB_NAME_WITH_SPACES}}",
-        tabName = "{{TAB_NAME}}",
-        icon    = icon("home")
     )
 
-    return( retMenuItem )
+    return(ui_div)
 }
