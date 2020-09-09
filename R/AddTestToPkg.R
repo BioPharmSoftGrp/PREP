@@ -32,9 +32,9 @@ AddTestToPkg <- function(  strTestFileName )
         bTestFileExists     <- file.exists( strTestFileNameFull )
     }
 
-    strTemplateFloder <- GetTemplateDirectory( "Templates" )
+    strTemplateFloder <- GetTemplateDirectory( "library" )
 
-    strTestFunctionTemplateFile <- paste( strTemplateFloder, "/",  "TestFunctionTemplate.R", sep="")
+    strTestFunctionTemplateFile <- paste( strTemplateFloder, "/pkg/TestFunctionTemplate.R", sep="")
 
     bTestFileCoppied   <- file.copy( strTestFunctionTemplateFile, strTestFileNameFull )
 

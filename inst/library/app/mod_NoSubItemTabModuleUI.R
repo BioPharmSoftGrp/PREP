@@ -4,11 +4,11 @@
 
 {{TAB_NAME}}UI <- function(  )
 {
-    strID <- "{{TAB_NAME}}"
+    strID <- "{{MODULE_ID}}"
     ns <- NS( strID )
-    #----- Sidebar Tab: {{TAB_NAME}} -----#
+    #----- Sidebar Tab: {{MODULE_ID}} -----#
     tTabItem <- tabItem(
-        tabName =  "{{TAB_NAME}}",
+        trow =  "{{MODULE_ID}}",
         fluidRow(
 
             box(
@@ -110,8 +110,8 @@
             )
         )
 
-    )
-    return(tTabItem)
+
+    return(trow)
 
 }
 {{TAB_NAME}}SideBarMenu <- function( ){

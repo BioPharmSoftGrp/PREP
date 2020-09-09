@@ -1,9 +1,3 @@
----
-title: "Instructions"
-author: "{{AUTHOR_NAME}}"
-date: "8/10/2020"
-output: html_document
----
 ## Biopharm pAckage Shared Software - Project Creation
 The purpose of this document is to outline the important aspects of the projects that were created.  
 

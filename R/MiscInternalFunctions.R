@@ -4,7 +4,7 @@
 ################################################################################ .
 
 # This function will look in the directory where the BaSS package is installed for the strTemplateFolder
-GetTemplateDirectory <- function( strTemplateFolder = "ProjectTemplate")
+GetTemplateDirectory <- function( strTemplateFolder = "Templates")
 {
     strPackageTemplateDirectory <- "BaSS"
     strTemplateDirectory        <- system.file( strTemplateFolder, package = strPackageTemplateDirectory)

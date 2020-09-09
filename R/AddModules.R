@@ -10,8 +10,9 @@
 #' @param strType type of application - valid options are "package" and "standalone"
 #' @param bDashboard should modules be added to a shinyDashboard? If True,  module UI is wrapped in a shinyDashboard::tabItem and a shinyDashboard::menuItem is added. Default: True
 #' @param strUIWrapperTemplate Wrapper for calling module UI
-#' @param strUITemplate UI whisker Template to use when creating new Modules
-#' @param strServerTemplate Server whisker Template to use when creating new Modules
+#' @param strNewModuleUITemplate UI whisker Template to use when creating new Modules
+#' @param strNewModuleServerTemplate Server whisker Template to use when creating new Modules
+#' @param lNewModuleCustomParameters List of Custom Parameters for new modules
 #'
 #' @importFrom devtools build document
 #' @importFrom whisker whisker.render
@@ -28,7 +29,8 @@ AddModules <- function(
     bDashboard=TRUE,
     strUIWrapperTemplate=NULL,
     strNewModuleUITemplate=NULL,
-    strNewModuleServerTemplate=NULL
+    strNewModuleServerTemplate=NULL,
+    lNewModuleCustomParameters=NULL
 ){
 
     # 0. Parse Parameter Defaults
@@ -85,7 +87,8 @@ AddModules <- function(
                 strModuleID=strModuleID,
                 strDestDirectory=strDestDirectory,
                 strUITemplate = strNewModuleUITemplate,
-                strServerTemplate = strNewModuleServerTemplate
+                strServerTemplate = strNewModuleServerTemplate,
+                lCustomParameters= lNewModuleCustomParameters
             )
             vModuleFiles <- c(vModuleFiles,paste0("mod_",strModuleID,"UI.R"),paste0("mod_",strModuleID,"Server.R"))
         }
