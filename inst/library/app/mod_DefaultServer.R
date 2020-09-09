@@ -5,32 +5,12 @@
 #'
 #' @import shinyBS
 #' @import shinydashboardPlus
-#' 
+#'
 {{MODULE_ID}}Server <- function( )
 {
     #The strID here must match what is in the UI file.
     strID     <- "{{MODULE_ID}}"
     retModule <- function( input, output, session ){
-
-
-        ## Enter any observer events here  - The code block provides an example using a progress updater
-        observeEvent( input$btnSimulate ,{
-
-            updateButton( session, inputId= "btnSimulate", label="Simulations Running", style = "danger",  size="large", disabled = TRUE)
-
-            #Don't need the next part just an example of how to display the progress bar
-            withProgress(message = 'Calculation in progress',
-                         detail = 'This may take a while...', value = 0, {
-                             for (i in 1:15) {
-                                 incProgress(1/15)
-                                 Sys.sleep(0.25)
-                             }
-                         })
-            x1<- rnorm( input$nN1 )
-            updateButton(session, inputId = "btnSimulate" , label="Run Simulation", style = "success",  size="large", disabled = FALSE)
-            output$ctrlPlotOCs <- renderPlot({ plot( density( x1 ), type='l', main=paste("N = ", input$nN1,sep="") ) } )
-
-        } )
 
         output$orderNum <- renderText({
             prettyNum(input$orders, big.mark=",")
