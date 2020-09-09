@@ -4,7 +4,6 @@
 #' @description { This function adds a module to a shiny app created by BaSS.  }
 #'
 #' @param vModuleIDs IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R".
-#' @param strModuleID alias for vModuleIDs. Items are merged if both are provided.
 #' @param strPackageDirectory The directory where the BaSS shiny app located.
 #' @param strModuleDirectory Location of the Module to be added ot the app. Defaults to inst/_shared/modules.
 #' @param strType type of application - valid options are "package" and "standalone"
@@ -22,7 +21,6 @@
 
 AddModules <- function(
     vModuleIDs=c(),
-    strModuleID=NULL,
     strPackageDirectory=getwd(),
     strModuleDirectory="",
     strType="package",
@@ -34,10 +32,6 @@ AddModules <- function(
 ){
 
     # 0. Parse Parameter Defaults
-    if(!is.null(strModuleID)){
-        vModuleIDs <- c(vModuleIDs,strModuleID)
-    }
-
     stopifnot(
         length(vModuleIDs)>0,
         all(nchar(vModuleIDs)>0),
@@ -121,25 +115,26 @@ AddModules <- function(
     #TODO: allow custom sidebar
     strSidebarTemplate<-"menuItem(text = '{{MODULE_ID}}', tabName = '{{MODULE_ID}}', icon = icon('angle-right'))"
 
-    strUI <- "{{ADD_NEW_MODULE_UI}}" #Keep the ADD_MODULE_UI Tag for future modules.
-    strSidebar<- "{{ADD_NEW_MODULE_SIDEBAR}}"
+    strUI <- ""
+    strSidebar<- ""
     for(strModuleID in vModuleIDs){
         strModuleCall <- whisker.render(strUIWrapperTemplate, list(MODULE_ID=strModuleID))
-        strUI <- paste0(strUI, "\n", strModuleCall,",")
-
+        strUI <- paste0(strUI, "\n,", strModuleCall)
         strSidebarCall<- whisker.render(strSidebarTemplate, list(MODULE_ID=strModuleID))
-        strSidebar<-paste0(strSidebar, "\n", strSidebarCall,",")
-    }
+        strSidebar<-paste0(strSidebar, "\n,", strSidebarCall)
 
-    strUI_new<-substr(strUI,1,nchar(strUI)-1) #remove trailing comma
-    strSidebar_new<-substr(strSidebar,1,nchar(strSidebar)-1) #remove trailing comma
+    }
+    strUI <- paste0(strUI,"\n #{{ADD_NEW_MODULE_UI}}") #Keep the ADD_MODULE_UI Tag for future modules.
+    strSidebar<- paste0(strSidebar,"\n #{{ADD_NEW_MODULE_SIDEBAR}}")
+    strUI_first<-paste0("\n",substr(strUI,3,nchar(strUI))) #hack to leading comma when initializing app
+    strSidebar_first<-paste0("\n",substr(strSidebar,3,nchar(strSidebar)))
 
     # Update app_ui.R
     strAppDir<-ifelse(strType=="package", strDestDirectory, strPackageDirectory)
     #NOTE - _FIRST vs. _NEW is needed to deal with trailing commas :/
     UIParameters<-list(
-        ADD_FIRST_MODULE_UI=strUI_new,
-        ADD_FIRST_MODULE_SIDEBAR=strSidebar_new,
+        ADD_FIRST_MODULE_UI=strUI_first,
+        ADD_FIRST_MODULE_SIDEBAR=strSidebar_first,
         ADD_NEW_MODULE_UI=strUI,
         ADD_NEW_MODULE_SIDEBAR=strSidebar,
         PROJECT_NAME="{{PROJECT_NAME}}",

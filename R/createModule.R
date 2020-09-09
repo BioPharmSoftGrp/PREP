@@ -2,8 +2,8 @@
 #'
 #' @param strModuleID Module ID
 #' @param strDestDirectory Directory to save new files
-#' @param strUITemplate Module Template Path.
-#' @param strServerTemplate Module Template Path.
+#' @param strUITemplate Module UI Template
+#' @param strServerTemplate Module Server Template
 #'
 #' @import whisker
 #'
@@ -16,20 +16,16 @@ CreateModule <- function(
     strServerTemplate=NULL,
     lCustomParameters=list()){
 
-    #Simple Default Templates
+    #Set Default Templates
+    strTemplatePath<-paste0(GetTemplateDirectory("library"),"/app/")
     if(is.null(strUITemplate)){
-        strUITemplate<-"{{MODULE_ID}}UI <- function(){
-        return(span('placeholder for {{MODULE_ID}} module'))
-        }"
+        uiPath<-paste0(strTemplatePath,"mod_DefaultUI.R")
+        strUITemplate<-paste(readLines(uiPath),collapse="\n")
     }
 
     if(is.null(strServerTemplate)){
-        strServerTemplate<-"{{MODULE_ID}}Server <- function(){
-        strID     <- '{{MODULE_ID}}';
-        retModule <- function( input, output, session ){}
-        retServer <- moduleServer( strID, module = retModule )
-        return( retServer )
-        }"
+        serverPath<-paste0(strTemplatePath,"mod_DefaultServer.R")
+        strServerTemplate<-paste(readLines(serverPath),collapse="\n")
     }
 
     #Merge in custom paramaters (if any)
