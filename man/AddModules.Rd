@@ -13,7 +13,8 @@ AddModules(
   bDashboard = TRUE,
   strUIWrapperTemplate = NULL,
   strNewModuleUITemplate = NULL,
-  strNewModuleServerTemplate = NULL
+  strNewModuleServerTemplate = NULL,
+  lNewModuleCustomParameters = NULL
 )
 }
 \arguments{
@@ -31,9 +32,11 @@ AddModules(
 
 \item{strUIWrapperTemplate}{Wrapper for calling module UI}
 
-\item{strUITemplate}{UI whisker Template to use when creating new Modules}
+\item{strNewModuleUITemplate}{UI whisker Template to use when creating new Modules}
 
-\item{strServerTemplate}{Server whisker Template to use when creating new Modules}
+\item{strNewModuleServerTemplate}{Server whisker Template to use when creating new Modules}
+
+\item{lNewModuleCustomParameters}{List of Custom Parameters for new modules}
 }
 \description{
 { This function adds a module to a shiny app created by BaSS.  }
