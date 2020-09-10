@@ -10,16 +10,17 @@
 #' @param strFunctionName The name of the function to add.
 #' @param strFunctionDescription A description to include at the top of the file with the function.
 #' @param strPkgDir The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.
+#' @param strFunctionTemplatePath Path to a function template. /inst/Templates/FunctionTemplate.R used as default.
+#' @param stTestTemplatePath Path to a test template. /inst/Templates/TestTemplate.R.
 #' @export
-AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", strPkgDir = "" )
+AddFunctionToPkg <- function(
+    strFunctionName="MyNewFunction",
+    strFunctionDescription = "Add Description",
+    strPkgDir = getwd(),
+    strFunctionTemplate=NULL,
+    strTestTemplate=NULL
+    )
 {
-
-    if( !Provided( strPkgDir) )
-        strPkgDir <- getwd()
-
-    if( !Provided( strFunctionDescription ) )
-        strFunctionDescription <- "Add Description"
-
     strFileName <- paste( strPkgDir, "/R/", strFunctionName, ".R", sep ="" )
 
     # Create the file name
@@ -32,7 +33,6 @@ AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", str
         strFileName <- paste( strPkgDir, "/R/", strFunctionName, nIndex, ".R", sep ="" )
         bFileExists <- file.exists( strFileName )
     }
-
 
     #Verify that the test function file does not exist
     strTestFileName <- paste( strPkgDir, "/tests/testthat/test-", strFunctionName,  ".R", sep ="" )
@@ -47,10 +47,20 @@ AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", str
         bTestFileExists <- file.exists( strTestFileName )
     }
 
-    strTemplateFolder <- GetTemplateDirectory( "Templates" )
+    strTemplateFolder <- GetTemplateDirectory( "library" )
 
-    strFunctionTemplateFile     <- paste( strTemplateFolder, "/", "FunctionTemplate.R", sep="")
-    strTestFunctionTemplateFile <- paste( strTemplateFolder, "/",  "TestFunctionTemplate.R", sep="")
+
+    strFunctionTemplateFile     <- ifelse(
+        is.null(strFunctionTemplate),
+        paste( strTemplateFolder, "/pkg/FunctionTemplate.R", sep=""),
+        strFunctionTemplate
+    )
+    strTestFunctionTemplateFile <- ifelse(
+        is.null(strTestTemplate),
+        paste( strTemplateFolder, "/pkg/TestFunctionTemplate.R", sep=""),
+        strTestTemplate
+    )
+
 
     bFileCoppied       <- file.copy( strFunctionTemplateFile, strFileName )
     bTestFileCoppied   <- file.copy( strTestFunctionTemplateFile, strTestFileName )
@@ -58,17 +68,15 @@ AddFunctionToPkg <- function(  strFunctionName, strFunctionDescription = "", str
     strToday           <- format(Sys.Date(), format="%m/%d/%Y")
 
     # Replace the TAGS in the coppied files
-    strFileLines       <- readLines( strFileName )
-    strFileLines       <- gsub( "_FUNCTION_NAME_", strFunctionName, strFileLines )
-    strFileLines       <- gsub( "_FILE_DESCRIPTION_", strFunctionDescription, strFileLines )
-    strFileLines       <- gsub( "_CREATION_DATE_", strToday, strFileLines )
-    writeLines( strFileLines, con = strFileName )
 
-    strFileLines       <- readLines( strTestFileName )
-    strFileLines       <- gsub( "_FUNCTION_NAME_", strFunctionName, strFileLines )
-    strFileLines       <- gsub( "_FILE_NAME_", strFunctionName, strFileLines )
-    strFileLines       <- gsub( "_CREATION_DATE_", strToday, strFileLines )
-    writeLines( strFileLines, con = strTestFileName )
+    vTags    <- c("FUNCTION_NAME", "FILE_DESCRIPTION", "CREATION_DATE")
+    vReplace <- c(strFunctionName, strFunctionDescription, strToday)
+    ReplaceTagsInFile( strFileName, vTags, vReplace )
+
+    vTags    <- c("FUNCTION_NAME", "FILE_NAME", "CREATION_DATE")
+    vReplace <- c(strFunctionName, strFunctionName, strToday)
+    ReplaceTagsInFile( strTestFileName, vTags, vReplace )
+
 
     strRet <- "The following file(s) were created: "
 

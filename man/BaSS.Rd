@@ -15,6 +15,7 @@ the Shiny app utiizes the R package.
 Authors:
 \itemize{
   \item Nan Chen \email{nchen4@gmail.com} [contributor]
+  \item Jeremy Wildfire \email{jwildfire@gmail.com} [contributor]
 }
 
 }

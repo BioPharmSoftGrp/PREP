@@ -8,6 +8,13 @@
 
 <title>AddNewTabToApp — AddNewTabToApp • BaSS</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -43,6 +50,7 @@
 <meta property="og:description" content="This funciton will add a new tab to the Shiny App. This function assumes that the working directory
 is the main directory of the Shiny app created by this package.  This function creates a module file for the UI and the Server in the Modules directory
 of the app, it alters the ShinyUI.R file to insert the calls to  modules so the tab is added to the UI." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -74,7 +82,7 @@ of the app, it alters the ShinyUI.R file to insert the calls to  modules so the 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -106,6 +114,9 @@ of the app, it alters the ShinyUI.R file to insert the calls to  modules so the 
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
+</li>
+<li>
+  <a></a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -139,7 +150,11 @@ is the main directory of the Shiny app created by this package.  This function c
 of the app, it alters the ShinyUI.R file to insert the calls to  modules so the tab is added to the UI.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>AddNewTabToApp</span>(<span class='no'>strTabName</span>, <span class='kw'>vSubMenuItemNames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>AddNewTabToApp</span>(
+  <span class='no'>strTabName</span>,
+  <span class='kw'>vSubMenuItemNames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>strTemplate</span> <span class='kw'>=</span> <span class='st'>"NoSubItemTabModule"</span>
+)</pre>
 
 
 
@@ -154,11 +169,11 @@ of the app, it alters the ShinyUI.R file to insert the calls to  modules so the 
 
       <footer>
       <div class="copyright">
-  <p>Developed by The package maintainer.</p>
+  <p>Developed by J. Kyle Wathen, Nan Chen, Jeremy Wildfire.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

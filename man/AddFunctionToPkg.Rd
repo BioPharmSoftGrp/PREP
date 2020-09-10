@@ -4,7 +4,13 @@
 \alias{AddFunctionToPkg}
 \title{AddFunctionToPkg}
 \usage{
-AddFunctionToPkg(strFunctionName, strFunctionDescription = "", strPkgDir = "")
+AddFunctionToPkg(
+  strFunctionName = "MyNewFunction",
+  strFunctionDescription = "Add Description",
+  strPkgDir = getwd(),
+  strFunctionTemplate = NULL,
+  strTestTemplate = NULL
+)
 }
 \arguments{
 \item{strFunctionName}{The name of the function to add.}
@@ -12,8 +18,12 @@ AddFunctionToPkg(strFunctionName, strFunctionDescription = "", strPkgDir = "")
 \item{strFunctionDescription}{A description to include at the top of the file with the function.}
 
 \item{strPkgDir}{The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.}
+
+\item{strFunctionTemplatePath}{Path to a function template. /inst/Templates/FunctionTemplate.R used as default.}
+
+\item{stTestTemplatePath}{Path to a test template. /inst/Templates/TestTemplate.R.}
 }
 \description{
-{ Add a new function named strFunctionName to a package.  This function creates a file names R/strFunctionName.R
+{ Add a new function named strFunctionName to a package.  This function creates a file named R/strFunctionName.R
 and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package. }
 }
