@@ -6,10 +6,9 @@
 #' @import shinydashboardPlus
 #'
 
-{{MODULE_ID}}UI <- function(  )
+{{MODULE_ID}}UI <- function( id="{{MODULE_ID}}" )
 {
-    strID <- "{{MODULE_ID}}"
-    ns <- NS( strID )
+    ns <- NS( id )
     #----- Sidebar Tab: {{MODULE_ID}} -----#
     ui_div <-
     div(

@@ -4,9 +4,9 @@
 #'
 #' @return
 
-HomeServer <- function( strID="Home" ){
+HomeServer <- function( id="Home" ){
     retModule <- function( input, output, session ){}
-    retServer <- moduleServer( strID, module = retModule )
+    retServer <- moduleServer( id, module = retModule )
     return( retServer )
 }
 

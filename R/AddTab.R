@@ -26,11 +26,12 @@ AddTab<-function(strModuleID, strType="package", vSubtabIDs=c()){
     strServerTemplate <- paste(strServerTemplate, collapse="\n")
     
     #Set up custom template if using subtabs
+    
     lCustomParameters <- ""
     if(bHasSubtabs){
-        strUIWrapper <- "tabItem(tabName='{{MODULE_ID}}_{{SUBMODULE_ID}}', {{MODULE_ID}}_{{SUBMODULE_ID}}UI())"
+        strUIWrapper <- "tabItem(tabName='{{MODULE_ID}}_{{SUBMODULE_ID}}', {{MODULE_ID}}_{{SUBMODULE_ID}}UI(id='{{MODULE_ID}}_{{SUBMODULE_ID}}'))"
         strSidebarWrapper <-"menuSubItem(text='{{SUBMODULE_ID}}', tabName='{{MODULE_ID}}_{{SUBMODULE_ID}}')"
-        strServerWrapper <- "{{MODULE_ID}}_{{SUBMODULE_ID}}Server()"
+        strServerWrapper <- "{{MODULE_ID}}_{{SUBMODULE_ID}}Server(id='{{MODULE_ID}}_{{SUBMODULE_ID}}')"
         
         strUI<-""
         strSidebar<-""
@@ -44,26 +45,24 @@ AddTab<-function(strModuleID, strType="package", vSubtabIDs=c()){
         }
         strUI <- substr(strUI, 1, nchar(strUI)-2)
         strSidebar <- substr(strSidebar, 1, nchar(strSidebar)-2)
-        lCustomParameters <-  list(
-            ADD_SUBTAB_UI= strUI, 
-            ADD_SUBTAB_SIDEBAR = strSidebar, 
-            ADD_SUBTAB_SERVER = strServer #update AddModules to be more flexible regarding custom menu items - this is probably the hardest part ... 
-        )
+        strSidebar <- paste0("menuItem(text='",strModuleID,"',tabName='",strModuleID,"',icon = icon('calculator'),",strSidebar,")")
     }
-
 
     # Create module that then calls the submodules
     AddModules(
         vModuleIDs=c(strModuleID), 
         strType=strType,
-        strNewModuleUITemplate=strUITemplate,
-        strNewModuleServerTemplate=strServerTemplate,
-        bDashboard=TRUE, #NOTE: Required for the AddTab() function. 
-        lNewModuleCustomParameters=lCustomParameters
+        strUIWrapper=strUI,
+        strSidebarWrapper=strSidebar,
+        strServerWrapper=strServer,
+        strUITemplate=strUITemplate,
+        strServerTemplate=strServerTemplate,
+        bDashboard=TRUE #NOTE: Required for the AddTab() function. 
     )
 
     #Create subtabs from the standard template (or we can make an option that supports custom templates
     for(strSubModuleID in vSubtabIDs){
-        CreateModule(strModuleID=paste0(strModuleID,"_",strSubModuleID))
+        CreateModule(strModuleID=
+        paste0(strModuleID,"_",strSubModuleID))
     }
 }

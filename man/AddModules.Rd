@@ -6,21 +6,20 @@
 \usage{
 AddModules(
   vModuleIDs = c(),
-  strModuleID = NULL,
   strPackageDirectory = getwd(),
   strModuleDirectory = "",
   strType = "package",
   bDashboard = TRUE,
-  strUIWrapperTemplate = NULL,
-  strNewModuleUITemplate = NULL,
-  strNewModuleServerTemplate = NULL,
-  lNewModuleCustomParameters = NULL
+  strUIWrapper = NULL,
+  strSidebarWrapper = NULL,
+  strServerWrapper = NULL,
+  strUITemplate = NULL,
+  strServerTemplate = NULL,
+  lCustomParameters = NULL
 )
 }
 \arguments{
 \item{vModuleIDs}{IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R".}
-
-\item{strModuleID}{alias for vModuleIDs. Items are merged if both are provided.}
 
 \item{strPackageDirectory}{The directory where the BaSS shiny app located.}
 
@@ -30,13 +29,17 @@ AddModules(
 
 \item{bDashboard}{should modules be added to a shinyDashboard? If True,  module UI is wrapped in a shinyDashboard::tabItem and a shinyDashboard::menuItem is added. Default: True}
 
-\item{strUIWrapperTemplate}{Wrapper for calling module UI}
+\item{strUIWrapper}{Wrapper for calling module UI}
 
-\item{strNewModuleUITemplate}{UI whisker Template to use when creating new Modules}
+\item{strSidebarWrapper}{Wrapper for calling sidebar UI}
 
-\item{strNewModuleServerTemplate}{Server whisker Template to use when creating new Modules}
+\item{strServerWrapper}{Wrapper for calling UI code}
 
-\item{lNewModuleCustomParameters}{List of Custom Parameters for new modules}
+\item{strUITemplate}{UI whisker Template to use when creating new Modules}
+
+\item{strServerTemplate}{Server whisker Template to use when creating new Modules}
+
+\item{lCustomParameters}{List of Custom Parameters for new modules}
 }
 \description{
 { This function adds a module to a shiny app created by BaSS.  }

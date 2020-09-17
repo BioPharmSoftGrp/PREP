@@ -3,10 +3,9 @@
 #'
 #' @return moduleServer for simulation module - currently an empty shell
 
-SimulationServer <- function(){
-    strID <- "Simulation"
+SimulationServer <- function(id="simulation"){
     retModule <- function( input, output, session){
-  lDataValues <- reactiveValues(dfAll = NULL)
+        lDataValues <- reactiveValues(dfAll = NULL)
         
         observeEvent( input$btnSimulate , {
             
@@ -72,7 +71,7 @@ SimulationServer <- function(){
             }
         )
     }
-    retServer <- moduleServer( strID, module = retModule )
+    retServer <- moduleServer( id, module = retModule )
     return( retServer )
 }
 

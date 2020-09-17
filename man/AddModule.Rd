@@ -9,7 +9,7 @@ AddModule(strModuleID, strType = "package")
 \arguments{
 \item{strModuleID}{ID for new module}
 
-\item{bType}{Type of application. Valid options are 'standalone' or 'package'.}
+\item{strType}{Type of application. Valid options are 'standalone' or 'package'.}
 }
 \description{
 { This function quickly adds a module to the current app using the default parameters. Use addModules() when additional customization is needed.   }

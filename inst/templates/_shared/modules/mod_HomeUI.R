@@ -6,11 +6,9 @@
 #' @import shinydashboard
 #' @import shinydashboardPlus
 
-HomeUI <- function(  ){
-    strID <- "Welcome"
-    ns <- NS( strID )
+HomeUI <- function(id="home"){
+    ns <- NS( id )
     tWelcomerow <-
-
             fluidRow(
                 box(
                     width = 12,
@@ -39,15 +37,3 @@ HomeUI <- function(  ){
         
     return(tWelcomerow)
 }
-
-#' Side bar menu item for home page
-#'
-#' @importFrom shinydashboard menuItem
-#'
-#' @return menuItem
-
-HomeSideBarMenu <- function( ){
-    retMenuItem <- menuItem(text = "Home", tabName = "Home", icon = icon("home"))
-    return( retMenuItem )
-}
-

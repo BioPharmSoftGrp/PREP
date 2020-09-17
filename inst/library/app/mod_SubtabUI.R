@@ -5,29 +5,9 @@
 #' @import shinyBS
 #' @import shinydashboardPlus
 #'
-{{MODULE_ID}}UI <- function(  )
+{{MODULE_ID}}UI <- function( id="{{MODULE_ID}}"  )
 {
-    lRet <-  list( {{ADD_SUBTAB_UI}}   )
+    ns <- NS(id)
+    lRet <-  list( )
     return( lRet )
 }
-
-#' {{MODULE_ID}} sidebar UI
-#'
-#' @return {{MODULE_ID}} sidebar UI
-#'
-#' @import shinyBS
-#' @import shinydashboardPlus
-#'
-
-{{MODULE_ID}}SideBarMenu <- function( )
-{
-    retMenuItem <- menuItem(
-        text    = "{{MODULE_ID}}",
-        tabName = "{{MODULE_ID}}",
-        icon = icon("calculator"),
-
-        {{ADD_SUBTAB_SIDEBAR}}
-    )
-    return( retMenuItem )
-}
-

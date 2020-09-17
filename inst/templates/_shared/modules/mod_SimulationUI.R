@@ -7,9 +7,8 @@
 #' @return shiny module
 #'
 
-SimulationUI <- function( ){
-    strID<-"Simulation"
-    ns <- NS( strID )
+SimulationUI <- function(id="simulation"){
+    ns <- NS( id )
     fldRow<-
         fluidRow(
             box(
@@ -48,19 +47,4 @@ SimulationUI <- function( ){
         )
     
     return(fldRow)
-}
-
-
-#' Simulation shiny module sidebar
-#'
-#' @return shinydashboard::menuItem() for the simulation module
-
-SimulationSideBarMenu <- function( ){
-    retMenuItem <-  menuItem(
-        text    = "Simulation",
-        tabName = "Simulation",
-        icon    = icon("cogs")
-    )
-
-    return(retMenuItem)
 }

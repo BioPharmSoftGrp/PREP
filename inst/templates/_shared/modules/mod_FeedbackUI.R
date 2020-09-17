@@ -6,9 +6,9 @@
 #' 
 #' @return tabItem() for feedback UI
 
-FeedbackUI <- function(strID="Feedback"){
+FeedbackUI <- function(id="feedback"){
 
-    ns <- NS( strID )
+    ns <- NS( id )
     fldRow <- fluidRow(
         box(
             width = 12,
@@ -27,14 +27,14 @@ FeedbackUI <- function(strID="Feedback"){
             conditionalPanel(
                 condition ="input.selType =='Other'",
                 textInput( inputId = ns("txtOther"), value = "Other Reason, please specify", label = NULL  ),
-                ns = NS( strID )
+                ns = NS("other")
             ),
 
             conditionalPanel(
                 condition ="input.selType =='Bug report'",
                 selectInput( inputId = ns("selBugLevel"), label = "Bug Severity",
                              choices = c( "Please select..", "1 - Low impact, minor issue", "2 - Medium Impact", "3 - Major impact or incorrect results") ),
-                ns = NS( strID )
+                ns = NS("bug")
             ),
 
             textAreaInput( inputId = ns("strFeedback"), value="", label="Feedback Details", rows=10 ),
@@ -46,14 +46,3 @@ FeedbackUI <- function(strID="Feedback"){
 
     return( fldRow )
 }
-
-#' Feedback sidebar item
-#'
-#' @return menuItem() for feedback
-#' @export
-
-FeedbackSideBarMenu <- function( ){
-    retMenuItem <- menuItem(text = "Feedback", tabName = "Feedback", icon = icon("envelope-square"))
-    return( retMenuItem )
-}
-

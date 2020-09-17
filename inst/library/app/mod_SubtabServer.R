@@ -2,16 +2,11 @@
 #'
 #' @return {{MODULE_ID}} Server
 #'
-#'
-#' @import shinyBS
-#' @import shinydashboardPlus
-#' 
-{{MODULE_ID}}Server <- function(id)
+
+{{MODULE_ID}}Server <- function(id="{{MODULE_ID}}")
 {
     retModule <- function( input, output, session ){}
 
-    {{ADD_SUBTAB_SERVER}}
-
-    retServer <- moduleServer( strID, module = retModule )
+    retServer <- moduleServer( id, module = retModule )
     return( retServer )
 }

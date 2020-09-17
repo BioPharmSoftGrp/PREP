@@ -4,10 +4,12 @@
 \alias{AddTab}
 \title{AddTab}
 \usage{
-AddTab(strModuleID, strType = "package")
+AddTab(strModuleID, strType = "package", vSubtabIDs = c())
 }
 \arguments{
 \item{strModuleID}{ID for new module}
+
+\item{vSubtabIDs}{IDs for the sub tabs}
 
 \item{bType}{Type of application. Valid options are 'standalone' or 'package'.}
 }
