@@ -53,7 +53,7 @@ app_ui <- function(){
   )
 
   body <-  dashboardBody(
-    #ChangeThemeOutputUI(),   # Theme: This line will inject the theme options into the right place ####
+    uiOutput("theme"), #inserts theme if options tab is present
     tabItems(
       # whisker tag to add module UI
       # {{ADD_FIRST_MODULE_UI}}

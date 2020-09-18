@@ -4,7 +4,11 @@
 
 OptionsServer <- function(id="options"){
     retModule <- function( input, output, session ){
-        OptionsThemeSwitcherServer()
+        return(
+            list(
+                theme=OptionsThemeSwitcherServer()
+            )
+        )
     }
     retServer <- moduleServer( id, module = retModule )
     return( retServer )
