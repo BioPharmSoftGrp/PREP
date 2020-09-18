@@ -27,7 +27,9 @@ AddTab<-function(strModuleID, strType="package", vSubtabIDs=c()){
     
     #Set up custom template if using subtabs
     
-    lCustomParameters <- ""
+    strUI<-NULL
+    strSidebar<-NULL
+    strServer<-NULL
     if(bHasSubtabs){
         strUIWrapper <- "tabItem(tabName='{{MODULE_ID}}_{{SUBMODULE_ID}}', {{MODULE_ID}}_{{SUBMODULE_ID}}UI(id='{{MODULE_ID}}_{{SUBMODULE_ID}}'))"
         strSidebarWrapper <-"menuSubItem(text='{{SUBMODULE_ID}}', tabName='{{MODULE_ID}}_{{SUBMODULE_ID}}')"
