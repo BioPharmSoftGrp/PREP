@@ -17,9 +17,9 @@ CreateModule(
 
 \item{strDestDirectory}{Directory to save new files}
 
-\item{strUITemplate}{Module Template Path.}
+\item{strUITemplate}{Module UI Template}
 
-\item{strServerTemplate}{Module Template Path.}
+\item{strServerTemplate}{Module Server Template}
 }
 \description{
 Create Module

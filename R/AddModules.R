@@ -8,10 +8,12 @@
 #' @param strModuleDirectory Location of the Module to be added ot the app. Defaults to inst/_shared/modules.
 #' @param strType type of application - valid options are "package" and "standalone"
 #' @param bDashboard should modules be added to a shinyDashboard? If True,  module UI is wrapped in a shinyDashboard::tabItem and a shinyDashboard::menuItem is added. Default: True
-#' @param strUIWrapperTemplate Wrapper for calling module UI
-#' @param strNewModuleUITemplate UI whisker Template to use when creating new Modules
-#' @param strNewModuleServerTemplate Server whisker Template to use when creating new Modules
-#' @param lNewModuleCustomParameters List of Custom Parameters for new modules
+#' @param strUIWrapper Wrapper for calling module UI
+#' @param strSidebarWrapper Wrapper for calling sidebar UI
+#' @param strServerWrapper Wrapper for calling UI code
+#' @param strUITemplate UI whisker Template to use when creating new Modules
+#' @param strServerTemplate Server whisker Template to use when creating new Modules
+#' @param lCustomParameters List of Custom Parameters for new modules
 #'
 #' @importFrom devtools build document
 #' @importFrom whisker whisker.render
@@ -25,10 +27,12 @@ AddModules <- function(
     strModuleDirectory="",
     strType="package",
     bDashboard=TRUE,
-    strUIWrapperTemplate=NULL,
-    strNewModuleUITemplate=NULL,
-    strNewModuleServerTemplate=NULL,
-    lNewModuleCustomParameters=NULL
+    strUIWrapper=NULL,
+    strSidebarWrapper=NULL,
+    strServerWrapper=NULL,
+    strUITemplate=NULL,
+    strServerTemplate=NULL,
+    lCustomParameters=NULL
 ){
 
     # 0. Parse Parameter Defaults
@@ -80,9 +84,9 @@ AddModules <- function(
             CreateModule(
                 strModuleID=strModuleID,
                 strDestDirectory=strDestDirectory,
-                strUITemplate = strNewModuleUITemplate,
-                strServerTemplate = strNewModuleServerTemplate,
-                lCustomParameters= lNewModuleCustomParameters
+                strUITemplate = strUITemplate,
+                strServerTemplate = strServerTemplate,
+                lCustomParameters= lCustomParameters
             )
             vModuleFiles <- c(vModuleFiles,paste0("mod_",strModuleID,"UI.R"),paste0("mod_",strModuleID,"Server.R"))
         }
@@ -103,26 +107,25 @@ AddModules <- function(
     # 3. Update app_ui to call the module UI
     # UI Module Call
 
-    if(is.null(strUIWrapperTemplate)){
-        strUIWrapperTemplate <- ifelse(
+    if(is.null(strUIWrapper)){
+        strUIWrapper <- ifelse(
         bDashboard,
         "tabItem(tabName='{{MODULE_ID}}', {{MODULE_ID}}UI())",
         "{{MODULE_ID}}UI()"
        )
-    }else{
-        strUIWrapperTemplate <- strCustomUITemplate
     }
-    #TODO: allow custom sidebar
-    strSidebarTemplate<-"menuItem(text = '{{MODULE_ID}}', tabName = '{{MODULE_ID}}', icon = icon('angle-right'))"
+
+    if(is.null(strSidebarWrapper)){
+        strSidebarWrapper<-"menuItem(text = '{{MODULE_ID}}', tabName = '{{MODULE_ID}}', icon = icon('angle-right'))"
+    }
 
     strUI <- ""
     strSidebar<- ""
     for(strModuleID in vModuleIDs){
-        strModuleCall <- whisker.render(strUIWrapperTemplate, list(MODULE_ID=strModuleID))
+        strModuleCall <- whisker.render(strUIWrapper, list(MODULE_ID=strModuleID))
         strUI <- paste0(strUI, "\n,", strModuleCall)
-        strSidebarCall<- whisker.render(strSidebarTemplate, list(MODULE_ID=strModuleID))
+        strSidebarCall<- whisker.render(strSidebarWrapper, list(MODULE_ID=strModuleID))
         strSidebar<-paste0(strSidebar, "\n,", strSidebarCall)
-
     }
     strUI <- paste0(strUI,"\n #{{ADD_NEW_MODULE_UI}}") #Keep the ADD_MODULE_UI Tag for future modules.
     strSidebar<- paste0(strSidebar,"\n #{{ADD_NEW_MODULE_SIDEBAR}}")
@@ -146,7 +149,14 @@ AddModules <- function(
     writeLines( strUIRet, con = strUIpath)
 
     # 4. update app_server to call module server at end of file
-    strServer<-paste0(vModuleIDs,'Server()',collapse="\n")
+    if(is.null(strServerWrapper)){
+        strServerWrapper <- "{{MODULE_ID}}Server()"
+    }
+    strServer<-""
+    for(strModuleID in vModuleIDs){
+        strServerCall <- whisker.render(strServerWrapper, list(MODULE_ID=strModuleID))
+        strServer <- paste0(strServer, "\n", strServerCall)
+    }
     strServerTemplate <- paste("{{ADD_MODULE_SERVER}} \n",strServer) #Keep the ADD_MODULE_UI Tag for future modules.
     ServerParameters<-list(ADD_MODULE_SERVER=strServerTemplate)
     strServerPath <- paste0(strAppDir,"/app_server.R")

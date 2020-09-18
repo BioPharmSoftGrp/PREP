@@ -1,12 +1,12 @@
-#' Server for home tab
+#' {{MODULE_ID}} shiny Server
 #'
-#' @param strID Tab ID
+#' @return {{MODULE_ID}} Server
 #'
-#' @return
 
-HomeServer <- function( id="Home" ){
+{{MODULE_ID}}Server <- function(id="{{MODULE_ID}}")
+{
     retModule <- function( input, output, session ){}
+
     retServer <- moduleServer( id, module = retModule )
     return( retServer )
 }
-

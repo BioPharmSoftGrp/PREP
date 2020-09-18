@@ -6,10 +6,9 @@
 #' @import shinyBS
 #' @import shinydashboardPlus
 #'
-{{MODULE_ID}}Server <- function( )
+{{MODULE_ID}}Server <- function( id="{{MODULE_ID}}")
 {
     #The strID here must match what is in the UI file.
-    strID     <- "{{MODULE_ID}}"
     retModule <- function( input, output, session ){
 
         output$orderNum <- renderText({
@@ -49,6 +48,6 @@
         })
     }
 
-    retServer <- moduleServer( strID, module = retModule )
+    retServer <- moduleServer( id, module = retModule )
     return( retServer )
 }
