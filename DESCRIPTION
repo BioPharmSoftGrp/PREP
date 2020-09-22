@@ -1,7 +1,7 @@
 Package: BaSS
 Type: Package
 Title: BaSS - Biopharm Package for Shared Software
-Version: 0.6.0
+Version: 0.7.0
 Author: J. Kyle Wathen
 Maintainer: The package maintainer <KyleWathen@gmail.com>
 Authors@R: c( person("J. Kyle", "Wathen", email = "KyleWathen@gmail.com", role = c("aut", "cre")), 
