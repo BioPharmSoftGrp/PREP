@@ -10,7 +10,7 @@
 #' @export
 
 CreateModule <- function(
-    strModuleID="newModule" ,
+    strModuleID="newModule",
     strDestDirectory=paste0(getwd(),"/R"),
     strUITemplate=NULL,
     strServerTemplate=NULL,

@@ -2,10 +2,9 @@
 #'
 #' @return moduleServer for feedback module
 
-FeedbackServer <- function(){
-    strID <- "Feedback"
-    retModule <- function( input, output, session ){
-        
+FeedbackServer <- function(id="feedback"){
+
+    retModule <- function(input, output, session ){
         observeEvent( 
             input$btnSubmit ,
             {
@@ -24,8 +23,7 @@ FeedbackServer <- function(){
         } )
     }
     
-    
-    retServer <- moduleServer( strID, module = retModule )
+    retServer <- moduleServer(id, module = retModule )
     return( retServer )
 }
 

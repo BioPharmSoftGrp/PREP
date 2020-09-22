@@ -2,17 +2,19 @@
 #'
 #' @return moduleServer() for theme switcher module
 
-OptionsThemeSwitcherServer <- function( ){
+OptionsThemeSwitcherServer <- function(id="themeswitcher"){
     BassShinyDashboardThemes <- function(theme){
-        vAvailableThemes <-  c( "Blue gradient"     = "blue_gradient",
-                                "Flat Red   "       = "flat_red",
-                                "Grey light"        = "grey_light",
-                                "Grey dark"         = "grey_dark",
-                                "OneNote"           = "onenote",
-                                "Poor man's Flatly" = "poor_mans_flatly",
-                                "Purple gradient"   = "purple_gradient"  )
+        vAvailableThemes <-  c(
+            "Blue gradient"     = "blue_gradient",
+            "Flat Red   "       = "flat_red",
+            "Grey light"        = "grey_light",
+            "Grey dark"         = "grey_dark",
+            "OneNote"           = "onenote",
+            "Poor man's Flatly" = "poor_mans_flatly",
+            "Purple gradient"   = "purple_gradient"
+        )
         if( theme %in% vAvailableThemes ) {
-            selectedTheme <- shinyDashboardThemes( theme)
+            selectedTheme <- shinyDashboardThemes(theme)
         } else {
             selectedTheme <- do.call( theme, list() )$theme    # It was a known theme from the package.
         }
@@ -20,17 +22,12 @@ OptionsThemeSwitcherServer <- function( ){
     }
 
     retModule <- function( input, output, session ){
-        observeEvent(
-            input$dbxChangeTheme,
-            {
-                output$uiChangeTheme <- renderUI({
-                    BassShinyDashboardThemes(theme = input$dbxChangeTheme)
-                })
-            }
+        reactive(
+            {BassShinyDashboardThemes(theme = input$dbxChangeTheme)}
         )
     }
 
-    retServer <- moduleServer( "ThemeSwitcher", module = retModule )
+    retServer <- moduleServer( id, module = retModule )
 
     return( retServer )
 }

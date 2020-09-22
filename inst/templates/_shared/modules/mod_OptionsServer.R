@@ -2,11 +2,14 @@
 #'
 #' @return moduleServer for options module - currently and empty shell
 
-OptionsServer <- function(){
-    strID <- "Options"
+OptionsServer <- function(id="options"){
     retModule <- function( input, output, session ){
-        OptionsThemeSwitcherServer()
+        return(
+            list(
+                theme=OptionsThemeSwitcherServer()
+            )
+        )
     }
-    retServer <- moduleServer( strID, module = retModule )
+    retServer <- moduleServer( id, module = retModule )
     return( retServer )
 }

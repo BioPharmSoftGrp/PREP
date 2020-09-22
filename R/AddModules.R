@@ -3,18 +3,22 @@
 #' @title AddModules
 #' @description { This function adds a module to a shiny app created by BaSS.  }
 #'
-#' @param vModuleIDs IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R".
+#' @param vModuleIDs IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R". Also, note that all whitespace and non-alphanumeric characters are removed when determining function names.
 #' @param strPackageDirectory The directory where the BaSS shiny app located.
 #' @param strModuleDirectory Location of the Module to be added ot the app. Defaults to inst/_shared/modules.
 #' @param strType type of application - valid options are "package" and "standalone"
 #' @param bDashboard should modules be added to a shinyDashboard? If True,  module UI is wrapped in a shinyDashboard::tabItem and a shinyDashboard::menuItem is added. Default: True
-#' @param strUIWrapperTemplate Wrapper for calling module UI
-#' @param strNewModuleUITemplate UI whisker Template to use when creating new Modules
-#' @param strNewModuleServerTemplate Server whisker Template to use when creating new Modules
-#' @param lNewModuleCustomParameters List of Custom Parameters for new modules
+#' @param strUIWrapper Wrapper for calling module UI
+#' @param strSidebarWrapper Wrapper for calling sidebar UI
+#' @param strServerWrapper Wrapper for calling Server code
+#' @param strUITemplate UI whisker Template to use when creating new Modules
+#' @param strServerTemplate Server whisker Template to use when creating new Modules
+#' @param lCustomParameters List of Custom Parameters for new modules
 #'
+#' @importFrom stringr str_replace_all
 #' @importFrom devtools build document
 #' @importFrom whisker whisker.render
+#' 
 #'
 #' @export
 #'
@@ -25,10 +29,12 @@ AddModules <- function(
     strModuleDirectory="",
     strType="package",
     bDashboard=TRUE,
-    strUIWrapperTemplate=NULL,
-    strNewModuleUITemplate=NULL,
-    strNewModuleServerTemplate=NULL,
-    lNewModuleCustomParameters=NULL
+    strUIWrapper=NULL,
+    strSidebarWrapper=NULL,
+    strServerWrapper=NULL,
+    strUITemplate=NULL,
+    strServerTemplate=NULL,
+    lCustomParameters=NULL
 ){
 
     # 0. Parse Parameter Defaults
@@ -37,8 +43,6 @@ AddModules <- function(
         all(nchar(vModuleIDs)>0),
         all(is.character(vModuleIDs))
     )
-
-
 
     #source location of modules to copy in to new package
     strSrcDirectory <- ifelse(
@@ -53,6 +57,12 @@ AddModules <- function(
         paste0(strPackageDirectory,"/inst/modules")
     )
 
+    #Remove spaces from vModuleIDs
+    vModuleLabels <- vModuleIDs #Keep spaces in the labels
+    vModuleIDs <- str_replace_all(vModuleIDs, "[^[:alnum:]]", " ") #remove non alphanumerics
+    vModuleIDs <- str_replace_all(vModuleIDs, " ", "")
+
+    
     # 1. Copy Files - Copy all files starting with `mod_{strMod}` to the package
     vModulePaths <- c()
     vModuleFiles <- c()
@@ -80,9 +90,9 @@ AddModules <- function(
             CreateModule(
                 strModuleID=strModuleID,
                 strDestDirectory=strDestDirectory,
-                strUITemplate = strNewModuleUITemplate,
-                strServerTemplate = strNewModuleServerTemplate,
-                lCustomParameters= lNewModuleCustomParameters
+                strUITemplate = strUITemplate,
+                strServerTemplate = strServerTemplate,
+                lCustomParameters= lCustomParameters
             )
             vModuleFiles <- c(vModuleFiles,paste0("mod_",strModuleID,"UI.R"),paste0("mod_",strModuleID,"Server.R"))
         }
@@ -103,26 +113,26 @@ AddModules <- function(
     # 3. Update app_ui to call the module UI
     # UI Module Call
 
-    if(is.null(strUIWrapperTemplate)){
-        strUIWrapperTemplate <- ifelse(
+    if(is.null(strUIWrapper)){
+        strUIWrapper <- ifelse(
         bDashboard,
         "tabItem(tabName='{{MODULE_ID}}', {{MODULE_ID}}UI())",
         "{{MODULE_ID}}UI()"
        )
-    }else{
-        strUIWrapperTemplate <- strCustomUITemplate
     }
-    #TODO: allow custom sidebar
-    strSidebarTemplate<-"menuItem(text = '{{MODULE_ID}}', tabName = '{{MODULE_ID}}', icon = icon('angle-right'))"
+
+    if(is.null(strSidebarWrapper)){
+        strSidebarWrapper<-"menuItem(text = '{{MODULE_LABEL}}', tabName = '{{MODULE_ID}}', icon = icon('angle-right'))"
+    }
 
     strUI <- ""
     strSidebar<- ""
-    for(strModuleID in vModuleIDs){
-        strModuleCall <- whisker.render(strUIWrapperTemplate, list(MODULE_ID=strModuleID))
+    for(i in 1:length(vModuleIDs)){
+        lParams <- list(MODULE_ID=vModuleIDs[i], MODULE_LABEL=vModuleLabels[i])
+        strModuleCall <- whisker.render(strUIWrapper, lParams)
         strUI <- paste0(strUI, "\n,", strModuleCall)
-        strSidebarCall<- whisker.render(strSidebarTemplate, list(MODULE_ID=strModuleID))
+        strSidebarCall<- whisker.render(strSidebarWrapper, lParams)
         strSidebar<-paste0(strSidebar, "\n,", strSidebarCall)
-
     }
     strUI <- paste0(strUI,"\n #{{ADD_NEW_MODULE_UI}}") #Keep the ADD_MODULE_UI Tag for future modules.
     strSidebar<- paste0(strSidebar,"\n #{{ADD_NEW_MODULE_SIDEBAR}}")
@@ -146,12 +156,26 @@ AddModules <- function(
     writeLines( strUIRet, con = strUIpath)
 
     # 4. update app_server to call module server at end of file
-    strServer<-paste0(vModuleIDs,'Server()',collapse="\n")
+    strServer<-""
+    #TODO - the solution for the option server below is a bit hack-y. Probably better to convert strModuleID to a list that allows for different behavior for different modules. 
+    for(strModuleID in vModuleIDs){
+        if(is.null(strServerWrapper)){
+            strCurrentWrapper <- ifelse(
+                strModuleID=="Options", 
+                'appOptions=OptionsServer() \n output$theme=renderUI({appOptions$theme()}) #passes theme to UI if options',
+                '{{MODULE_ID}}Server()'
+            )
+        }else{
+            strCurrentWrapper <- strServerWrapper
+        }
+
+        strServerCall <- whisker.render(strCurrentWrapper, list(MODULE_ID=strModuleID))
+        strServer <- paste0(strServer, "\n", strServerCall)
+    }
     strServerTemplate <- paste("{{ADD_MODULE_SERVER}} \n",strServer) #Keep the ADD_MODULE_UI Tag for future modules.
     ServerParameters<-list(ADD_MODULE_SERVER=strServerTemplate)
     strServerPath <- paste0(strAppDir,"/app_server.R")
     strServerInput <- readLines(strServerPath)
     strServerRet  <-whisker.render(strServerInput, data=ServerParameters)
     writeLines( strServerRet, con = strServerPath)
-
 }
