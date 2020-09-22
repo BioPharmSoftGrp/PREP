@@ -3,7 +3,7 @@
 #' @title AddModules
 #' @description { This function adds a module to a shiny app created by BaSS.  }
 #'
-#' @param vModuleIDs IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R".
+#' @param vModuleIDs IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R". Also, note that all whitespace and non-alphanumeric characters are removed when determining function names.
 #' @param strPackageDirectory The directory where the BaSS shiny app located.
 #' @param strModuleDirectory Location of the Module to be added ot the app. Defaults to inst/_shared/modules.
 #' @param strType type of application - valid options are "package" and "standalone"
@@ -15,8 +15,10 @@
 #' @param strServerTemplate Server whisker Template to use when creating new Modules
 #' @param lCustomParameters List of Custom Parameters for new modules
 #'
+#' @importFrom stringr str_replace_all
 #' @importFrom devtools build document
 #' @importFrom whisker whisker.render
+#' 
 #'
 #' @export
 #'
@@ -55,8 +57,12 @@ AddModules <- function(
         paste0(strPackageDirectory,"/inst/modules")
     )
 
+    #Remove spaces from vModuleIDs
+    vModuleLabels <- vModuleIDs #Keep spaces in the labels
+    vModuleIDs <- str_replace_all(vModuleIDs, "[^[:alnum:]]", " ") #remove non alphanumerics
+    vModuleIDs <- str_replace_all(vModuleIDs, " ", "")
 
-
+    
     # 1. Copy Files - Copy all files starting with `mod_{strMod}` to the package
     vModulePaths <- c()
     vModuleFiles <- c()
@@ -116,15 +122,16 @@ AddModules <- function(
     }
 
     if(is.null(strSidebarWrapper)){
-        strSidebarWrapper<-"menuItem(text = '{{MODULE_ID}}', tabName = '{{MODULE_ID}}', icon = icon('angle-right'))"
+        strSidebarWrapper<-"menuItem(text = '{{MODULE_LABEL}}', tabName = '{{MODULE_ID}}', icon = icon('angle-right'))"
     }
 
     strUI <- ""
     strSidebar<- ""
-    for(strModuleID in vModuleIDs){
-        strModuleCall <- whisker.render(strUIWrapper, list(MODULE_ID=strModuleID))
+    for(i in 1:length(vModuleIDs)){
+        lParams <- list(MODULE_ID=vModuleIDs[i], MODULE_LABEL=vModuleLabels[i])
+        strModuleCall <- whisker.render(strUIWrapper, lParams)
         strUI <- paste0(strUI, "\n,", strModuleCall)
-        strSidebarCall<- whisker.render(strSidebarWrapper, list(MODULE_ID=strModuleID))
+        strSidebarCall<- whisker.render(strSidebarWrapper, lParams)
         strSidebar<-paste0(strSidebar, "\n,", strSidebarCall)
     }
     strUI <- paste0(strUI,"\n #{{ADD_NEW_MODULE_UI}}") #Keep the ADD_MODULE_UI Tag for future modules.
@@ -171,5 +178,4 @@ AddModules <- function(
     strServerInput <- readLines(strServerPath)
     strServerRet  <-whisker.render(strServerInput, data=ServerParameters)
     writeLines( strServerRet, con = strServerPath)
-
 }

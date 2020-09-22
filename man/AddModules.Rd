@@ -19,7 +19,7 @@ AddModules(
 )
 }
 \arguments{
-\item{vModuleIDs}{IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R".}
+\item{vModuleIDs}{IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R". Also, note that all whitespace and non-alphanumeric characters are removed when determining function names.}
 
 \item{strPackageDirectory}{The directory where the BaSS shiny app located.}
 
@@ -33,7 +33,7 @@ AddModules(
 
 \item{strSidebarWrapper}{Wrapper for calling sidebar UI}
 
-\item{strServerWrapper}{Wrapper for calling UI code}
+\item{strServerWrapper}{Wrapper for calling Server code}
 
 \item{strUITemplate}{UI whisker Template to use when creating new Modules}
 
