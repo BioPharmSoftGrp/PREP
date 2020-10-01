@@ -1,0 +1,24 @@
+Binding: CreateAppStandaloneFromProjectCreation
+Title: BaSS Shiny App
+OpenFiles: ProjectInstructions.Rmd
+
+
+Parameter: strDisplayName
+Widget: TextInput
+Label: App Name to Display
+Default:
+Position: left
+
+Parameter: strAuthors
+Widget: TextInput
+Label: App Author Names
+Default:
+Position: left
+
+Parameter: bSimulationMod
+Widget: CheckboxInput
+Label: Include Example Module
+Default: On
+Position: left
+
+
