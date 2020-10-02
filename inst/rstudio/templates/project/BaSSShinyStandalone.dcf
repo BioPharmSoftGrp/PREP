@@ -1,6 +1,7 @@
 Binding: CreateAppStandaloneFromProjectCreation
 Title: BaSS Shiny App
 OpenFiles: ProjectInstructions.Rmd
+Icon: basslogo.png
 
 
 Parameter: strDisplayName
