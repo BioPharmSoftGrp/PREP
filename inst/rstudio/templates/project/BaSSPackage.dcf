@@ -1,7 +1,7 @@
 Binding: CreatePackageFromProjectCreation
-Title: BaSS Package
+Title: PREP Package
 OpenFiles: ProjectInstructions.Rmd
-Icon: basslogo.png
+Icon: preplogo.png
 
 
 Parameter: strAuthors

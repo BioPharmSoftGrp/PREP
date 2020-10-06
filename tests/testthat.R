@@ -1,4 +1,4 @@
 library(testthat)
-library(BaSS)
+library(PREP)
 
-test_check("BaSS")
+test_check("PREP")

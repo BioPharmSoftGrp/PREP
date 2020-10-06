@@ -19,7 +19,7 @@ navbar:
       href: news/index.html
     intro:
       text: Get started
-      href: articles/BaSS.html
+      href: articles/PREP.html
     tutorials: ~
     articles:
     - title: All vignettes
@@ -31,4 +31,4 @@ navbar:
           href: articles/Example1.html
     github:
           icon: fa-github fa-lg
-          href: https://github.com/BioPharmSoftGrp/BaSS
+          href: https://github.com/BioPharmSoftGrp/PREP

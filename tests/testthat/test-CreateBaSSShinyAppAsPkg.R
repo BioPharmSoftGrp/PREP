@@ -3,11 +3,11 @@
 #################################################################################################### .
 
 
-context( "CrateBaSSShinyAppAsPkg")
+context( "CratePREPShinyAppAsPkg")
 
 source( "MiscTestFunctions.R")
 
-test_that("Test- CreateBaSSShinyAppAsPkg", {
+test_that("Test- CreatePREPShinyAppAsPkg", {
 
 
     bSuccess <- FALSE
@@ -21,7 +21,7 @@ test_that("Test- CreateBaSSShinyAppAsPkg", {
     strShinyName        <- "TestShiny"
     strShinyDispName    <- "Test App"
 
-    strRet <-  CreateBaSSShinyAppAsPkg( strProjDir, strShinyName  )
+    strRet <-  CreatePREPShinyAppAsPkg( strProjDir, strShinyName  )
     print( strRet )
 
     strTmpDir       <- paste( strWD, "TestProject", strShinyName, sep = "/")

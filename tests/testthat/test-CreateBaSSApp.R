@@ -1,7 +1,7 @@
-context( "CreateBaSSApp")
+context( "CreatePREPApp")
 source( "MiscTestFunctions.R")
 
-test_that("Test- CreateBaSSApp", {
+test_that("Test- CreatePREPApp", {
 
     bSuccess <- FALSE
     strErr   <- "None of the projects were created."
@@ -15,7 +15,7 @@ test_that("Test- CreateBaSSApp", {
     strShinyName        <- "TestShiny"
     strShinyDispName    <- "Test App"
 
-    strRet              <- CreateBaSSApp( strProjectDirectory       = strProjDir,
+    strRet              <- CreatePREPApp( strProjectDirectory       = strProjDir,
                                             strProjectName            = strProjName,
                                             strCalculationLibraryName = strCalcName,
                                             strShinyAppName           = strShinyName,
@@ -57,7 +57,7 @@ test_that("Test- CreateBaSSApp", {
 
 })
 
-test_that("Test- CreateBaSSAppShinyAsPkg", {
+test_that("Test- CreatePREPAppShinyAsPkg", {
 
     bSuccess <- FALSE
     strErr   <- "None of the projects were created."
@@ -71,7 +71,7 @@ test_that("Test- CreateBaSSAppShinyAsPkg", {
     strShinyName        <- "TestShiny"
     strShinyDispName    <- "Test App"
 
-    strRet              <- CreateBaSSApp( strProjectDirectory       = strProjDir,
+    strRet              <- CreatePREPApp( strProjectDirectory       = strProjDir,
                                           strProjectName            = strProjName,
                                           strCalculationLibraryName = strCalcName,
                                           strShinyAppName           = strShinyName,
