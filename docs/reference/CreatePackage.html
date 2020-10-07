@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AddTestToPkg — AddTestToPkg • PREP</title>
+<title>CreatePackage — CreatePackage • PREP</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,8 @@
 
 
 
-<meta property="og:title" content="AddTestToPkg — AddTestToPkg" />
-<meta property="og:description" content="Description - The function will add a new test function to the calculation package.
-  This function is intended to be used when a file in the package was already created but
-  a test file was not created.  This fuction will create a file named /tests/testthat/test-strTestFileName.R" />
+<meta property="og:title" content="CreatePackage — CreatePackage" />
+<meta property="og:description" content="Create an R package complete with an example testthat unit test." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -139,33 +137,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>AddTestToPkg</h1>
+    <h1>CreatePackage</h1>
     
-    <div class="hidden name"><code>AddTestToPkg.Rd</code></div>
+    <div class="hidden name"><code>CreatePackage.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Description - The function will add a new test function to the calculation package.
-  This function is intended to be used when a file in the package was already created but
-  a test file was not created.  This fuction will create a file named /tests/testthat/test-strTestFileName.R</p>
+    <p>Create an R package complete with an example testthat unit test.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>AddTestToPkg</span>(<span class='no'>strTestFileName</span>)</pre>
+    <pre class="usage"><span class='fu'>CreatePackage</span>(<span class='kw'>strDirectory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(), <span class='kw'>strName</span> <span class='kw'>=</span> <span class='st'>"newPackage"</span>, <span class='kw'>strAuthors</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>strFunctionName</th>
-      <td><p>The name of the function to add.</p></td>
+      <th>strDirectory</th>
+      <td><p>The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.</p></td>
+    </tr>
+    <tr>
+      <th>strName</th>
+      <td><p>The folder where the app saved.</p></td>
+    </tr>
+    <tr>
+      <th>strAuthors</th>
+      <td><p>Author Names. Blank by default</p></td>
     </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-    <span class='fu'>AddTestToPkg</span>( <span class='st'>"RunSimulation"</span> )  <span class='co'># This would create a test file at /tests/testthat/test-RunSimulation.R</span>
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

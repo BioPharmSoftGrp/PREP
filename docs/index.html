@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BaSS - Biopharm Package for Shared Software • BaSS</title>
+<title>PREP - Packages fRom tEmPlates • PREP</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="BaSS - Biopharm Package for Shared Software">
+<script src="pkgdown.js"></script><meta property="og:title" content="PREP - Packages fRom tEmPlates">
 <meta property="og:description" content="This project is package in R used to create a Shiny app with a default template and also creates a R package project that the Shiny app links to.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <a class="navbar-link" href="index.html">PREP</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -51,7 +51,7 @@
   </a>
 </li>
 <li>
-  <a href="articles/BaSS.html">Get started</a>
+  <a href="articles/PREP.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -77,7 +77,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/BioPharmSoftGrp/BaSS">
+  <a href="https://github.com/BioPharmSoftGrp/PREP">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -95,25 +95,25 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="biopharm-package-for-shared-software-bass---project-creation-" class="section level1">
+<div id="packages-from-templates-prep---project-creation-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#biopharm-package-for-shared-software-bass---project-creation-" class="anchor"></a>Biopharm pAckage for Shared Software (BaSS) - Project Creation <img src="logo.png" align="right" alt="" width="120">
+<a href="#packages-from-templates-prep---project-creation-" class="anchor"></a>Packages fRom tEmPlates (PREP) - Project Creation <img src="logo.png" align="right" alt="" width="120">
 </h1></div>
 <p>This project is package in R used to create a Shiny app with a default template and also creates a R package project that the Shiny app links to.</p>
 <p>The default Shiny app has a common layout that utilizes modules rather than two long server.r and ui.r files. This helps to create a common look and feel across apps as well as organize the apps such that they are more suitable for team development and testing.</p>
-<p>The BaSS project may be installed using the remotes package with the following command.</p>
-<pre><code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github("BioPharmSoftGrp/BaSS")</a></code></pre>
+<p>The PREP project may be installed using the remotes package with the following command.</p>
+<pre><code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github("BioPharmSoftGrp/PREP")</a></code></pre>
 </div>
 <div id="utilizing-within-r-studio" class="section level1">
 <h1 class="hasAnchor">
 <a href="#utilizing-within-r-studio" class="anchor"></a>Utilizing Within R Studio</h1>
 <p>Likely the most convenient way to utilize this package is through R studio.</p>
-<p>Once the package has been installed, restart R Studio so that the BaSS project will be loaded.</p>
+<p>Once the package has been installed, restart R Studio so that the PREP project will be loaded.</p>
 <p>To create a new Project click on File-&gt;New Project and you should get the following: <img src="CreateProject.png" alt="Create Project"></p>
-<p>Click on New Directory so that the various project types will show. You should now see Project Type where the BaSS Project is listed.</p>
-<p><img src="BaSSProjectStep1.png" alt="BassProjectStep1"></p>
-<p>Click on BaSS Project to move to the next step.</p>
-<p><img src="BaSSProjectStep2.png" alt="BassProjectStep2"></p>
+<p>Click on New Directory so that the various project types will show. You should now see Project Type where the PREP Project is listed.</p>
+<p><img src="PREPProjectStep1.png" alt="PREPProjectStep1"></p>
+<p>Click on PREP Project to move to the next step.</p>
+<p><img src="PREPProjectStep2.png" alt="PREPProjectStep2"></p>
 </div>
 
   </div>

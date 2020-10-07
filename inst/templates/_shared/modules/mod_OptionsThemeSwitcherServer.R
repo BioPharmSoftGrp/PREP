@@ -3,7 +3,7 @@
 #' @return moduleServer() for theme switcher module
 
 OptionsThemeSwitcherServer <- function(id="themeswitcher"){
-    BassShinyDashboardThemes <- function(theme){
+    PREPShinyDashboardThemes <- function(theme){
         vAvailableThemes <-  c(
             "Blue gradient"     = "blue_gradient",
             "Flat Red   "       = "flat_red",
@@ -23,7 +23,7 @@ OptionsThemeSwitcherServer <- function(id="themeswitcher"){
 
     retModule <- function( input, output, session ){
         reactive(
-            {BassShinyDashboardThemes(theme = input$dbxChangeTheme)}
+            {PREPShinyDashboardThemes(theme = input$dbxChangeTheme)}
         )
     }
 

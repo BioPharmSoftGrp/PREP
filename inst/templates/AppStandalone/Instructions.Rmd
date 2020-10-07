@@ -19,7 +19,7 @@ By default the shiny app is created and linked to an R package.  If the app does
 To launch the Shiny App, open the ShinyApp.R file, then click the button that says "Run App".
 
 
-You may find the following functions in the BaSS package helpful when you developing the Shiny app. 
+You may find the following functions in the PREP package helpful when you developing the Shiny app. 
 
 AddNewTabToApp( strTabName, vSubMenuItemNames ) - This function will add a new tab to the Shiny App. This function assumes that the working directory
 is the main directory of the Shiny app created by this package.  This function creates a module file for the UI and the Server in the Modules directory

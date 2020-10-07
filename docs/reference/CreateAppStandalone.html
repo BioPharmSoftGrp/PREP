@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BaSS — BaSS • BaSS</title>
+<title>CreateAppStandalone — CreateAppStandalone • PREP</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="BaSS — BaSS" />
-<meta property="og:description" content="The BaSS package was developed to create Shiny projects based on a tempalte and a R package, with testthat unit testing already setup, where
-the Shiny app utiizes the R package." />
+<meta property="og:title" content="CreateAppStandalone — CreateAppStandalone" />
+<meta property="og:description" content="This function creates a standalone Shiny app." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,8 +79,8 @@ the Shiny app utiizes the R package." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <a class="navbar-link" href="../index.html">PREP</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -94,7 +93,7 @@ the Shiny app utiizes the R package." />
   </a>
 </li>
 <li>
-  <a href="../articles/BaSS.html">Get started</a>
+  <a href="../articles/PREP.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -120,7 +119,7 @@ the Shiny app utiizes the R package." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/BioPharmSoftGrp/BaSS">
+  <a href="https://github.com/BioPharmSoftGrp/PREP">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -138,17 +137,47 @@ the Shiny app utiizes the R package." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>BaSS</h1>
+    <h1>CreateAppStandalone</h1>
     
-    <div class="hidden name"><code>BaSS.Rd</code></div>
+    <div class="hidden name"><code>CreateAppStandalone.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The BaSS package was developed to create Shiny projects based on a tempalte and a R package, with testthat unit testing already setup, where
-the Shiny app utiizes the R package.</p>
+    <p>This function creates a standalone Shiny app.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>CreateAppStandalone</span>(
+  <span class='kw'>strDirectory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
+  <span class='kw'>strName</span> <span class='kw'>=</span> <span class='st'>"newApp"</span>,
+  <span class='kw'>strDisplayName</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>strAuthors</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>vModuleIDs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Home"</span>, <span class='st'>"Simulation"</span>, <span class='st'>"Feedback"</span>, <span class='st'>"Options"</span>)
+)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>strDirectory</th>
+      <td><p>The directory where the project folder is created.  If this parameter is left blank then the current working directory will be used.</p></td>
+    </tr>
+    <tr>
+      <th>strName</th>
+      <td><p>The folder where the app saved.</p></td>
+    </tr>
+    <tr>
+      <th>strDisplayName</th>
+      <td><p>Display name for the app. strName is used by default</p></td>
+    </tr>
+    <tr>
+      <th>strAuthors</th>
+      <td><p>Author Names. Blank by default</p></td>
+    </tr>
+    <tr>
+      <th>vModuleIDs</th>
+      <td><p>list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_moduleID*" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See PREP::add_module() for more detail.</p></td>
+    </tr>
+    </table>
 
 
   </div>

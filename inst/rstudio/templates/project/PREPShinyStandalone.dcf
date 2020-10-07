@@ -1,7 +1,8 @@
-Binding: CreateAppPackageFromProjectCreation
-Title: BaSS Shiny as a Package
+Binding: CreateAppStandaloneFromProjectCreation
+Title: PREP Shiny App
 OpenFiles: ProjectInstructions.Rmd
-Icon: basslogo.png
+Icon: logo.png
+
 
 Parameter: strDisplayName
 Widget: TextInput
@@ -18,12 +19,6 @@ Position: left
 Parameter: bSimulationMod
 Widget: CheckboxInput
 Label: Include Example Module
-Default: On
-Position: left
-
-Parameter: bDocumentPackage
-Widget: CheckboxInput
-Label: Document Package
 Default: On
 Position: left
 

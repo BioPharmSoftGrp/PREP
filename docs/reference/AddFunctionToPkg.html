@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AddFunctionToPkg — AddFunctionToPkg • BaSS</title>
+<title>AddFunctionToPkg — AddFunctionToPkg • PREP</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -80,8 +80,8 @@ and adds a test function in the file tests/testthat/test-strFunctionName.R to be
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <a class="navbar-link" href="../index.html">PREP</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@ and adds a test function in the file tests/testthat/test-strFunctionName.R to be
   </a>
 </li>
 <li>
-  <a href="../articles/BaSS.html">Get started</a>
+  <a href="../articles/PREP.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -120,7 +120,7 @@ and adds a test function in the file tests/testthat/test-strFunctionName.R to be
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/BioPharmSoftGrp/BaSS">
+  <a href="https://github.com/BioPharmSoftGrp/PREP">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -148,7 +148,13 @@ and adds a test function in the file tests/testthat/test-strFunctionName.R to be
 and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>AddFunctionToPkg</span>(<span class='no'>strFunctionName</span>, <span class='kw'>strFunctionDescription</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>strPkgDir</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+    <pre class="usage"><span class='fu'>AddFunctionToPkg</span>(
+  <span class='kw'>strFunctionName</span> <span class='kw'>=</span> <span class='st'>"MyNewFunction"</span>,
+  <span class='kw'>strFunctionDescription</span> <span class='kw'>=</span> <span class='st'>"Add Description"</span>,
+  <span class='kw'>strPkgDir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
+  <span class='kw'>strFunctionTemplate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>strTestTemplate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,6 +170,14 @@ and adds a test function in the file tests/testthat/test-strFunctionName.R to be
     <tr>
       <th>strPkgDir</th>
       <td><p>The directory of the package to add the function to.  If this parameter is left blank then the current working directory will be used.</p></td>
+    </tr>
+    <tr>
+      <th>strFunctionTemplatePath</th>
+      <td><p>Path to a function template. /inst/Templates/FunctionTemplate.R used as default.</p></td>
+    </tr>
+    <tr>
+      <th>stTestTemplatePath</th>
+      <td><p>Path to a test template. /inst/Templates/TestTemplate.R.</p></td>
     </tr>
     </table>
 
