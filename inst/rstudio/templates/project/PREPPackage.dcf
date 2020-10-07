@@ -1,7 +1,7 @@
 Binding: CreatePackageFromProjectCreation
 Title: PREP Package
 OpenFiles: ProjectInstructions.Rmd
-Icon: preplogo.png
+Icon: logo.png
 
 
 Parameter: strAuthors
