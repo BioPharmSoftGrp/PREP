@@ -73,7 +73,7 @@ AddModules <- function(
             recursive = TRUE,
             full.names = TRUE
         )
-
+   
         #Also get file names for update to global.R below.
         vCurrentFiles <- list.files(
             strSrcDirectory,
@@ -84,7 +84,13 @@ AddModules <- function(
         vModuleFiles <- c(vModuleFiles,vCurrentFiles)
 
         if(length(vCurrentPaths)>0){
-            file.copy(from=vCurrentPaths, to=strDestDirectory)
+            vDestPaths <- paste0(strDestDirectory,"/",vCurrentFiles)
+            vDestExists <- vCurrentFiles[file.exists(vDestPaths)] 
+            if(length(vDestExists > 0 )){
+                print("The following file(s) already exist in your app and will not be replaced; This may cause unexpected behavior.  You can delete the file(s) and rerun this command, or manually edit the existing file.")
+                print(paste(vDestExists, collapse=", "))
+            }
+            file.copy(from=vCurrentPaths, to=strDestDirectory, overwrite=FALSE)
         }else{
             #If no matching files are found create a new module using a template
             CreateModule(
