@@ -128,7 +128,7 @@ devtools::install()
 Example4::RunApp()  # Make sure the new package name is Example4, eg CreateApp(strName="Example4")
 ```
 
-<img src="https://user-images.githubusercontent.com/3680095/94923048-3c156d80-0489-11eb-80b7-4da874a5baaa.png"  width="90%">
+![Example4](Example4.png)
 
 ### Example 5 - Custom Module Template
 
