@@ -51,9 +51,6 @@
   </a>
 </li>
 <li>
-  <a href="articles/PREP.html">Get started</a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -64,7 +61,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/Example1.html">Example 1</a>
+      <a href="articles/intro.html">Intro</a>
     </li>
   </ul>
 </li>
@@ -110,10 +107,25 @@
 <p>Likely the most convenient way to utilize this package is through R studio.</p>
 <p>Once the package has been installed, restart R Studio so that the PREP project will be loaded.</p>
 <p>To create a new Project click on File-&gt;New Project and you should get the following: <img src="CreateProject.png" alt="Create Project"></p>
-<p>Click on New Directory so that the various project types will show. You should now see Project Type where the PREP Project is listed.</p>
+<p>Click on New Directory so that the various project types will show. You should now see Project Type where the three PREP Projects is listed.</p>
 <p><img src="PREPProjectStep1.png" alt="PREPProjectStep1"></p>
-<p>Click on PREP Project to move to the next step.</p>
-<p><img src="PREPProjectStep2.png" alt="PREPProjectStep2"></p>
+<p>For this point you can select to either setup {PREP} Package, {PREP} Shiny as a Package or {PREP} Shiny App.</p>
+<div id="prep-shiny-as-a-package" class="section level2">
+<h2 class="hasAnchor">
+<a href="#prep-shiny-as-a-package" class="anchor"></a>{PREP} Shiny as a Package</h2>
+<p>This option creates a package for a shiny app where all modules are in the R directory and all usual package development approaches apply. To start this type of project, just fill in the desired info. <img src="PrepShinyAsPkg.png" alt="PREP Shiny as a Package"></p>
+</div>
+<div id="prep-package" class="section level2">
+<h2 class="hasAnchor">
+<a href="#prep-package" class="anchor"></a>{PREP} Package</h2>
+<p>This option creates a package with testing via {testthat} already setup. The desired information is below: <img src="PrepPkg.png" alt="PREP Package"></p>
+</div>
+<div id="prep-shiny-app" class="section level2">
+<h2 class="hasAnchor">
+<a href="#prep-shiny-app" class="anchor"></a>{PREP} Shiny App</h2>
+<p>This option createsa Shiny app utilizing modules and a default theme. This option is NOT a package so is more easier to understand if you have not developed packages.</p>
+<p>The required information is shown below. <img src="PrepShinyApp.png" alt="PREP Package"></p>
+</div>
 </div>
 
   </div>

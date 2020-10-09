@@ -20,10 +20,26 @@ Once the package has been installed, restart R Studio so that the PREP project w
 To create a new Project click on File->New Project and you should get the following:
 ![Create Project](CreateProject.png)
 
-Click on New Directory so that the various project types will show. You should now see Project Type where the PREP Project is listed.
+Click on New Directory so that the various project types will show. You should now see Project Type where the three PREP Projects is listed.
 
 ![PREPProjectStep1](PREPProjectStep1.png)
 
-Click on PREP Project to move to the next step.
+For this point you can select to either setup {PREP} Package, {PREP} Shiny as a Package or {PREP} Shiny App.  
 
-![PREPProjectStep2](PREPProjectStep2.png)
+## {PREP} Shiny as a Package
+This option creates a package for a shiny app where all modules are in the R directory and all usual package development approaches apply.   To start this type of project, just fill in the desired info. 
+![PREP Shiny as a Package](PrepShinyAsPkg.png)
+
+## {PREP} Package
+This option creates a package with testing via {testthat} already setup.   The desired information is below:
+![PREP Package](PrepPkg.png)
+
+## {PREP} Shiny App
+This option createsa Shiny app utilizing modules and a default theme.  This option is NOT a package so is more easier to understand if you have not developed packages. 
+
+The required information is shown below.
+![PREP Package](PrepShinyApp.png)
+
+
+
+
