@@ -3,7 +3,6 @@ Title: PREP Shiny App
 OpenFiles: ProjectInstructions.Rmd
 Icon: logo.png
 
-
 Parameter: strDisplayName
 Widget: TextInput
 Label: App Name to Display

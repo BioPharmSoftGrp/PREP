@@ -18,6 +18,7 @@ CreateAppStandaloneFromProjectCreation <- function( path, ... )
     lArgs              <- list( ... )
     lArgs$strDirectory <- lInfo$strPath
     lArgs$strName      <- lInfo$strName
+    #lArgs$bPackage     <- FALSE
 
 
     if( lArgs$bSimulationMod )
@@ -30,5 +31,5 @@ CreateAppStandaloneFromProjectCreation <- function( path, ... )
         lArgs$vModuleIDs <- c( "Home", "Feedback", "Options" )
     }
     lArgs$bSimulationMod <- NULL
-    do.call( CreateAppPackage, lArgs )
+    do.call( CreateAppStandalone, lArgs )
 }
