@@ -373,8 +373,6 @@ summary {
 <h2>R Shiny App</h2>
 <p>By default the shiny app is created and linked to an R package. If the app does not need complex computation you can remove the call to load the library in the Global.R file. A couple important points:</p>
 <ol class="example" style="list-style-type: decimal">
-<li>Before the app will run you must first build the R library or remove the call to load the library, see next item.</li>
-<li>To remove the dependency on the R library, remove the library call in Global.R</li>
 <li>ShinyUI.R - Contain several options to modify such as a) Application name, b) Author name, c) Contact info and d) release date.
 <ul>
 <li>Contains the sidebar object that setup the navigation bar on the left.</li>
@@ -388,6 +386,125 @@ summary {
 <p>To launch the Shiny App, open the ShinyApp.R file, then click the button that says “Run App”.</p>
 <p>You may find the following functions in the PREP package helpful when you developing the Shiny app.</p>
 <p>AddNewTabToApp( strTabName, vSubMenuItemNames ) - This function will add a new tab to the Shiny App. This function assumes that the working directory is the main directory of the Shiny app created by this package. This function creates a module file for the UI and the Server in the Modules directory of the app, it alters the ShinyUI.R file to insert the calls to modules so the tab is added to the UI.</p>
+</div>
+<div id="helpful-packages" class="section level2">
+<h2>Helpful packages</h2>
+<ol>
+<li><a href="https://biopharmsoftgrp.github.io/BaSS/"><strong>PREP</strong></a> - This packages was used to setup the GoNGCalcs and GoNGShiny projects. It can be installed with remotes::install_github(“BioPharmSoftGrp/PREP”)</li>
+<li><a href="https://covr.r-lib.org/"><strong>covr</strong></a> - Use to create a test coverage report with the following commands</li>
+<li><a href="https://testthat.r-lib.org/"><strong>testthat</strong></a> - Package used for creating tests for your package.</li>
+</ol>
+</div>
+<div id="helpful-code-and-code-snippets" class="section level2">
+<h2>Helpful Code and Code Snippets</h2>
+<p>From the PREP package, AddFunctionToPkg( strFunctionName, strPkgDir = &quot;“, strFunctionDescription =”&quot; ) - Add a new function named strFunctionName to a package. This function creates a file names R/strFunctionName.R and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package.</p>
+<p>To execute all tests in the project, execute the following code</p>
+<pre class="r"><code>#&#39; @export
+devtools::test()</code></pre>
+<p>Code snippets are very useful within R Studio. They allow you to type a short phrase and automatically insert a block of code.</p>
+<p>Add code snippet by Clicking Tools-&gt; Global Options -&gt; Code-&gt; Edit Snippets</p>
+<pre class="r"><code>snippet news3meth
+  #&#39; @name ${1}
+  #&#39; @title ${1}
+  #&#39; @description ${4:function description}
+  #&#39; @export
+  ${1:MethodName} &lt;- function( ${2:ClassObjName} )
+  {
+    UseMethod( &quot;${1}&quot;, ${2} )
+  }
+  ${1}.default &lt;- function( ${2} )
+  {
+     stop( &quot;The default method for ${1} is not defined.&quot;)
+  }
+          
+
+
+snippet newcom
+   `r paste( paste( rep( &quot;#&quot;, 100), collapse=&quot;&quot; ), &quot;.&quot; )`
+   # ${0} ####
+    `r paste( paste( rep( &quot;#&quot;, 100), collapse=&quot;&quot; ), &quot;.&quot; )`
+
+
+snippet header
+  `r paste( paste( rep( &quot;#&quot;, 100), collapse=&quot;&quot; ), &quot;.&quot; )`
+  #   Program Name: ${1}
+  #   Author: J. Kyle Wathen
+  #   Description:
+  #   Category:
+  #   Usage: 
+  #   Change History:
+  `r paste( paste( rep( &quot;#&quot;, 100), collapse=&quot;&quot; ), &quot;.&quot; )`</code></pre>
+</div>
+<div id="helpful-links" class="section level2">
+<h2>Helpful Links</h2>
+<ol style="list-style-type: decimal">
+<li><a href="http://adv-r.had.co.nz/S3.html">S3 Classes</a></li>
+<li><a href="http://r-pkgs.had.co.nz/">R Packages Book</a></li>
+<li><a href="https://mastering-shiny.org/">Mastering Shiny</a>
+<ol style="list-style-type: lower-alpha">
+<li><a href="https://shiny.rstudio.com/articles/modules.html">Introduction to Shiny modules</a></li>
+<li><a href="https://mastering-shiny.org/scaling-modules.html">Chapter 15 - Scaling Shiny Modules</a></li>
+</ol></li>
+<li>Testing
+<ol style="list-style-type: lower-alpha">
+<li><a href="https://testthat.r-lib.org/">Testing R with testthat</a></li>
+<li><a href="https://r-pkgs.org/tests.html">From R packages</a></li>
+</ol></li>
+<li>Git Source Control
+<ol style="list-style-type: lower-alpha">
+<li><a href="https://git-scm.com/book/en/v1/Getting-Started-About-Version-Control">Getting Started with Version Control</a></li>
+<li><a href="https://git-for-windows.github.io/">Git for Windows</a></li>
+<li><a href="https://tortoisegit.org/">Tortoise Git</a> - Free Window shell program (runs in Windows explorer by Right clicking on a folder/file)]</li>
+</ol></li>
+<li><a href="https://rstudio.com/resources/cheatsheets/">R Studio Cheatsheet</a> - There are several really good ones but the R Markdown, R Studio IDE and Shiny cheatsheets are really helpful for this project.</li>
+</ol>
+</div>
+<div id="style-guide" class="section level2">
+<h2>Style Guide</h2>
+<p>It is recommended to follow a style guide. One potential guide to use is the <a href="https://biopharmsoftgrp.github.io/BioPharmSoftRStyleGuide/">Biopharm Soft style guide</a>. When developing code so that the style is consistent across different developers. A few key highlights are provided below.</p>
+<p>If you are using source control such as GitHub it can be helpful to have guidelines. Please refer to the <a href="https://biopharmsoftgrp.github.io/BioPharmSoftRStyleGuide/github.html#branch-names">GitHub Section</a> of the style guide when naming branches.</p>
+</div>
+<div id="github-and-version-numbers" class="section level2">
+<h2>GitHub and Version Numbers</h2>
+<p>The section outlines the approach and rational for GitHub and the version numbers.</p>
+<div id="github" class="section level3">
+<h3>GitHub</h3>
+<p>Everyone creates feature/bug/documentation branches off of Dev.<br />
+Using IT to represent the users initials, branch names should follow a consistent naming pattern, like Feature-Add-XXX-IT, Test-CalcCHM-IT, Bug-XXX-IT. For example of Bob Smith (BS) was creating a branch to add a feature two add two numbers a good branch name would be Feature-Add2Numbers-BS.</p>
+<p>Pull Requests (PRs) are against Dev so that when the are merged the issues close automatically. Then when a release is ready, eg whatever updates are going to be included have been merged into Dev, a PR is filled for Dev to be merged to master.</p>
+<p>Branches are intended to be small and something a developer adds specific items to, then merges via a PR. A branch should be work that can be completed in a few hours/days and not weeks.</p>
+<p>Once a PR for Dev-&gt;Master is executed, please make sure Dev and Master are at the same point. One way this can be done on GitHub by going to the Insights tab then clicking on Network.</p>
+<p>A few details about the setup on GitHub:</p>
+<ol start="4" class="example" style="list-style-type: decimal">
+<li>A Dev branch has been created and set as the default.</li>
+<li>The option to “Automatically delete branches” when a PR is merged, is enabled. With this option enabled, when a PR is merged to Dev, the “from” branch is automatically deleted. By automatically deleting branches when a PR is merged, the remote repo (eg GitHub) should have fewer branches and be more clean. The auto delete feature does allow us to restore a delete branch if we need to.</li>
+<li>Since Dev is the default it will NOT be deleted when a PR from Dev-&gt;Master occurs.</li>
+</ol>
+<p>Please note, the branch is ONLY deleted on the remote repo and is NOT deleted in the local repo. So if you were working on a branch Feature-123 and you file a PR from Feature-123 -&gt; Dev when the PR is merged the Feature-123 branch is deleted on the remote, eg GitHub, but you still have a local copy on your computer. There are a few ways to delete a local branch.</p>
+</div>
+<div id="version-numbering" class="section level3">
+<h3>Version Numbering</h3>
+<p>We will use the version numbers from semver.org</p>
+<p>The following is the general version number explanation Version numbering from Sematic</p>
+<ul>
+<li>0.0.x doesn’t add features (mostly for bug fixes and documentation)</li>
+<li>0.x.0 adds new features, but doesn’t effect backwards compatibility.</li>
+<li>x.0.0 breaks backwards compatibility in some way.</li>
+</ul>
+</div>
+<div id="rationel-for-githubversion-numbers" class="section level3">
+<h3>Rationel for GitHub/Version Numbers</h3>
+<p>A few advantages of this approach:</p>
+<ul>
+<li>The version number is easy to explain and understand.<br />
+</li>
+<li>The master branch is always the release</li>
+<li>When someone needs to create a branch it always come off of Dev (for all projects) and issues get closed when merge to Dev occur.<br />
+</li>
+<li>Version numbers can quickly be explained.</li>
+</ul>
+<p>This avoids us having to ask or remember what Dev-VX.X.X to create a branch off of or what issues have been closed when we have multiple people in different places working on things.</p>
+</div>
 </div>
 
 

@@ -11,6 +11,7 @@
 
 <meta name="author" content="{{AUTHOR_NAME}}" />
 
+<meta name="date" content="2020-10-13" />
 
 <title>Instructions</title>
 
@@ -364,43 +365,147 @@ summary {
 
 <h1 class="title toc-ignore">Instructions</h1>
 <h4 class="author">{{AUTHOR_NAME}}</h4>
-<h4 class="date">8/10/2020</h4>
+<h4 class="date">October 13, 2020</h4>
 
 </div>
 
 
-<div id="r-computation-package" class="section level2">
-<h2>R Computation Package</h2>
-<p>To build the package click on Build-&gt;Clean and Rebuild. This is also available Build tab typically to right pane in R Studio.</p>
-<p>The R directory contains the files with functions in the library. For example, R/CalcPosteriorProbsBinom.R contains the function that is called from the Shiny app.</p>
-<p>You may find the following functions in the PREP package helpful when developing the Calculation package</p>
-<p>AddFunctionToPkg( strFunctionName, strFunctionDescription = &quot;“, strPkgDir =”&quot; ) - Add a new function named strFunctionName to a package. This function creates a file names R/strFunctionName.R and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package.</p>
-<p>For a function to be available to the user that installs the package it must have a #’ <span class="citation">@export</span> in the line above the function name like the following</p>
-<pre class="r"><code>#&#39; @export
-ExampleFunction &lt;- function()
-{
-    return( -1) 
-}</code></pre>
-<p>For an example of how to create a test using testthat see the tests/testthat/test-CalcPosteriorProbsBinom.R file.</p>
-<p>If you create a file with a function the best practice is to create a test for the function. If the file name is FileXX.R then there should be a file in tests/testhat/test-FileXX.R that provides the tests for the function. To facilitate the creation of this file and the test you can execute the following command in the working directory set to the project directory (the default when you open the R Studio project file).</p>
-<pre class="r"><code>#&#39; @export
-usethis::use_test( &quot;FileXX&quot;)</code></pre>
-<p>The command above will create the tests/testhat/test-FileXX.R file with an example test in it.</p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This Shiny package application is organized as a R package and all code is in the R directory and test code in tests/testthat.</p>
+<p>Since this application is organized as a package, all of the usual package development can be followed. For example, to build the package click on Build-&gt;Clean and Rebuild. This is also available Build tab typically to right pane in R Studio. Once the package is built and installed, you can run the application by executing the command {{PACKAGE_NAME}}::RunApp().</p>
+<p>If you are new to building R packages you may find the <a href="http://r-pkgs.had.co.nz/">R Packages Book</a> very helpful.</p>
+<p>In addition, to help improve testing and stability of the application, the application is developed using Shiny modules. You may find <a href="https://shiny.rstudio.com/articles/modules.html">introduction to Shiny modules</a> helpful and <a href="https://mastering-shiny.org/scaling-modules.html">Chapter 15</a> of Mastering Shiny by Hadley Wickham is also very helpful.</p>
+</div>
+<div id="helpful-prep-commands" class="section level2">
+<h2>Helpful PREP Commands</h2>
+<p>Now that you have setup your new PREP Shiny Package you may find the following commands helpful:</p>
+<ol>
+<li>PREP::AddTab</li>
+<li>PREP::AddModules</li>
+<li>PREP::AddModule</li>
+<li>PREP::AddFunctionToPkg</li>
+</ol>
+<p>Example: AddFunctionToPkg( strFunctionName, strFunctionDescription = &quot;“, strPkgDir =”&quot; ) - Add a new function named strFunctionName to a package. This function creates a file names R/strFunctionName.R and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package.</p>
+</div>
+<div id="helpful-packages" class="section level2">
+<h2>Helpful packages</h2>
+<ol>
+<li><a href="https://biopharmsoftgrp.github.io/BaSS/"><strong>PREP</strong></a> - This packages was used to setup the GoNGCalcs and GoNGShiny projects. It can be installed with remotes::install_github(“BioPharmSoftGrp/PREP”)</li>
+<li><a href="https://covr.r-lib.org/"><strong>covr</strong></a> - Use to create a test coverage report with the following commands</li>
+<li><a href="https://testthat.r-lib.org/"><strong>testthat</strong></a> - Package used for creating tests for your package.</li>
+</ol>
+</div>
+<div id="helpful-code-and-code-snippets" class="section level2">
+<h2>Helpful Code and Code Snippets</h2>
+<p>From the PREP package, AddFunctionToPkg( strFunctionName, strPkgDir = &quot;“, strFunctionDescription =”&quot; ) - Add a new function named strFunctionName to a package. This function creates a file names R/strFunctionName.R and adds a test function in the file tests/testthat/test-strFunctionName.R to be used with the testthat package.</p>
 <p>To execute all tests in the project, execute the following code</p>
 <pre class="r"><code>#&#39; @export
 devtools::test()</code></pre>
-<p>The results should be similar to the following</p>
-<pre class="r"><code>Testing _CALCULATION_PACKAGE_NAME_
-√ |  OK F W S | Context
-√ |   2       | Test - CalcPosteriorProbsBinom.R
+<p>Code snippets are very useful within R Studio. They allow you to type a short phrase and automatically insert a block of code.</p>
+<p>Add code snippet by Clicking Tools-&gt; Global Options -&gt; Code-&gt; Edit Snippets</p>
+<pre class="r"><code>snippet news3meth
+  #&#39; @name ${1}
+  #&#39; @title ${1}
+  #&#39; @description ${4:function description}
+  #&#39; @export
+  ${1:MethodName} &lt;- function( ${2:ClassObjName} )
+  {
+    UseMethod( &quot;${1}&quot;, ${2} )
+  }
+  ${1}.default &lt;- function( ${2} )
+  {
+     stop( &quot;The default method for ${1} is not defined.&quot;)
+  }
+          
 
-== Results =====================================================================
-OK:       2
-Failed:   0
-Warnings: 0
-Skipped:  0
 
-:)</code></pre>
+snippet newcom
+   `r paste( paste( rep( &quot;#&quot;, 100), collapse=&quot;&quot; ), &quot;.&quot; )`
+   # ${0} ####
+    `r paste( paste( rep( &quot;#&quot;, 100), collapse=&quot;&quot; ), &quot;.&quot; )`
+
+
+snippet header
+  `r paste( paste( rep( &quot;#&quot;, 100), collapse=&quot;&quot; ), &quot;.&quot; )`
+  #   Program Name: ${1}
+  #   Author: J. Kyle Wathen
+  #   Description:
+  #   Category:
+  #   Usage: 
+  #   Change History:
+  `r paste( paste( rep( &quot;#&quot;, 100), collapse=&quot;&quot; ), &quot;.&quot; )`</code></pre>
+</div>
+<div id="helpful-links" class="section level2">
+<h2>Helpful Links</h2>
+<ol style="list-style-type: decimal">
+<li><a href="http://adv-r.had.co.nz/S3.html">S3 Classes</a></li>
+<li><a href="http://r-pkgs.had.co.nz/">R Packages Book</a></li>
+<li><a href="https://mastering-shiny.org/">Mastering Shiny</a>
+<ol style="list-style-type: lower-alpha">
+<li><a href="https://shiny.rstudio.com/articles/modules.html">Introduction to Shiny modules</a></li>
+<li><a href="https://mastering-shiny.org/scaling-modules.html">Chapter 15 - Scaling Shiny Modules</a></li>
+</ol></li>
+<li>Testing
+<ol style="list-style-type: lower-alpha">
+<li><a href="https://testthat.r-lib.org/">Testing R with testthat</a></li>
+<li><a href="https://r-pkgs.org/tests.html">From R packages</a></li>
+</ol></li>
+<li>Git Source Control
+<ol style="list-style-type: lower-alpha">
+<li><a href="https://git-scm.com/book/en/v1/Getting-Started-About-Version-Control">Getting Started with Version Control</a></li>
+<li><a href="https://git-for-windows.github.io/">Git for Windows</a></li>
+<li><a href="https://tortoisegit.org/">Tortoise Git</a> - Free Window shell program (runs in Windows explorer by Right clicking on a folder/file)]</li>
+</ol></li>
+<li><a href="https://rstudio.com/resources/cheatsheets/">R Studio Cheatsheet</a> - There are several really good ones but the R Markdown, R Studio IDE and Shiny cheatsheets are really helpful for this project.</li>
+</ol>
+</div>
+<div id="style-guide" class="section level2">
+<h2>Style Guide</h2>
+<p>It is recommended to follow a style guide. One potential guide to use is the <a href="https://biopharmsoftgrp.github.io/BioPharmSoftRStyleGuide/">Biopharm Soft style guide</a>. When developing code so that the style is consistent across different developers. A few key highlights are provided below.</p>
+<p>If you are using source control such as GitHub it can be helpful to have guidelines. Please refer to the <a href="https://biopharmsoftgrp.github.io/BioPharmSoftRStyleGuide/github.html#branch-names">GitHub Section</a> of the style guide when naming branches.</p>
+</div>
+<div id="github-and-version-numbers" class="section level2">
+<h2>GitHub and Version Numbers</h2>
+<p>The section outlines the approach and rational for GitHub and the version numbers.</p>
+<div id="github" class="section level3">
+<h3>GitHub</h3>
+<p>Everyone creates feature/bug/documentation branches off of Dev.<br />
+Using IT to represent the users initials, branch names should follow a consistent naming pattern, like Feature-Add-XXX-IT, Test-CalcCHM-IT, Bug-XXX-IT. For example of Bob Smith (BS) was creating a branch to add a feature two add two numbers a good branch name would be Feature-Add2Numbers-BS.</p>
+<p>Pull Requests (PRs) are against Dev so that when the are merged the issues close automatically. Then when a release is ready, eg whatever updates are going to be included have been merged into Dev, a PR is filled for Dev to be merged to master.</p>
+<p>Branches are intended to be small and something a developer adds specific items to, then merges via a PR. A branch should be work that can be completed in a few hours/days and not weeks.</p>
+<p>Once a PR for Dev-&gt;Master is executed, please make sure Dev and Master are at the same point. One way this can be done on GitHub by going to the Insights tab then clicking on Network.</p>
+<p>A few details about the setup on GitHub:</p>
+<ol class="example" style="list-style-type: decimal">
+<li>A Dev branch has been created and set as the default.</li>
+<li>The option to “Automatically delete branches” when a PR is merged, is enabled. With this option enabled, when a PR is merged to Dev, the “from” branch is automatically deleted. By automatically deleting branches when a PR is merged, the remote repo (eg GitHub) should have fewer branches and be more clean. The auto delete feature does allow us to restore a delete branch if we need to.</li>
+<li>Since Dev is the default it will NOT be deleted when a PR from Dev-&gt;Master occurs.</li>
+</ol>
+<p>Please note, the branch is ONLY deleted on the remote repo and is NOT deleted in the local repo. So if you were working on a branch Feature-123 and you file a PR from Feature-123 -&gt; Dev when the PR is merged the Feature-123 branch is deleted on the remote, eg GitHub, but you still have a local copy on your computer. There are a few ways to delete a local branch.</p>
+</div>
+<div id="version-numbering" class="section level3">
+<h3>Version Numbering</h3>
+<p>We will use the version numbers from semver.org</p>
+<p>The following is the general version number explanation Version numbering from Sematic</p>
+<ul>
+<li>0.0.x doesn’t add features (mostly for bug fixes and documentation)</li>
+<li>0.x.0 adds new features, but doesn’t effect backwards compatibility.</li>
+<li>x.0.0 breaks backwards compatibility in some way.</li>
+</ul>
+</div>
+<div id="rationel-for-githubversion-numbers" class="section level3">
+<h3>Rationel for GitHub/Version Numbers</h3>
+<p>A few advantages of this approach:</p>
+<ul>
+<li>The version number is easy to explain and understand.<br />
+</li>
+<li>The master branch is always the release</li>
+<li>When someone needs to create a branch it always come off of Dev (for all projects) and issues get closed when merge to Dev occur.<br />
+</li>
+<li>Version numbers can quickly be explained.</li>
+</ul>
+<p>This avoids us having to ask or remember what Dev-VX.X.X to create a branch off of or what issues have been closed when we have multiple people in different places working on things.</p>
+</div>
 </div>
 
 

@@ -82,7 +82,7 @@ CreateAppStandalone <-
             ADD_NEW_MODULE_UI="{{ADD_NEW_MODULE_UI}}"
         )
 
-        vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$", "Global.R") #apply template to these file types
+        vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$", "Global.R", "app_ui.R") #apply template to these file types
         vFileNames <- c()
         for(i in 1:length(vFileType)){
             newFiles <- list.files(
