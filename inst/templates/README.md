@@ -9,7 +9,7 @@ Before the Shiny app will run you must first build the R package or remove the r
 
 Please refer to the [BioPharmSoft Style Guide](https://biopharmsoftgrp.github.io/BioPharmSoftRStyleGuide/) for development best practices.
 
-You may find the following functions in the BaSS package helpful.
+You may find the following functions in the PREP package helpful.
 
 # For the Shiny App
 AddNewTabToApp( strTabName, vSubMenuItemNames ) - This function will add a new tab to the Shiny App. This function assumes that the working directory

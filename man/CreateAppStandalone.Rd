@@ -21,7 +21,7 @@ CreateAppStandalone(
 
 \item{strAuthors}{{Author Names. Blank by default}}
 
-\item{vModuleIDs}{{list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_{moduleID*}" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See BaSS::add_module() for more detail.}}
+\item{vModuleIDs}{{list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_{moduleID*}" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See PREP::add_module() for more detail.}}
 }
 \description{
 { This function creates a standalone Shiny app.  }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CreateBaSSRPackage — CreateBaSSRPackage • BaSS</title>
+<title>AddModule — AddModule • PREP</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="CreateBaSSRPackage — CreateBaSSRPackage" />
-<meta property="og:description" content="Create an R package complete with an example testthat unit test." />
+<meta property="og:title" content="AddModule — AddModule" />
+<meta property="og:description" content="This function quickly adds a module to the current app using the default parameters. Use addModules() when additional customization is needed." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -79,8 +79,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <a class="navbar-link" href="../index.html">PREP</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -93,9 +93,6 @@
   </a>
 </li>
 <li>
-  <a href="../articles/BaSS.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -106,7 +103,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Example1.html">Example 1</a>
+      <a href="../articles/intro.html">Intro</a>
     </li>
   </ul>
 </li>
@@ -119,7 +116,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/BioPharmSoftGrp/BaSS">
+  <a href="https://github.com/BioPharmSoftGrp/PREP">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -137,37 +134,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>CreateBaSSRPackage</h1>
+    <h1>AddModule</h1>
     
-    <div class="hidden name"><code>CreateBaSSRPackage.Rd</code></div>
+    <div class="hidden name"><code>AddModule.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create an R package complete with an example testthat unit test.</p>
+    <p>This function quickly adds a module to the current app using the default parameters. Use addModules() when additional customization is needed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>CreateBaSSRPackage</span>(
-  <span class='no'>strProjectDirectory</span>,
-  <span class='no'>strPackageName</span>,
-  <span class='kw'>strAuthors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bCreateProjectSubdirectory</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>AddModule</span>(<span class='no'>strModuleID</span>, <span class='kw'>strType</span> <span class='kw'>=</span> <span class='st'>"package"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>strProjectDirectory</th>
-      <td><p>The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.</p></td>
+      <th>strModuleID</th>
+      <td><p>ID for new module</p></td>
     </tr>
     <tr>
-      <th>strPackageName</th>
-      <td><p>The name of the package folder. If strPackageName  is blank or missing then the project is created in the strProjectDirectory.
-if strPackageName is provided, is not blank and bCreateProjectSubdirectory == TRUE then a folder named  strPackageName is created in the strProjectDirectory directory.</p></td>
-    </tr>
-    <tr>
-      <th>bCreateProjectSubdirectory</th>
-      <td><p>If bCreateProjectSubdirectory then then a subdirectory for the project is created in strProjectDirectory.</p></td>
+      <th>strType</th>
+      <td><p>Type of application. Valid options are 'standalone' or 'package'.</p></td>
     </tr>
     </table>
 

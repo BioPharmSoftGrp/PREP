@@ -21,7 +21,7 @@ AddModules(
 \arguments{
 \item{vModuleIDs}{IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R". Also, note that all whitespace and non-alphanumeric characters are removed when determining function names.}
 
-\item{strPackageDirectory}{The directory where the BaSS shiny app located.}
+\item{strPackageDirectory}{The directory where the PREP shiny app located.}
 
 \item{strModuleDirectory}{Location of the Module to be added ot the app. Defaults to inst/_shared/modules.}
 
@@ -42,5 +42,5 @@ AddModules(
 \item{lCustomParameters}{List of Custom Parameters for new modules}
 }
 \description{
-{ This function adds a module to a shiny app created by BaSS.  }
+{ This function adds a module to a shiny app created by PREP.  }
 }

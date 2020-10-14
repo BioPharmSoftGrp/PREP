@@ -2,3 +2,4 @@
 .Rproj.user
 **/.DS_Store
 .RData
+inst/doc

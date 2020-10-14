@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AddNewTabToApp — AddNewTabToApp • BaSS</title>
+<title>GetDirectoryAndName — GetDirectoryAndName • PREP</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,9 @@
 
 
 
-<meta property="og:title" content="AddNewTabToApp — AddNewTabToApp" />
-<meta property="og:description" content="This funciton will add a new tab to the Shiny App. This function assumes that the working directory
-is the main directory of the Shiny app created by this package.  This function creates a module file for the UI and the Server in the Modules directory
-of the app, it alters the ShinyUI.R file to insert the calls to  modules so the tab is added to the UI." />
+<meta property="og:title" content="GetDirectoryAndName — GetDirectoryAndName" />
+<meta property="og:description" content="Function to split the path into the directory name (without the last folder)
+              and name which is created from the last folder." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -81,8 +80,8 @@ of the app, it alters the ShinyUI.R file to insert the calls to  modules so the 
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <a class="navbar-link" href="../index.html">PREP</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -95,9 +94,6 @@ of the app, it alters the ShinyUI.R file to insert the calls to  modules so the 
   </a>
 </li>
 <li>
-  <a href="../articles/BaSS.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -108,7 +104,7 @@ of the app, it alters the ShinyUI.R file to insert the calls to  modules so the 
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Example1.html">Example 1</a>
+      <a href="../articles/intro.html">Intro</a>
     </li>
   </ul>
 </li>
@@ -121,7 +117,7 @@ of the app, it alters the ShinyUI.R file to insert the calls to  modules so the 
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/BioPharmSoftGrp/BaSS">
+  <a href="https://github.com/BioPharmSoftGrp/PREP">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -139,22 +135,17 @@ of the app, it alters the ShinyUI.R file to insert the calls to  modules so the 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>AddNewTabToApp</h1>
+    <h1>GetDirectoryAndName</h1>
     
-    <div class="hidden name"><code>AddNewTabToApp.Rd</code></div>
+    <div class="hidden name"><code>GetDirectoryAndName.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This funciton will add a new tab to the Shiny App. This function assumes that the working directory
-is the main directory of the Shiny app created by this package.  This function creates a module file for the UI and the Server in the Modules directory
-of the app, it alters the ShinyUI.R file to insert the calls to  modules so the tab is added to the UI.</p>
+    <p>Function to split the path into the directory name (without the last folder)
+              and name which is created from the last folder.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>AddNewTabToApp</span>(
-  <span class='no'>strTabName</span>,
-  <span class='kw'>vSubMenuItemNames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>strTemplate</span> <span class='kw'>=</span> <span class='st'>"NoSubItemTabModule"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>GetDirectoryAndName</span>(<span class='no'>path</span>)</pre>
 
 
 

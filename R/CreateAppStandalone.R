@@ -6,7 +6,7 @@
 #' @param strName {The folder where the app saved.}
 #' @param strDisplayName {Display name for the app. strName is used by default}
 #' @param strAuthors {Author Names. Blank by default}
-#' @param vModuleIDs {list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_{moduleID*}" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See BaSS::add_module() for more detail.}
+#' @param vModuleIDs {list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_{moduleID*}" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See PREP::add_module() for more detail.}
 
 #' @export
 
@@ -58,7 +58,7 @@ CreateAppStandalone <-
         CopyFiles(strAppSrc,strDestDirectory)
 
         # Logo
-        # TODO - allow user to select an image (using BaSS hex as placeholder for now)
+        # TODO - allow user to select an image (using PREP hex as placeholder for now)
         strLogoSrc<-paste0(strSharedDirectory,"/img/logo.png")
         strLogoDest<-paste0(strDestDirectory,"/www/logo.png")
         file.copy(strLogoSrc,strLogoDest)
@@ -82,7 +82,7 @@ CreateAppStandalone <-
             ADD_NEW_MODULE_UI="{{ADD_NEW_MODULE_UI}}"
         )
 
-        vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$", "Global.R") #apply template to these file types
+        vFileType <- c("\\.Rmd$", "\\DESCRIPTION$", "\\.html$", "Global.R", "app_ui.R") #apply template to these file types
         vFileNames <- c()
         for(i in 1:length(vFileType)){
             newFiles <- list.files(

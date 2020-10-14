@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CreateBaSSShinyAppAsPkg2 — CreateBaSSShinyAppAsPkg2 • BaSS</title>
+<title>CreateApp — CreateApp • PREP</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="CreateBaSSShinyAppAsPkg2 — CreateBaSSShinyAppAsPkg2" />
-<meta property="og:description" content="This function creates a Shiny app as an R Package." />
+<meta property="og:title" content="CreateApp — CreateApp" />
+<meta property="og:description" content="Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -79,8 +79,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <a class="navbar-link" href="../index.html">PREP</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -93,9 +93,6 @@
   </a>
 </li>
 <li>
-  <a href="../articles/BaSS.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -106,7 +103,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Example1.html">Example 1</a>
+      <a href="../articles/intro.html">Intro</a>
     </li>
   </ul>
 </li>
@@ -119,7 +116,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/BioPharmSoftGrp/BaSS">
+  <a href="https://github.com/BioPharmSoftGrp/PREP">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -137,24 +134,52 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>CreateBaSSShinyAppAsPkg2</h1>
+    <h1>CreateApp</h1>
     
-    <div class="hidden name"><code>CreateBaSSShinyAppAsPkg2.Rd</code></div>
+    <div class="hidden name"><code>CreateApp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function creates a Shiny app as an R Package.</p>
+    <p>Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>CreateBaSSShinyAppAsPkg2</span>(
-  <span class='kw'>strProjectDirectory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
-  <span class='kw'>strShinyAppName</span> <span class='kw'>=</span> <span class='st'>"newApp"</span>,
-  <span class='kw'>strShinyAppDisplayName</span> <span class='kw'>=</span> <span class='st'>""</span>,
+    <pre class="usage"><span class='fu'>CreateApp</span>(
+  <span class='kw'>strDirectory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
+  <span class='kw'>strName</span> <span class='kw'>=</span> <span class='st'>"NewApp"</span>,
+  <span class='kw'>strDisplayName</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>strAuthors</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>bCreateProjectSubdirectory</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>modules</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"home"</span>)
+  <span class='kw'>vModuleIDs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Home"</span>, <span class='st'>"Simulation"</span>, <span class='st'>"Feedback"</span>, <span class='st'>"Options"</span>),
+  <span class='kw'>bPackage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>strDirectory</th>
+      <td><p>The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.</p></td>
+    </tr>
+    <tr>
+      <th>strName</th>
+      <td><p>The name of the folder where the R Shiny app is created.</p></td>
+    </tr>
+    <tr>
+      <th>strDisplayName</th>
+      <td><p>The display name of the app.</p></td>
+    </tr>
+    <tr>
+      <th>strAuthors</th>
+      <td><p>List of authors</p></td>
+    </tr>
+    <tr>
+      <th>vModuleIDs</th>
+      <td><p>list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_moduleID*" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See PREP::add_module() for more detail.</p></td>
+    </tr>
+    <tr>
+      <th>bPackage</th>
+      <td><p>Specifies whether the app should be wrapped in a pacakge. Default True</p></td>
+    </tr>
+    </table>
 
 
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BaSS — BaSS • BaSS</title>
+<title>Create Module — CreateModule • PREP</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="BaSS — BaSS" />
-<meta property="og:description" content="The BaSS package was developed to create Shiny projects based on a tempalte and a R package, with testthat unit testing already setup, where
-the Shiny app utiizes the R package." />
+<meta property="og:title" content="Create Module — CreateModule" />
+<meta property="og:description" content="Create Module" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,8 +79,8 @@ the Shiny app utiizes the R package." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <a class="navbar-link" href="../index.html">PREP</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -94,9 +93,6 @@ the Shiny app utiizes the R package." />
   </a>
 </li>
 <li>
-  <a href="../articles/BaSS.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -107,7 +103,7 @@ the Shiny app utiizes the R package." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Example1.html">Example 1</a>
+      <a href="../articles/intro.html">Intro</a>
     </li>
   </ul>
 </li>
@@ -120,7 +116,7 @@ the Shiny app utiizes the R package." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/BioPharmSoftGrp/BaSS">
+  <a href="https://github.com/BioPharmSoftGrp/PREP">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -138,17 +134,43 @@ the Shiny app utiizes the R package." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>BaSS</h1>
+    <h1>Create Module</h1>
     
-    <div class="hidden name"><code>BaSS.Rd</code></div>
+    <div class="hidden name"><code>CreateModule.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The BaSS package was developed to create Shiny projects based on a tempalte and a R package, with testthat unit testing already setup, where
-the Shiny app utiizes the R package.</p>
+    <p>Create Module</p>
     </div>
 
+    <pre class="usage"><span class='fu'>CreateModule</span>(
+  <span class='kw'>strModuleID</span> <span class='kw'>=</span> <span class='st'>"newModule"</span>,
+  <span class='kw'>strDestDirectory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(), <span class='st'>"/R"</span>),
+  <span class='kw'>strUITemplate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>strServerTemplate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>lCustomParameters</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
+)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>strModuleID</th>
+      <td><p>Module ID</p></td>
+    </tr>
+    <tr>
+      <th>strDestDirectory</th>
+      <td><p>Directory to save new files</p></td>
+    </tr>
+    <tr>
+      <th>strUITemplate</th>
+      <td><p>Module UI Template</p></td>
+    </tr>
+    <tr>
+      <th>strServerTemplate</th>
+      <td><p>Module Server Template</p></td>
+    </tr>
+    </table>
 
 
   </div>

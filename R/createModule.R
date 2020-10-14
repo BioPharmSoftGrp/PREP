@@ -31,13 +31,26 @@ CreateModule <- function(
     #Merge in custom paramaters (if any)
     parameters <- c(list(MODULE_ID=strModuleID),lCustomParameters)
 
-    #Create UI Module
+    # Test for existing files
     strUIPath <- paste0(strDestDirectory,"/mod_",strModuleID,"UI.R")
-    strUI  <-whisker.render(strUITemplate, data=parameters)
-    writeLines( strUI, con = strUIPath)
+    strServerPath <- paste0(strDestDirectory,"/mod_",strModuleID,"Server.R")
+    vDestPaths <- c(strUIPath, strServerPath)
+    vCurrentFiles<-c(paste0("mod_",strModuleID,"UI.R"),paste0("mod_",strModuleID,"Server.R"))
+    vDestExists <- vCurrentFiles[file.exists(vDestPaths)] 
+    if(length(vDestExists > 0 )){
+        print(paste0("Caution: The following file(s) for the '",strModuleID, "' module already exist in your app and will not be replaced; This may cause unexpected behavior.  You can delete the file(s) and rerun this command, or manually edit the existing file."))
+        print(paste("File(s) not copied:", paste(vDestExists, collapse=", ")))
+    }
+
+    #Create UI Module
+    if(!file.exists(strUIPath)){
+        strUI  <-whisker.render(strUITemplate, data=parameters)
+        writeLines( strUI, con = strUIPath)
+    }
 
     #Create Server Module
-    strServerPath <- paste0(strDestDirectory,"/mod_",strModuleID,"Server.R")
-    strServer  <-whisker.render(strServerTemplate, data=parameters)
-    writeLines( strServer, con = strServerPath)
+    if(!file.exists(strServerPath)){
+        strServer  <-whisker.render(strServerTemplate, data=parameters)
+        writeLines( strServer, con = strServerPath)
+    }
 }

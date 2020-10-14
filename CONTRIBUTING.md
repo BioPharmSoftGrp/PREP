@@ -1,10 +1,10 @@
-# BaSS Contribution Guidelines
+# PREP Contribution Guidelines
 
 **This page is under development. We'd love your help making it better!**
 
 # Overview 
 
-Hello! Thank you for your interest in contributing to the BaSS pacakge. This page provides guidelines for technical contributors to this project. . If you can't find what you need on this page, don't hesitate to [email Kyle](mailto:KyleWathen@gmail.com?subject=BaSS%20Technical%20Question) with questions. 
+Hello! Thank you for your interest in contributing to the PREP pacakge. This page provides guidelines for technical contributors to this project. . If you can't find what you need on this page, don't hesitate to [email Kyle](mailto:KyleWathen@gmail.com?subject=PREP%20Technical%20Question) with questions. 
 
 # Approach
 

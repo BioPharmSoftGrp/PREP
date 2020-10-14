@@ -6,7 +6,7 @@
 #' @param strName {The folder where the app saved.}
 #' @param strDisplayName {Display name for the app. strName is used by default}
 #' @param strAuthors {Author Names. Blank by default}
-#' @param vModuleIDs {list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_{moduleID*}" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See BaSS::add_module() for more detail.}
+#' @param vModuleIDs {list of module IDs to copy.  The function looks in inst/_shared/modules for files named "mod_{moduleID*}" for each value of vModuleIDs provided; matching files are copied to the new app and initialized as shiny modules in app_ui and app_server. See PREP::add_module() for more detail.}
 #' @param bDocumentPackage {run devtools:document() on the new package once it is created? TRUE by default}
 #'
 #' @importFrom devtools build document
@@ -54,7 +54,7 @@ CreateAppPackage <- function(
     CopyFiles(strAppSrc,strAppDest)
 
     # Logo
-    # TODO - allow user to select an image (using BaSS hex as placeholder for now)
+    # TODO - allow user to select an image (using PREP hex as placeholder for now)
     strLogoSrc<-paste0(strSharedDirectory,"/img/logo.png")
     dir.create(paste0(strInstDest,"/www"))
     strLogoDest<-paste0(strInstDest,"/www/logo.png")

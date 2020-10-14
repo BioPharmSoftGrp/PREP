@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CreateBaSSShinyApp — CreateBaSSShinyApp • BaSS</title>
+<title>AddModules — AddModules • PREP</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="CreateBaSSShinyApp — CreateBaSSShinyApp" />
-<meta property="og:description" content="Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications." />
+<meta property="og:title" content="AddModules — AddModules" />
+<meta property="og:description" content="This function adds a module to a shiny app created by PREP." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -79,8 +79,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">BaSS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <a class="navbar-link" href="../index.html">PREP</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -93,9 +93,6 @@
   </a>
 </li>
 <li>
-  <a href="../articles/BaSS.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -106,7 +103,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Example1.html">Example 1</a>
+      <a href="../articles/intro.html">Intro</a>
     </li>
   </ul>
 </li>
@@ -119,7 +116,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/BioPharmSoftGrp/BaSS">
+  <a href="https://github.com/BioPharmSoftGrp/PREP">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -137,48 +134,75 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>CreateBaSSShinyApp</h1>
+    <h1>AddModules</h1>
     
-    <div class="hidden name"><code>CreateBaSSShinyApp.Rd</code></div>
+    <div class="hidden name"><code>AddModules.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create an R Shiny app based on a template to help ease development.  The R Shiny App utilizes modeules which is very helpful for large scale applications.</p>
+    <p>This function adds a module to a shiny app created by PREP.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>CreateBaSSShinyApp</span>(
-  <span class='no'>strProjectDirectory</span>,
-  <span class='no'>strShinyAppName</span>,
-  <span class='no'>strShinyAppDisplayName</span>,
-  <span class='no'>strCalculationLibraryName</span>,
-  <span class='no'>strAuthors</span>,
-  <span class='kw'>bCreateProjectSubdirectory</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>bCreateWithExampleTabs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+    <pre class="usage"><span class='fu'>AddModules</span>(
+  <span class='kw'>vModuleIDs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(),
+  <span class='kw'>strPackageDirectory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
+  <span class='kw'>strModuleDirectory</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>strType</span> <span class='kw'>=</span> <span class='st'>"package"</span>,
+  <span class='kw'>bDashboard</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>strUIWrapper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>strSidebarWrapper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>strServerWrapper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>strUITemplate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>strServerTemplate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>lCustomParameters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>strProjectDirectory</th>
-      <td><p>The directory where the project should be created.  If this parameter is left blank then the current working directory will be used.</p></td>
+      <th>vModuleIDs</th>
+      <td><p>IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_strModuleIDUI.R" and mod_strModuleIDServer.R". If desired, submodules may also be included using the following naming convention "mod_strModuleID_XXX.R". Also, note that all whitespace and non-alphanumeric characters are removed when determining function names.</p></td>
     </tr>
     <tr>
-      <th>strShinyAppName</th>
-      <td><p>The name of the folder where the R Shiny app is created. If strShinyAppName  is blank or missing then the project is created in the strProjectDirectory.
-If strPackageName is provided, is not blank and bCreateProjectSubdirectory == TRUE then a folder named  strShinyAppName is created in the strProjectDirectory directory.</p></td>
+      <th>strPackageDirectory</th>
+      <td><p>The directory where the PREP shiny app located.</p></td>
     </tr>
     <tr>
-      <th>bCreateProjectSubdirectory</th>
-      <td><p>If bCreateProjectSubdirectory then then a subdirectory for the project is created in strProjectDirectory.</p></td>
+      <th>strModuleDirectory</th>
+      <td><p>Location of the Module to be added ot the app. Defaults to inst/_shared/modules.</p></td>
     </tr>
     <tr>
-      <th>bCreateWithExampleTabs</th>
-      <td><p>By default, the R Shiny app will contain two example tabs (Simulation and Data analyusis), if bCreateWithExampleTabs = FALSE those tabs are removed.</p></td>
+      <th>strType</th>
+      <td><p>type of application - valid options are "package" and "standalone"</p></td>
     </tr>
     <tr>
-      <th>bAppInRFolder</th>
-      <td><p>Create</p></td>
+      <th>bDashboard</th>
+      <td><p>should modules be added to a shinyDashboard? If True,  module UI is wrapped in a shinyDashboard::tabItem and a shinyDashboard::menuItem is added. Default: True</p></td>
+    </tr>
+    <tr>
+      <th>strUIWrapper</th>
+      <td><p>Wrapper for calling module UI</p></td>
+    </tr>
+    <tr>
+      <th>strSidebarWrapper</th>
+      <td><p>Wrapper for calling sidebar UI</p></td>
+    </tr>
+    <tr>
+      <th>strServerWrapper</th>
+      <td><p>Wrapper for calling Server code</p></td>
+    </tr>
+    <tr>
+      <th>strUITemplate</th>
+      <td><p>UI whisker Template to use when creating new Modules</p></td>
+    </tr>
+    <tr>
+      <th>strServerTemplate</th>
+      <td><p>Server whisker Template to use when creating new Modules</p></td>
+    </tr>
+    <tr>
+      <th>lCustomParameters</th>
+      <td><p>List of Custom Parameters for new modules</p></td>
     </tr>
     </table>
 

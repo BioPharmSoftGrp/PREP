@@ -1,4 +1,4 @@
-BassShinyDashboardThemes <- function( theme )
+PREPShinyDashboardThemes <- function( theme )
 {
 
     vAvailableThemes <-  c( "Blue gradient"     = "blue_gradient",

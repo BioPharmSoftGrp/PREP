@@ -1,10 +1,10 @@
 #' @name AddModules
 #'
 #' @title AddModules
-#' @description { This function adds a module to a shiny app created by BaSS.  }
+#' @description { This function adds a module to a shiny app created by PREP.  }
 #'
 #' @param vModuleIDs IDs of the shiny module to be added to the application. The source code for each module should be saved in strModuleDirectory with files named "mod_{strModuleID}UI.R" and mod_{strModuleID}Server.R". If desired, submodules may also be included using the following naming convention "mod_{strModuleID}_XXX.R". Also, note that all whitespace and non-alphanumeric characters are removed when determining function names.
-#' @param strPackageDirectory The directory where the BaSS shiny app located.
+#' @param strPackageDirectory The directory where the PREP shiny app located.
 #' @param strModuleDirectory Location of the Module to be added ot the app. Defaults to inst/_shared/modules.
 #' @param strType type of application - valid options are "package" and "standalone"
 #' @param bDashboard should modules be added to a shinyDashboard? If True,  module UI is wrapped in a shinyDashboard::tabItem and a shinyDashboard::menuItem is added. Default: True
@@ -18,7 +18,7 @@
 #' @importFrom stringr str_replace_all
 #' @importFrom devtools build document
 #' @importFrom whisker whisker.render
-#' 
+#'
 #'
 #' @export
 #'
@@ -62,7 +62,7 @@ AddModules <- function(
     vModuleIDs <- str_replace_all(vModuleIDs, "[^[:alnum:]]", " ") #remove non alphanumerics
     vModuleIDs <- str_replace_all(vModuleIDs, " ", "")
 
-    
+
     # 1. Copy Files - Copy all files starting with `mod_{strMod}` to the package
     vModulePaths <- c()
     vModuleFiles <- c()
@@ -73,7 +73,7 @@ AddModules <- function(
             recursive = TRUE,
             full.names = TRUE
         )
-
+   
         #Also get file names for update to global.R below.
         vCurrentFiles <- list.files(
             strSrcDirectory,
@@ -84,7 +84,13 @@ AddModules <- function(
         vModuleFiles <- c(vModuleFiles,vCurrentFiles)
 
         if(length(vCurrentPaths)>0){
-            file.copy(from=vCurrentPaths, to=strDestDirectory)
+            vDestPaths <- paste0(strDestDirectory,"/",vCurrentFiles)
+            vDestExists <- vCurrentFiles[file.exists(vDestPaths)] 
+            if(length(vDestExists > 0 )){
+                print("The following file(s) already exist in your app and will not be replaced; This may cause unexpected behavior.  You can delete the file(s) and rerun this command, or manually edit the existing file.")
+                print(paste(vDestExists, collapse=", "))
+            }
+            file.copy(from=vCurrentPaths, to=strDestDirectory, overwrite=FALSE)
         }else{
             #If no matching files are found create a new module using a template
             CreateModule(
@@ -157,11 +163,11 @@ AddModules <- function(
 
     # 4. update app_server to call module server at end of file
     strServer<-""
-    #TODO - the solution for the option server below is a bit hack-y. Probably better to convert strModuleID to a list that allows for different behavior for different modules. 
+    #TODO - the solution for the option server below is a bit hack-y. Probably better to convert strModuleID to a list that allows for different behavior for different modules.
     for(strModuleID in vModuleIDs){
         if(is.null(strServerWrapper)){
             strCurrentWrapper <- ifelse(
-                strModuleID=="Options", 
+                strModuleID=="Options",
                 'appOptions=OptionsServer() \n output$theme=renderUI({appOptions$theme()}) #passes theme to UI if options',
                 '{{MODULE_ID}}Server()'
             )
