@@ -29,7 +29,7 @@ app_ui <- function(){
 #   }
 
   header <- dashboardHeader(
-    title = span("{{PROJECT_NAME}}", img(src="www/logo.png", height=35)),
+    title = "{{PROJECT_NAME}}",
     titleWidth = 300,
 
     ## Drop down menu

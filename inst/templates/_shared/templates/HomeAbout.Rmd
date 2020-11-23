@@ -5,6 +5,7 @@ date: "2/4/2020"
 output: html_document
 ---
 
+<img src="/www/logo.png" width = "175" height = "200" align="right" />
 
 This is an R-Shiny application that utilizes a template with the ability to switch themes (colors).  To view theme (color) options, click on the Options tab and select a different theme. 
 
