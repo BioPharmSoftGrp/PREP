@@ -32,11 +32,11 @@ Each release has it's own [GitHub project board](https://help.github.com/en/gith
 
  We typically use three types of branches: 
 
-- **`master`** - The production version of the repository. Commits directly to the `master` branch are not permitted, so all code development must be done in development and feature branches as described below.
-- **Development Branches** - Development branches contain all code for a given release, and should be named `vX.X.X-dev`. When the work on the release is complete, the development branch will be merged to `master` via a pull request. 
-- **Feature Branches** - Feature branches resolve one or more issues and should be named to reflect the new features added  (e.g. `add-participant-filter`). Once all issues are resolved, the feature branch should be merged into a development branch. 
+- **`master`** - The production version of the repository. Commits directly to the `master` branch are not permitted. `dev` is merged in to master whenever a release is needed. 
+- **dev** - This is the default branch and it contains the most recent development version of the app. Commits directly to `dev` are not permitted, so code development must be done in feature branches - code review is required before code is merged to dev. 
+- **Feature Branches** - Feature branches resolve one or more issues and should be named to reflect the new features added  (e.g. `add-participant-filter`). Once all issues are resolved, the feature branch should be merged into the development branch. 
 
-For a large release, there will likely be several feature branches merged to the development branch before the development branch is merged to `master`. Commits directly to development branches are discouraged since we generally recommend making a feature branch/PR instead. However, for a small release that only resolves a few features, a single development branch may be sufficient. Following this Branch structure is important since our quality control is built using this framework. 
+For a large release, there will likely be several feature branches merged to the development branch before the development branch is merged to `master`. Following this Branch structure is important since our quality control is built using this framework. 
 
 All merging should be done via pull requests. More details of our merge/PR process are provided in the Quality Control section below. 
 

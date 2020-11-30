@@ -21,6 +21,10 @@ AddFunctionToPkg <- function(
     strTestTemplate=NULL
     )
 {
+    
+    strFunctionName <- str_replace_all(strFunctionName, "[^[:alnum:]]", " ") #remove non alphanumerics
+    strFunctionName <- str_replace_all(strFunctionName, " ", "")
+
     strFileName <- paste( strPkgDir, "/R/", strFunctionName, ".R", sep ="" )
 
     # Create the file name
