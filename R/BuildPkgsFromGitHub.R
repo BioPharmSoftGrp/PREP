@@ -58,7 +58,7 @@ BuildPkgsFromGitHub <- function( vGitHubRepos, vPkgNames, vRefs,  vAuthTokens, s
     for( iPkg in 1:nQtyReposToClone )
     {
         setwd( vCloneDirs[ iPkg ] )
-        lRet <- BuildAndAddPkgToLocalCran( lCranRepoDetails, strLocalCranName, strDirectoryForLocalCran, strPkgName = vPkgNames[ iPkg ])
+        lRet <- BuildAndAddPkgToLocalCran( lCranRepoDetails, strLocalCranName ) #, strDirectoryForLocalCran, strPkgName = vPkgNames[ iPkg ])
 
     }
 
