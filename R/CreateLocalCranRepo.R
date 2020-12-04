@@ -9,7 +9,7 @@
 #' @title CreateLocalCranRepo
 #' @description { Description: Function to create local cran repo. }
 #' @export
-CreateLocalCranRepo <- function(strDirectoryForRepo = "")
+CreateLocalCranRepo <- function( strDirectoryForRepo = "")
 {
 
     #################################################################################################### .

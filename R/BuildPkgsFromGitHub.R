@@ -18,7 +18,10 @@ BuildPkgsFromGitHub <- function( vGitHubRepos, vPkgNames, vRefs,  vAuthTokens, s
     #TODO: The vPkgNames should be read from the packages that are pulled from GitHub rather than sent
     #       in by the nuser.
     #TODO: Currently the vGitHubRepos needs to have the token in the address for private repos and
-    #       vAuthTokes are ingored.
+    #       vAuthTokes are ignored.
+
+    # Clone the desired repos ####
+
     if( is.null( strCloneDir ) )
     {
         #if it was not supplied then create a directory in the the current wd called GitClone-Date
@@ -38,21 +41,36 @@ BuildPkgsFromGitHub <- function( vGitHubRepos, vPkgNames, vRefs,  vAuthTokens, s
 
     vGitCloneCmds <- paste0( "git clone ", vGitHubRepos,   " ", vCloneDirs  )
     lapply(vGitCloneCmds, system )
-
-
     print( "Cloning complete... Staring build...")
-    strCurentWrkDir <- getwd()
+
+    #################################################################################################### .
+    # Create local cran repo  ####
+    #################################################################################################### .
+
+    lCranRepoDetails <- CreateLocalCranRepo( strDirectoryForLocalCran )
+
+    #################################################################################################### .
+    # Build the packages and copy to local cran ####
+    #################################################################################################### .
+
+    strCurentWrkDir <- getwd()  # To build the packages we will update the working dir and will need to return to where we started
 
     for( iPkg in 1:nQtyReposToClone )
     {
         setwd( vCloneDirs[ iPkg ] )
-        lRet <- BuildPkgCreateLocalRepo( strLocalCranName, strDirectoryForLocalCran, strPkgName = vPkgNames[ iPkg ])
+        lRet <- BuildAndAddPkgToLocalCran( lCranRepoDetails, strLocalCranName, strDirectoryForLocalCran, strPkgName = vPkgNames[ iPkg ])
 
     }
+
+    # Return to the original working directory
     setwd( strCurentWrkDir )
 
     print( "Build complete... Starting detach...")
-    # Install the packages
+
+    #################################################################################################### .
+    # Install the packages ####
+    #################################################################################################### .
+
     for( iPkg in 1:nQtyReposToClone )
     {
         strDetachPkg <- paste0( "package:", vPkgNames[ iPkg ])
@@ -72,5 +90,5 @@ BuildPkgsFromGitHub <- function( vGitHubRepos, vPkgNames, vRefs,  vAuthTokens, s
     localRepo <- lRet$strNewRepo
     install.packages( vPkgNames, quiet = TRUE, repos = localRepo )
 
-    return(  )
+    return( NULL )
 }

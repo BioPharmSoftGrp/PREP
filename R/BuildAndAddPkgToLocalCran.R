@@ -9,20 +9,18 @@
 #' @title BuildAndAddPkgToLocalCran
 #' @description { Description: Function to build a package and copy to the local cran repo. }
 #' @export
-BuildAndAddPkgToLocalCran <- function( lCranRepoDetails, strRepoName = "" ) #, strPkgName = "")
-    #BuildPkgCreateLocalRepo <- function( strRepoName = "", strDirectoryForRepo = "", strPkgName = ""  )
+BuildAndAddPkgToLocalCran <- function( lCranRepoDetails, strLocalCranName = "localCRAN" ) #, strPkgName = "")
 {
 
     #lRepo         <- CreateLocalCranRepo( strDirectoryForRepo )
     strContribDir <- lCranRepoDetails$strContribDir
     strLocalCRAN  <- lCranRepoDetails$strLocalCRAN
     lBinPaths     <- lCranRepoDetails$lBinPaths
-    # In your R package that you want to add to this repo you need to add the following line to the package Description file
-    # Repository: localCRAN
-    # Add the repo line to the description file if the file is present and it does not have it
 
-    if( strRepoName == "" )
-        strRepoName        <- "localCRAN"
+    # In your R package that you want to add to this repo you need to add the following line to the package Description file
+    # Repository: strLocalCranName
+
+    # Update Description File - Add the repo line to the description file if the file is present and it does not have it ####
 
     strDescriptionFile <- file.path( "DESCRIPTION" )
     bFileExists <- file.exists( strDescriptionFile )
@@ -33,7 +31,7 @@ BuildAndAddPkgToLocalCran <- function( lCranRepoDetails, strRepoName = "" ) #, s
         bContains <- any( grepl( "Repository", strInput, ignore.case = TRUE) )
         if( !bContains )
         {
-            cat( paste( "Repository: ", strRepoName, sep = "" ), file= strDescriptionFile, append = TRUE, sep="\n")
+            cat( paste( "Repository: ", strLocalCranName, sep = "" ), file= strDescriptionFile, append = TRUE, sep="\n")
 
         }
 
