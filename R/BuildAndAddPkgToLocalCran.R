@@ -9,9 +9,68 @@
 #' @title BuildAndAddPkgToLocalCran
 #' @description { Description: Function to build a package and copy to the local cran repo. }
 #' @export
-BuildAndAddPkgToLocalCran <- function( [Add arguments] )
+BuildAndAddPkgToLocalCran <- function( lCranRepoDetails, strRepoName = "" ) #, strPkgName = "")
+    #BuildPkgCreateLocalRepo <- function( strRepoName = "", strDirectoryForRepo = "", strPkgName = ""  )
 {
 
-    lRet <- list( )  #Example of return object
-    return( lRet )   # Use an explicit return
+    #lRepo         <- CreateLocalCranRepo( strDirectoryForRepo )
+    strContribDir <- lCranRepoDetails$strContribDir
+    strLocalCRAN  <- lCranRepoDetails$strLocalCRAN
+    lBinPaths     <- lCranRepoDetails$lBinPaths
+    # In your R package that you want to add to this repo you need to add the following line to the package Description file
+    # Repository: localCRAN
+    # Add the repo line to the description file if the file is present and it does not have it
+
+    if( strRepoName == "" )
+        strRepoName        <- "localCRAN"
+
+    strDescriptionFile <- file.path( "DESCRIPTION" )
+    bFileExists <- file.exists( strDescriptionFile )
+    if( bFileExists )
+    {
+        # First check to see if it lists a repo so we don't re add it
+        strInput  <- readLines( strDescriptionFile )
+        bContains <- any( grepl( "Repository", strInput, ignore.case = TRUE) )
+        if( !bContains )
+        {
+            cat( paste( "Repository: ", strRepoName, sep = "" ), file= strDescriptionFile, append = TRUE, sep="\n")
+
+        }
+
+    }
+
+    # Build the package and copy to the contributed directory in the new repo
+    devtools::document(roclets = c('rd', 'collate', 'namespace', 'vignette'))
+
+    strPkgTarZip <- devtools::build()
+    strCopyTo    <- file.path( strContribDir, basename( strPkgTarZip) )
+
+    if( file.exists( strCopyTo ) )
+    {
+        file.remove( strCopyTo )
+    }
+    file.copy( strPkgTarZip, strCopyTo )
+
+    # Need to update the permissions
+    strUpdatePermission <- paste0( "chmod 777 ", strCopyTo )
+    system( strUpdatePermission )
+
+    #Update the PACKAGES file in each subdirectory of the repo
+    tools::write_PACKAGES( strContribDir, type = "source" )
+    lapply( lBinPaths, function(path) {
+        tools::write_PACKAGES(path)
+    })
+
+
+    bLinux <- TRUE
+    if( bLinux )
+        strNewRepo   <- paste("file://", normalizePath(strLocalCRAN, winslash = "/"), sep = "")
+    else # Windows
+        strNewRepo   <- paste("file:", normalizePath(strLocalCRAN, winslash = "/"), sep = "")
+
+    return( list( strLocalCRAN = strLocalCRAN, strNewRepo = strNewRepo ) )
+    #vOrigRepos <- UpdateRepoOption( strRepoName, strLocalCRAN)
+
+    #return( list( vOrigRepos = vOrigRepos, strLocalCRAN = strLocalCRAN, strNewRepo = strNewRepo ) )
+
 }
