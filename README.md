@@ -1,3 +1,7 @@
+  <!-- badges: start -->
+  [![R build status](https://github.com/BioPharmSoftGrp/BaSS/workflows/R-CMD-check/badge.svg)](https://github.com/BioPharmSoftGrp/BaSS/actions)
+  <!-- badges: end -->
+  
 # Packages fRom tEmPlates (PREP) <img src="logo.png" align="right" alt="" width="120" />
 
 The PREP package allows users to create shells for R Packages and Shiny applications with minimal configuration. By expanding upon [many](https://r-pkgs.org/) [useful](https://usethis.r-lib.org/) [resources](https://thinkr-open.github.io/golem/) dedicated to this topic, PREP is designed to be both accessible to new users and highly customizable by expert users. 
