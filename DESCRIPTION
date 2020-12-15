@@ -16,7 +16,8 @@ RoxygenNote: 7.1.1
 Depends: R (>= 3.6.0),
          whisker,
          stringr,
-         shiny
+         shiny,
+         devtools
 Suggests: 
     testthat (>= 2.1.0),
     knitr,
