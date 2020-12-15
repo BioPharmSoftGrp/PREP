@@ -1,9 +1,9 @@
 # Build package. .tar.gz saved in /build folder
 
 on:
-  pull_request:
+  push:
     branches:
-      - dev
+      - gh-actions
 
 name: R-build
 
