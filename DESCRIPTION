@@ -1,7 +1,7 @@
 Package: PREP
 Type: Package
 Title: PREP - Packages fRom tEmPlates
-Version: 0.8.0
+Version: 0.9.0-dev
 Author: J. Kyle Wathen
 Maintainer: The package maintainer <KyleWathen@gmail.com>
 Authors@R: c( person("J. Kyle", "Wathen", email = "KyleWathen@gmail.com", role = c("aut", "cre")), 

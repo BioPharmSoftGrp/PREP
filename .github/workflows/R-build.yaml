@@ -3,7 +3,8 @@
 on:
   push:
     branches:
-      - gh-actions
+      - dev
+      - master
 
 name: R-build
 
