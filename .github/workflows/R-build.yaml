@@ -36,3 +36,9 @@ jobs:
           install.packages('devtools')
           devtools::build(path="build", vignettes=FALSE)
         shell: Rscript {0}
+        
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
