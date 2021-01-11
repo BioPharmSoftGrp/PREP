@@ -16,9 +16,7 @@
 #' @param lCustomParameters List of Custom Parameters for new modules
 #'
 #' @importFrom stringr str_replace_all
-#' @importFrom devtools build document
 #' @importFrom whisker whisker.render
-#'
 #'
 #' @export
 #'

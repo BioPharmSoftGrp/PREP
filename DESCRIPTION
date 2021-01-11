@@ -1,7 +1,7 @@
 Package: PREP
 Type: Package
 Title: PREP - Packages fRom tEmPlates
-Version: 0.8.0
+Version: 0.9.0-dev
 Author: J. Kyle Wathen
 Maintainer: The package maintainer <KyleWathen@gmail.com>
 Authors@R: c( person("J. Kyle", "Wathen", email = "KyleWathen@gmail.com", role = c("aut", "cre")), 
@@ -16,7 +16,8 @@ RoxygenNote: 7.1.1
 Depends: R (>= 3.6.0),
          whisker,
          stringr,
-         shiny
+         shiny,
+         devtools
 Suggests: 
     testthat (>= 2.1.0),
     knitr,
