@@ -36,6 +36,8 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
+      - name: Setup worktree
+          git worktree add build autobuild
       - name: Build
         run: |
           install.packages('devtools')
@@ -45,7 +47,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git worktree add build autobuild
           cd build
           git add -A
           git commit -m "Build package"
