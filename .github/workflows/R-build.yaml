@@ -37,8 +37,8 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
       - name: Setup worktree
-          run: |
-            git worktree add build autobuild
+        run: |
+          git worktree add build autobuild
       - name: Build
         run: |
           install.packages('devtools')
