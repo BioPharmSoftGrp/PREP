@@ -1,4 +1,6 @@
 # Build package. .tar.gz saved in /build folder
+# Using separate worktree for build branch to work around branch protections on dev and master. 
+# This github pages tutorial helped a lot http://sangsoonam.github.io/2019/02/08/using-git-worktree-to-deploy-github-pages.html
 
 on:
   push:
@@ -43,10 +45,12 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add build
+          git worktree add build autobuild
+          cd build
+          git add -A
           git commit -m "Build package"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: builds
+          branch: build
