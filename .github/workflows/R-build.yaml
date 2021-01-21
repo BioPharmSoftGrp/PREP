@@ -5,6 +5,7 @@ on:
     branches:
       - dev
       - master
+      - updateBuildAction
 
 name: R-build
 
@@ -42,10 +43,10 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -A
+          git add build
           git commit -m "Build package"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: build
