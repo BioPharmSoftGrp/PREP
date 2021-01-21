@@ -36,7 +36,7 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
-      - name: Setup worktree
+      - name: Setup custom worktree
         run: |
           git worktree add build autobuild
       - name: Build
@@ -44,11 +44,12 @@ jobs:
           install.packages('devtools')
           devtools::build(path="build", vignettes=FALSE)
         shell: Rscript {0}
-      - name: Commit files
+      - name: Commit/push .tar.gz to autobuild branch
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           cd build
+          git pull
           git add -A
           git commit -m "Build package"
           git status
