@@ -51,8 +51,5 @@ jobs:
           cd build
           git add -A
           git commit -m "Build package"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: autobuild
+          git status
+          git push "https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY"
