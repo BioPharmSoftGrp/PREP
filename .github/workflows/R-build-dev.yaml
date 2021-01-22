@@ -40,10 +40,11 @@ jobs:
       - name: Setup worktree
         run: |
           git worktree add build autobuild
+          mkdir build/dev
       - name: Build
         run: |
           install.packages('devtools')
-          devtools::build(path="build/dev", vignettes=FALSE)
+          devtools::build(path="build/dev/", vignettes=FALSE)
         shell: Rscript {0}
       - name: Commit/push new files 
         run: |
