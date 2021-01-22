@@ -1,13 +1,13 @@
 # Build package. .tar.gz saved in /build folder
 # Using separate worktree for build branch to work around branch protections on dev and master. 
+# Note that only new builds are committed here (`git add $(git ls-files -o --exclude-standard)`), to add a duplicate build for an existing version number, you must manually delete the previous build for that version
+
 # This github pages tutorial helped a lot http://sangsoonam.github.io/2019/02/08/using-git-worktree-to-deploy-github-pages.html
 
 on:
   push:
     branches:
-      - dev
       - master
-      - updateBuildAction
 
 name: R-build
 
@@ -36,7 +36,7 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
-      - name: Setup custom worktree
+      - name: Setup worktree
         run: |
           git worktree add build autobuild
       - name: Build
@@ -44,13 +44,13 @@ jobs:
           install.packages('devtools')
           devtools::build(path="build", vignettes=FALSE)
         shell: Rscript {0}
-      - name: Commit/push .tar.gz to autobuild branch
+      - name: Commit/push new files 
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           cd build
           git pull
-          git add -A
+          git add $(git ls-files -o --exclude-standard)
           git commit -m "Build package"
           git status
           git push "https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY"
