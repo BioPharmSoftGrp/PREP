@@ -30,7 +30,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - uses: r-lib/actions/setup-r@v1
         with:
@@ -42,15 +41,13 @@ jobs:
       - name: Build
         run: |
           install.packages('devtools')
-          devtools::build(path="build", vignettes=FALSE)
+          devtools::build(path="build/", vignettes=FALSE)
         shell: Rscript {0}
       - name: Commit/push new files 
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
           cd build
-          git pull
+          git pull --ff-only
           git add $(git ls-files -o --exclude-standard)
           git commit -m "Build package"
           git status
-          git push "https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY"
+          git push
