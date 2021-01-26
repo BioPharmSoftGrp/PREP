@@ -1,0 +1,53 @@
+# Build package. .tar.gz saved in /build folder
+# Using separate worktree for build branch to work around branch protections on dev and master. 
+# Note that only new builds are committed here (`git add $(git ls-files -o --exclude-standard)`), to add a duplicate build for an existing version number, you must manually delete the previous build for that version
+
+# This github pages tutorial helped a lot http://sangsoonam.github.io/2019/02/08/using-git-worktree-to-deploy-github-pages.html
+
+on:
+  push:
+    branches:
+      - master
+
+name: R-build
+
+jobs:
+  R-Build:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: macOS-latest,   r: 'release'}
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+      - name: Setup worktree
+        run: |
+          git worktree add build autobuild
+      - name: Build
+        run: |
+          install.packages('devtools')
+          devtools::build(path="build/", vignettes=FALSE)
+        shell: Rscript {0}
+      - name: Commit/push new files 
+        run: |
+          cd build
+          git pull --ff-only
+          git add $(git ls-files -o --exclude-standard)
+          git commit -m "Build package"
+          git status
+          git push

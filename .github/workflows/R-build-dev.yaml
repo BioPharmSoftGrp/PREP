@@ -1,10 +1,14 @@
-# Build package. .tar.gz saved in /build folder
+# Build package. .tar.gz saved in /build/dev folder
+# Using separate worktree for build branch to work around branch protections on dev and master. 
+# Note that only *all* files are committed here (`git add -A`) - when you rebuild the same version of a dev branch, the previous build is overwritten
+
+# This github pages tutorial helped a lot http://sangsoonam.github.io/2019/02/08/using-git-worktree-to-deploy-github-pages.html
 
 on:
   push:
     branches:
       - dev
-      - master
+      - updateBuildAction
 
 name: R-build
 
@@ -27,25 +31,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
+      - name: Setup worktree
+        run: |
+          git worktree add build autobuild
+          mkdir -p build/dev
       - name: Build
         run: |
           install.packages('devtools')
-          devtools::build(path="build", vignettes=FALSE)
+          devtools::build(path="build/dev/", vignettes=FALSE)
         shell: Rscript {0}
-      - name: Commit files
+      - name: Commit/push new files 
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          cd build
+          git pull --ff-only
           git add -A
           git commit -m "Build package"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          git status
+          git push 
