@@ -39,7 +39,7 @@ jobs:
       - name: Setup worktree
         run: |
           git worktree add build autobuild
-          mkdir build/dev
+          mkdir -p build/dev
       - name: Build
         run: |
           install.packages('devtools')
