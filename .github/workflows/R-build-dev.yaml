@@ -8,7 +8,7 @@ on:
   push:
     branches:
       - dev
-      - updateBuildAction
+      - implement-autobuild
 
 name: R-build
 
