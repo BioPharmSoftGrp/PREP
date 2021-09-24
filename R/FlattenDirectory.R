@@ -14,10 +14,10 @@ FlattenDirectory<-function(strInDir="src", strOutDir="R", bOverwrite=TRUE){
     outFiles <-  map_chr(
         list.files(strInDir, recursive=TRUE),
         ~FlattenFile(
-            path=.x,
-            inDir=strInDir,
-            outDir=strOutDir,
-            overwrite=bOverwrite)
+            strPath   = .x,
+            strInDir  = strInDir,
+            strOutDir = strOutDir,
+            bOverwrite = bOverwrite)
         )
     return(outFiles)
 }
